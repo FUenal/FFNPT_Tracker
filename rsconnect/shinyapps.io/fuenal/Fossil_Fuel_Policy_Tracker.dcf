@@ -5,8 +5,8 @@ account: fuenal
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 3670387
-bundleId: 4249569
+bundleId: 4249731
 url: https://fuenal.shinyapps.io/Fossil_Fuel_Policy_Tracker/
-when: 1613850627.09193
+when: 1613855384.90045
 asMultiple: FALSE
 asStatic: FALSE
