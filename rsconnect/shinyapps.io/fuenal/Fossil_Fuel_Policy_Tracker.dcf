@@ -1,0 +1,12 @@
+name: Fossil_Fuel_Policy_Tracker
+title: Fossil_Fuel_Policy_Tracker
+username:
+account: fuenal
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 3670387
+bundleId: 4249569
+url: https://fuenal.shinyapps.io/Fossil_Fuel_Policy_Tracker/
+when: 1613850627.09193
+asMultiple: FALSE
+asStatic: FALSE
