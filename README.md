@@ -4,11 +4,11 @@ This github page contains the code and input data for the [Fossil Fuel Policy Tr
 
 Input data are obtained from the [Sussex University github page](https://profiles.sussex.ac.uk/p104921-peter-newell).
 
-The Shiny app, first launched on [19th March 2021](https://theconversation.com/coronavirus-outbreak-a-new-mapping-tool-that-lets-you-scroll-through-timeline-131422), aims to complement existing Climate Change and Fossil Fuel mapping dashboards (such as those developed by the [the Grantham Research Institute on Climate Change and the Environment](https://www.climate-laws.org/#map-section) and the [Climate Action Tracker](https://climateactiontracker.org)) with a particular focus on supply-side policies, including a Fossil Fuel City Impact Map to help organizations to identify best practices in the field and facilitate target city choices by provinding a propensity action score. 
+The Shiny app, will be launched on 19th March 2021, aims to complement existing Climate Change and Fossil Fuel mapping dashboards (such as those developed by the [the Grantham Research Institute on Climate Change and the Environment](https://www.climate-laws.org/#map-section) and the [Climate Action Tracker](https://climateactiontracker.org)) with a particular focus on supply-side policies, including a Fossil Fuel City Impact Map to help organizations to identify best practices in the field and facilitate target city choices by provinding a propensity action score. 
 
 ## Shiny interface
 
-Follow [this](https://fuenal.shinyapps.io/FFTNP_tracker-master/) link for the interactive Shiny app. A screenshot of the interface is provided below.
+Follow [this]( https://fuenal.shinyapps.io/Fossil_Fuel_Policy_Tracker/) link for the interactive Shiny app. A screenshot of the interface is provided below.
 
 ![Shiny app interface](www/app_image.png) 
 
