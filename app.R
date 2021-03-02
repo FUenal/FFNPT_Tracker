@@ -385,7 +385,7 @@ ui <- bootstrapPage(
                                 htmlOutput("report")
                             )
                         )
-                        ),
+                    ),
        
                tabPanel("About this site",
                         tags$div(
