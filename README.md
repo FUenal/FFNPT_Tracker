@@ -32,6 +32,8 @@ The [Shiny app](https://fuenal.shinyapps.io/FFTNP_tracker-master/) automatically
 
 Several resources proved invaluable when building this app, including:
 
+- From [a Tutorial on using RMarkdown files in Shiny by David Ruvolo](https://davidruvolo51.github.io/shinytutorials/tutorials/rmarkdown-shiny/)
+
 - The [nCov_tracker by Dr Edward Parker and Quentin Leclerc](https://github.com/eparker12/nCoV_tracker);
 
 - A [tutorial by Florianne Verkroost](https://rviews.rstudio.com/2019/10/09/building-interactive-world-maps-in-shiny/) on building interactive maps;
