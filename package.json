@@ -1,0 +1,17 @@
+{
+  "name": "FFPT-app",
+  "version": "1.0.0",
+  "description": "Tracking and Mapping Supply Side Fossil Fuel Policies",
+  "author": "@FUenal",
+  "status": "active",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FUenal/FFNPT_Tracker.git"
+  },
+  "keywords": ["r", "shiny", "mapping"],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/FUenal/FFNPT_Tracker/issues"
+  },
+  "homepage": "https://github.com/FUenal/FFNPT_Tracker"
+}

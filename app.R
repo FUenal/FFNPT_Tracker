@@ -1,5 +1,12 @@
-## Supply-side policies interactive mapping tool
-## Dr. Fatih Uenal, Faculty AI <-  Data Science Fellow (mars.fatih@gmail.com), last updated February 2021
+#'//////////////////////////////////////////////////////////////////////////////
+#' FILE: app.R
+#' AUTHOR: Fatih Uenal
+#' CREATED: 19-03-2021
+#' MODIFIED: 19-03-2021
+#' PURPOSE: Supply-side policies interactive mapping tool
+#' PACKAGES: see below
+#' COMMENTS: NA
+#'//////////////////////////////////////////////////////////////////////////////
 
 ## includes code adapted from the following sources:
 # https://davidruvolo51.github.io/shinytutorials/tutorials/rmarkdown-shiny/
