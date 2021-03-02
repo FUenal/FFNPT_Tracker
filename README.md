@@ -1,4 +1,9 @@
 ## Fossil Fuel Policy Tracker & Interactive Mapping Tool
+Last updated: `r Sys.Date()`
+
+```r
+Sys.Date()
+```
 
 This github page contains the code and input data for the [Fossil Fuel Policy Tracker & Interactive Mapping Tool](https://fuenal.shinyapps.io/FFTNP_tracker-master/) developed by the Fossil Fuel Non-Proliferation Treats Initiative.
 

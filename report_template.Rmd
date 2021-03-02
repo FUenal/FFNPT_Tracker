@@ -1,0 +1,57 @@
+---
+output: html_document
+params: 
+    selection: null
+    data: null
+    data_mbl: null
+    data_sr: null
+    data_div: null
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, eval=TRUE, message=FALSE, warning=FALSE)
+```
+
+```{r echo=FALSE, eval=FALSE}
+includeMarkdown(
+    rmarkdown::render("report_template.Rmd", params = list(selection = input$country, data = country_overview_largeDF()))
+)
+```
+
+# **`r params$selection`**
+
+### Overview of policies for `r params$selection`:
+
+#### Total number of supply-side policies: `r sum(params$data['Policy_total'])`
+    Moratoria, Bans, Limitations:  `r sum(params$data['Moratoria_bans_limits'])`
+    Subsidy Removals: `r sum(params$data['Subsidy_removal'])`
+    Number of Divestments: `r sum(params$data['Divestment'])`
+                                         
+### Breakdown of policies across sectors (government vs. non-government) and levels (country vs. state/city vs. organization): 
+#### Government Policies
+    Number of All Governmental Policies: `r sum(params$data['Government_policies_total'])`
+    Number of national level governmental policies: `r sum(params$data['mbl_country'])`
+    Number of state/city governmental level policies (Moratoria, bans, & limits): `r sum(params$data['mbl_city_region'])`
+    Number of state/city governmental level policies (Divestments): `r sum(params$data['divestment_city_region'])`
+
+#### Non-Governmental Policies
+    Number of non-governmental policies: `r sum(params$data['Non_Government_policies_total'])`
+    Number of Divestment policies: `r sum(params$data['divestment_city_region'])`
+
+
+```{r echo=FALSE, eval=TRUE}
+# pkgs
+suppressPackageStartupMessages(library(tidyverse))
+suppressPackageStartupMessages(library(kableExtra))
+
+```
+
+```{r echo=FALSE, eval=FALSE}
+includeMarkdown(
+    rmarkdown::render("report_template.Rmd", params = list(selection = input$country, data_mbl = moratoria_bans_limitsDF()))
+)
+```
+
+
+
+
