@@ -67,8 +67,195 @@ addPolygons(stroke = FALSE, smoothFactor = 0.2, fillOpacity = 0.4, fillColor = ~
                             country_overview_large$Divestment_total) %>% lapply(htmltools::HTML),
             labelOptions = labelOptions(
                     style = list("font-weight" = "normal", "font-family" = "Roboto", padding = "3px 8px", "color" = cv_pal),
-                    textsize = "15px", direction = "auto")) %>%
+                    textsize = "15px", direction = "auto"))
+
+## Basemap with types of policies as layers and hovering with gov vs. non-gov policies
+# create base map 
+basemap = leaflet(plot_map) %>% 
+        addTiles() %>% 
+        addLayersControl(
+                position = "topright",
+                overlayGroups = c("All Policies", "Moratoria, Bans, & Limits", "Subsidy Removal", "Divestment"),
+                options = layersControlOptions(collapsed = FALSE)) %>% 
+        hideGroup(c("All Policies", "Moratoria, Bans, & Limits", "Subsidy Removal", "Divestment")) %>%
+        addProviderTiles(providers$CartoDB.Positron) %>%
+        fitBounds(~-100,-60,~60,70) %>%
+        addLegend("bottomright", colors = c("#FF0D0D","#FF4E11", "#FF8E15", "#FAB733", "#ACB334", "#69B34C", "#B1B6B9", "#EFEFEF"), 
+                  labels =  c("<small>Critically Insufficient</small>","<small>Highly Insufficient</small>","<small>Insufficient</small>", 
+                              "<small>2°C Compatible</small>","<small>1.5°C Paris Agreement Compatible</small>","<small>Role Model</small>", 
+                              "<small>No Rating</small>", "<small>No Data</small>"),values = ~country_overview_large$CAT_rating,
+                  title = "<small>Climate Action Tracker Rating</small>") %>% 
         
+        addPolygons(stroke = FALSE, smoothFactor = 0.2, fillOpacity = 0.4, fillColor = ~cv_pal(country_overview_large$CAT_rating),
+                    label = sprintf("<strong>%s</strong><br/>CAT Rating: %s<br/>Government policies: %g<br/>Non-governmental policies: %d", 
+                                    country_overview_large$Country, country_overview_large$CAT_rating, country_overview_large$Government_policies_total, 
+                                    country_overview_large$Non_Government_policies_total) %>% lapply(htmltools::HTML),
+                    labelOptions = labelOptions(
+                            style = list("font-weight" = "normal", "font-family" = "Roboto", padding = "3px 8px", "color" = cv_pal),
+                            textsize = "15px", direction = "auto")) %>%
+        
+        addCircleMarkers(data = country_overview_large, lat = ~ latitude, lng = ~ longitude, weight = 1, radius = ~(Policy_total)^(1/1.5), 
+                         fillOpacity = 0.2, color = All_policies, group = "All Policies",
+                         label = sprintf("<strong>%s</strong><br/>Moratoria, bans, & limits: %g<br/>Subsidy Removals: %d<br/>Divestments: %g", 
+                                         country_overview_large$Country, country_overview_large$Moratoria_bans_limits_total, country_overview_large$Subsidy_removal_total, 
+                                         country_overview_large$Divestment_total) %>% lapply(htmltools::HTML),
+                         labelOptions = labelOptions(
+                                 style = list("font-weight" = "normal", "font-family" = "Roboto", padding = "3px 8px", "color" = All_policies),
+                                 textsize = "15px", direction = "auto")) %>% 
+        
+        addCircleMarkers(data = country_overview_large, lat = ~ latitude, lng = ~ longitude, weight = 1, radius = ~(Moratoria_bans_limits_total)^(1/1.5), 
+                         fillOpacity = 0.2, color = Moratoria_bans_limits, group = "Moratoria, Bans, & Limits",
+                         label = sprintf("<strong>%s</strong><br/>Moratoria, bans, & limits: %g", 
+                                         country_overview_large$Country, country_overview_large$Moratoria_bans_limits_total) %>% lapply(htmltools::HTML),
+                         labelOptions = labelOptions(
+                                 style = list("font-weight" = "normal", "font-family" = "Roboto", padding = "3px 8px", "color" = Moratoria_bans_limits),
+                                 textsize = "15px", direction = "auto")) %>% 
+        
+        addCircleMarkers(data = country_overview_large, lat = ~ latitude, lng = ~ longitude, weight = 1, radius = ~(Subsidy_removal_total)^(1/1.5), 
+                         fillOpacity = 0.2, color = Subsidy_removal, group = "Subsidy Removal",
+                         label = sprintf("<strong>%s</strong><br/>Subsidy Removals: %g", 
+                                         country_overview_large$Country, country_overview_large$Subsidy_removal_total) %>% lapply(htmltools::HTML),
+                         labelOptions = labelOptions(
+                                 style = list("font-weight" = "normal", "font-family" = "Roboto", padding = "3px 8px", "color" = Subsidy_removal),
+                                 textsize = "15px", direction = "auto")) %>% 
+        
+        addCircleMarkers(data = country_overview_large, lat = ~ latitude, lng = ~ longitude, weight = 1, radius = ~(Divestment_total)^(1/1.5), 
+                         fillOpacity = 0.2, color = Divestment, group = "Divestment",
+                         label = sprintf("<strong>%s</strong><br/>Divestments: %g", 
+                                         country_overview_large$Country, country_overview_large$Divestment_total) %>% lapply(htmltools::HTML),
+                         labelOptions = labelOptions(
+                                 style = list("font-weight" = "normal", "font-family" = "Roboto", padding = "3px 8px", "color" = Divestment),
+                                 textsize = "15px", direction = "auto"))
+### SHINY SERVER ###
+
+server = function(input, output, session) {
+        
+        # Policy tab 
+        output$policy_count <- renderText({
+                paste0(prettyNum(sum(country_overview_large$Policy_total), big.mark=","), " Policies Overall")
+        })
+        
+        output$gov_pol_count <- renderText({
+                paste0(prettyNum(sum(country_overview_large$Government_policies_total), big.mark=","), " Government policies")
+        })
+        
+        output$Non_gov_pol_count <- renderText({
+                paste0(prettyNum(sum(country_overview_large$Non_Government_policies_total), big.mark=","), " Non-government policies")
+        })
+        
+        output$mbl_count <- renderText({
+                paste0(prettyNum(sum(country_overview_large$Moratoria_bans_limits_total), big.mark=","), " Moratoria, bans, limits")
+        })
+        
+        output$sr_count <- renderText({
+                paste0(prettyNum(sum(country_overview_large$Subsidy_removal_total), big.mark=","), " Subsidy removals")
+        })
+        
+        output$div_count <- renderText({
+                paste0(prettyNum(sum(country_overview_large$Divestment_total), big.mark=","), "  Divestments")
+        })
+        
+        output$mymap <- renderLeaflet({ 
+                basemap
+        })
+        
+        observeEvent(input$plot_date, {
+                leafletProxy("mymap") %>% 
+                        clearMarkers() %>%
+                        clearShapes() %>%
+                        
+                        addPolygons(stroke = FALSE, smoothFactor = 0.2, fillOpacity = 0.4, fillColor = ~cv_pal(country_overview_large$CAT_rating),
+                                    label = sprintf("<strong>%s</strong><br/>CAT Rating: %s<br/>Moratoria, bans, & limits: %g<br/>Subsidy Removals: %d<br/>Divestments: %g", 
+                                                    country_overview_large$Country, country_overview_large$CAT_rating, country_overview_large$Moratoria_bans_limits, 
+                                                    country_overview_large$Subsidy_removal, country_overview_large$Divestment) %>% lapply(htmltools::HTML),
+                                    labelOptions = labelOptions(
+                                            style = list("font-weight" = "normal", "font-family" = "Roboto", padding = "3px 8px", "color" = cv_pal),
+                                            textsize = "15px", direction = "auto")) %>%
+                        
+                        addCircleMarkers(data = country_overview_large, lat = ~ latitude, lng = ~ longitude, weight = 1, radius = ~(Policy_total)^(1/3), 
+                                         fillOpacity = 0.2, color = All_policies, group = "All Policies",
+                                         label = sprintf("<strong>%s</strong><br/>Moratoria, bans, & limits: %g<br/>Subsidy Removals: %d<br/>Divestments: %g", 
+                                                         country_overview_large$Country, country_overview_large$Moratoria_bans_limits_total, country_overview_large$Subsidy_removal_total, 
+                                                         country_overview_large$Divestment_total) %>% lapply(htmltools::HTML),
+                                         labelOptions = labelOptions(
+                                                 style = list("font-weight" = "normal", "font-family" = "Roboto", padding = "3px 8px", "color" = All_policies),
+                                                 textsize = "15px", direction = "auto")) %>% 
+                        
+                        addCircleMarkers(data = country_overview_large, lat = ~ latitude, lng = ~ longitude, weight = 1, radius = ~(Moratoria_bans_limits_total)^(1/3), 
+                                         fillOpacity = 0.2, color = Moratoria_bans_limits, group = "Moratoria, Bans, & Limits",
+                                         label = sprintf("<strong>%s</strong><br/>Moratoria, bans, & limits: %g", 
+                                                         country_overview_large$Country, country_overview_large$Moratoria_bans_limits_total) %>% lapply(htmltools::HTML),
+                                         labelOptions = labelOptions(
+                                                 style = list("font-weight" = "normal", "font-family" = "Roboto", padding = "3px 8px", "color" = Moratoria_bans_limits),
+                                                 textsize = "15px", direction = "auto")) %>% 
+                        
+                        addCircleMarkers(data = country_overview_large, lat = ~ latitude, lng = ~ longitude, weight = 1, radius = ~(Subsidy_removal_total)^(1/3), 
+                                         fillOpacity = 0.2, color = Subsidy_removal, group = "Subsidy Removal",
+                                         label = sprintf("<strong>%s</strong><br/>Subsidy Removals: %g", 
+                                                         country_overview_large$Country, country_overview_large$Subsidy_removal_total) %>% lapply(htmltools::HTML),
+                                         labelOptions = labelOptions(
+                                                 style = list("font-weight" = "normal", "font-family" = "Roboto", padding = "3px 8px", "color" = Subsidy_removal),
+                                                 textsize = "15px", direction = "auto")) %>% 
+                        
+                        addCircleMarkers(data = country_overview_large, lat = ~ latitude, lng = ~ longitude, weight = 1, radius = ~(Divestment_total)^(1/3), 
+                                         fillOpacity = 0.2, color = Divestment, group = "Divestment",
+                                         label = sprintf("<strong>%s</strong><br/>Divestments: %g", 
+                                                         country_overview_large$Country, country_overview_large$Divestment_total) %>% lapply(htmltools::HTML),
+                                         labelOptions = labelOptions(
+                                                 style = list("font-weight" = "normal", "font-family" = "Roboto", padding = "3px 8px", "color" = Divestment),
+                                                 textsize = "15px", direction = "auto"))
+        })
+        output$cumulative_mbl_plot <- renderPlot({
+                cumulative_mbl_plot(moratoria_bans_limits)
+        })
+        
+        output$cumulative_div_plot <- renderPlot({
+                cumulative_div_plot(divestment)
+        })
+        output$cumulative_sr_plot <- renderPlot({
+                cumulative_sr_plot(subsidiy_removal)
+        })
+        ## country-specific profiles
+        # set initial ui for htmlOutput
+        output$report <- renderUI({
+                tagList(
+                        tags$p(
+                                "The data presented here is based on the Fossil Fuel Database ",
+                                "which automatically searches the internet to identify ",
+                                "existing climate change supply-side policies. Click here ",
+                                tags$a(
+                                        href = "https://fossilfueltreaty.org",
+                                        "for more information"
+                                ),
+                                "."
+                        )
+                )
+        })
+        
+        # render report when button clicked
+        observeEvent(input$render, {
+                country_overview_largeDF <- country_overview_large[country_overview_large$Country == input$country, ]
+                moratoria_bans_limitsDF <- moratoria_bans_limits[moratoria_bans_limits$Country == input$country, ]
+                subsidiy_removalDF <- subsidiy_removal[subsidiy_removal$Country == input$country, ]
+                divestmentDF <- divestment[divestment$Country == input$country, ]
+                output$report <- renderUI({
+                        includeHTML(
+                                rmarkdown::render(
+                                        "report_template.Rmd",
+                                        params = list(
+                                                selection = input$country,
+                                                data = country_overview_largeDF,
+                                                data_mbl = moratoria_bans_limitsDF,
+                                                data_sr = subsidiy_removalDF,
+                                                data_div = divestmentDF
+                                        )
+                                )
+                        )
+                })
+        })
+}
+
+###################################################
 ### SHINY SERVER ###
 
 server = function(input, output, session) {

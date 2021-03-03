@@ -1,0 +1,125 @@
+---
+title: "BitsAndBites"
+author: "Dr. Fatih Uenal"
+date: "3/3/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+```{r echo=FALSE, eval=TRUE}
+### MAP FUNCTIONS ###
+# pkgs
+suppressPackageStartupMessages(library(tidyverse))
+suppressPackageStartupMessages(library(kableExtra))
+suppressPackageStartupMessages(library(ggplot2))
+
+# function to plot cumulative Moratoria, Bans, and Limit Policies by date
+cumulative_mbl_plot = function(data_mbl) {
+    g1 <- params$data_mbl %>% ggplot(aes(x = date, y = Policy)) + 
+        geom_bar(position="stack", stat="identity", fill = Moratoria_bans_limits) + 
+        ylab("Moratoria, Bans, & Limit Policies") +  xlab("Year") + theme_bw() + ylim(0,30) +
+        scale_fill_manual(values=c(Moratoria_bans_limits)) +
+        xlim(c(moratoria_bans_limits_min_date,moratoria_bans_limits_max_date)) + 
+        scale_x_date(date_labels = "%Y", limits=c(moratoria_bans_limits_min_date,moratoria_bans_limits_max_date)) +
+        theme(legend.title = element_blank(), legend.position = "", plot.title = element_text(size=10), 
+              plot.margin = margin(5, 10, 5, 5))
+    g1
+}
+
+# function to plot cumulative Divestments by date
+cumulative_div_plot = function(data_div) {
+    g1 <- params$data_div %>% ggplot(aes(x = date, y = Policy)) + 
+        geom_bar(position="stack", stat="identity", fill = Divestment) + 
+        ylab("Divestments") +  xlab("Year") + theme_bw() + ylim(0,300) +
+        scale_fill_manual(values=c(Divestment)) +
+        xlim(c(divestment_min_date,divestment_max_date)) + 
+        scale_x_date(date_labels = "%Y", limits=c(divestment_min_date,divestment_max_date)) +
+        theme(legend.title = element_blank(), legend.position = "", plot.title = element_text(size=10), 
+              plot.margin = margin(5, 10, 5, 5))
+    g1
+}
+
+# function to plot cumulative subsidiy_removal by date
+cumulative_sr_plot = function(data_sr) {
+    g1 <- params$data_sr %>% ggplot(aes(x = date, y = Policy)) + 
+        geom_bar(position="stack", stat="identity", fill = Subsidy_removal) + 
+        ylab("Subsidy Removals") +  xlab("Year") + theme_bw() + ylim(0,8) +
+        scale_fill_manual(values=c(Subsidy_removal)) +
+        xlim(c(subsidiy_removal_min_date,subsidiy_removal_max_date)) + 
+        scale_x_date(date_labels = "%Y", limits=c(subsidiy_removal_min_date,subsidiy_removal_max_date)) +
+        theme(legend.title = element_blank(), legend.position = "", plot.title = element_text(size=10), 
+              plot.margin = margin(5, 10, 5, 5))
+    g1
+}
+```
+
+
+```{r echo=FALSE, eval=TRUE, fig.width=10, fig.height=3}
+### MAP FUNCTIONS ###
+# pkgs
+suppressPackageStartupMessages(library(tidyverse))
+suppressPackageStartupMessages(library(kableExtra))
+suppressPackageStartupMessages(library(ggplot2))
+
+# plot mbl over time
+g1 <- params$data_mbl %>% ggplot(aes(x = date, y = Policy)) + 
+        geom_bar(position="stack", stat="identity", fill = Moratoria_bans_limits) + 
+        ylab("Number of Moratoria, Bans, & Limit Policies") +  xlab("Year") + theme_bw() + ylim(0,30) +
+        scale_fill_manual(values=c(Moratoria_bans_limits)) +
+        xlim(c(moratoria_bans_limits_min_date,moratoria_bans_limits_max_date)) + 
+        scale_x_date(date_labels = "%Y", limits=c(moratoria_bans_limits_min_date,moratoria_bans_limits_max_date)) +
+        ggtitle("Moratoria, Bans, & Limits over time") + 
+        theme(legend.title = element_blank(), legend.position = "", plot.title = element_text(size=10), 
+              plot.margin = margin(5, 10, 5, 5))
+
+```
+
+```{r echo=FALSE, eval=TRUE, fig.width=3, fig.height=3}
+### MAP FUNCTIONS ###
+# pkgs
+suppressPackageStartupMessages(library(tidyverse))
+suppressPackageStartupMessages(library(kableExtra))
+suppressPackageStartupMessages(library(ggplot2))
+
+# function to plot cumulative Moratoria, Bans, and Limit Policies by date
+g2 <- params$data_div %>% ggplot(aes(x = date, y = Policy)) + 
+        geom_bar(position="stack", stat="identity", fill = Divestment) + 
+        ylab("Number of Divestments") +  xlab("Year") + theme_bw() + ylim(0,300) +
+        scale_fill_manual(values=c(Divestment)) +
+        xlim(c(divestment_min_date,divestment_max_date)) + 
+        scale_x_date(date_labels = "%Y", limits=c(divestment_min_date,divestment_max_date)) +
+        ggtitle("Divestments over time") + 
+        theme(legend.title = element_blank(), legend.position = "", plot.title = element_text(size=10), 
+              plot.margin = margin(5, 10, 5, 5))
+```
+
+```{r echo=FALSE, eval=TRUE, fig.width=3, fig.height=3}
+### MAP FUNCTIONS ###
+# pkgs
+suppressPackageStartupMessages(library(tidyverse))
+suppressPackageStartupMessages(library(kableExtra))
+suppressPackageStartupMessages(library(ggplot2))
+
+# function to plot cumulative Moratoria, Bans, and Limit Policies by date
+ g3 <- params$data_sr %>% ggplot(aes(x = date, y = Policy)) + 
+        geom_bar(position="stack", stat="identity", fill = Subsidy_removal) + 
+        ylab("Number of Subsidy Removals") +  xlab("Year") + theme_bw() + ylim(0,8) +
+        scale_fill_manual(values=c(Subsidy_removal)) +
+        xlim(c(subsidiy_removal_min_date,subsidiy_removal_max_date)) + 
+        scale_x_date(date_labels = "%Y", limits=c(subsidiy_removal_min_date,subsidiy_removal_max_date)) +
+         ggtitle("Subsidy Removals over time") + 
+        theme(legend.title = element_blank(), legend.position = "", plot.title = element_text(size=10), 
+              plot.margin = margin(5, 10, 5, 5))
+```
+
+```{r echo=FALSE, eval=TRUE, fig.width=10, fig.height=3}
+### MAP FUNCTIONS ###
+grid.arrange(g1, g2, g3, ncol=3)
+```
+
+`r plotOutput(params$data_mbl(cumulative_mbl_plot))`

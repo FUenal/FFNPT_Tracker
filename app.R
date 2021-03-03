@@ -40,12 +40,15 @@ if(!require(shinythemes)) install.packages("shinythemes", repos = "http://cran.u
 if(!require(sjmisc)) install.packages("sjmisc", repos = "http://cran.us.r-project.org")
 if(!require(lubridate)) install.packages("lubridate", repos = "http://cran.us.r-project.org")
 if(!require(kableExtra)) install.packages("kableExtra", repos = "http://cran.us.r-project.org")
+if(!require(gridExtra)) install.packages("gridExtra", repos = "http://cran.us.r-project.org")
     
 # set mapping color for each category of policy
 All_policies  = "016c59"
 Moratoria_bans_limits = "#cc4c02"
 Subsidy_removal = "#662506"
 Divestment = "#045a8d"
+Government_policies = "#062A89"
+Non_Government_policies = "#42C04F"
 
 
 # Added ISO-normed country codes manually into the main xlsx data sheet (sheet 8) and manually updated country 
@@ -145,6 +148,8 @@ country_overview_large$CAT_rating <- factor(country_overview_large$CAT_rating, l
 #class(country_overview_large$CAT_rating)
 #table(country_overview_large$CAT_rating)
 #country_overview_large$CAT_rating
+
+write.csv(country_overview_large, file = "input_data/country_overview_large.csv")
 
 ### Data processing divestment_scrape
 ## Add ISO codes
@@ -262,9 +267,9 @@ basemap = leaflet(plot_map) %>%
     addTiles() %>% 
     addLayersControl(
         position = "topright",
-        overlayGroups = c("All Policies", "Moratoria, Bans, & Limits", "Subsidy Removal", "Divestment"),
+        overlayGroups = c("All Policies", "Governmental Policies", "Non-Governmental Policies"),
         options = layersControlOptions(collapsed = FALSE)) %>% 
-    hideGroup(c("All Policies", "Moratoria, Bans, & Limits", "Subsidy Removal", "Divestment")) %>%
+    hideGroup(c("All Policies", "Governmental Policies", "Non-Governmental Policies")) %>%
     addProviderTiles(providers$CartoDB.Positron) %>%
     fitBounds(~-100,-60,~60,70) %>%
     addLegend("bottomright", colors = c("#FF0D0D","#FF4E11", "#FF8E15", "#FAB733", "#ACB334", "#69B34C", "#B1B6B9", "#EFEFEF"), 
@@ -274,14 +279,15 @@ basemap = leaflet(plot_map) %>%
               title = "<small>Climate Action Tracker Rating</small>") %>% 
     
     addPolygons(stroke = FALSE, smoothFactor = 0.2, fillOpacity = 0.4, fillColor = ~cv_pal(country_overview_large$CAT_rating),
-                label = sprintf("<strong>%s</strong><br/>CAT Rating: %s<br/>Government policies: %g<br/>Non-governmental policies: %d", 
-                                country_overview_large$Country, country_overview_large$CAT_rating, country_overview_large$Government_policies_total, 
-                                country_overview_large$Non_Government_policies_total) %>% lapply(htmltools::HTML),
+                label = sprintf("<strong>%s</strong><br/>CAT Rating: %s<br/>Moratoria, bans, & limits: %g<br/>Subsidy Removals: %d<br/>Divestments: %g", 
+                                country_overview_large$Country, country_overview_large$CAT_rating, country_overview_large$Moratoria_bans_limits, 
+                                country_overview_large$Subsidy_removal, country_overview_large$Divestment) %>% lapply(htmltools::HTML),
                 labelOptions = labelOptions(
                     style = list("font-weight" = "normal", "font-family" = "Roboto", padding = "3px 8px", "color" = cv_pal),
                     textsize = "15px", direction = "auto")) %>%
     
-    addCircleMarkers(data = country_overview_large, lat = ~ latitude, lng = ~ longitude, weight = 1, radius = ~(Policy_total)^(1/1.5), 
+    addCircleMarkers(data = country_overview_large, lat = ~ latitude, lng = ~ longitude, weight = 1, 
+                     radius = ~ifelse(Policy_total > 0, (Policy_total)^(1/2), 0), 
                      fillOpacity = 0.2, color = All_policies, group = "All Policies",
                      label = sprintf("<strong>%s</strong><br/>Moratoria, bans, & limits: %g<br/>Subsidy Removals: %d<br/>Divestments: %g", 
                                      country_overview_large$Country, country_overview_large$Moratoria_bans_limits_total, country_overview_large$Subsidy_removal_total, 
@@ -290,28 +296,22 @@ basemap = leaflet(plot_map) %>%
                          style = list("font-weight" = "normal", "font-family" = "Roboto", padding = "3px 8px", "color" = All_policies),
                          textsize = "15px", direction = "auto")) %>% 
     
-    addCircleMarkers(data = country_overview_large, lat = ~ latitude, lng = ~ longitude, weight = 1, radius = ~(Moratoria_bans_limits_total)^(1/1.5), 
-                     fillOpacity = 0.2, color = Moratoria_bans_limits, group = "Moratoria, Bans, & Limits",
-                     label = sprintf("<strong>%s</strong><br/>Moratoria, bans, & limits: %g", 
-                                     country_overview_large$Country, country_overview_large$Moratoria_bans_limits_total) %>% lapply(htmltools::HTML),
+    addCircleMarkers(data = country_overview_large, lat = ~ latitude, lng = ~ longitude, weight = 1, 
+                     radius = ~ifelse(Government_policies_total > 0, (Government_policies_total)^(1/2), 0),
+                     fillOpacity = 0.2, color = Government_policies, group = "Governmental Policies",
+                     label = sprintf("<strong>%s</strong><br/>Governmental Policies: %g", 
+                                     country_overview_large$Country, country_overview_large$Government_policies_total) %>% lapply(htmltools::HTML),
                      labelOptions = labelOptions(
-                         style = list("font-weight" = "normal", "font-family" = "Roboto", padding = "3px 8px", "color" = Moratoria_bans_limits),
+                         style = list("font-weight" = "normal", "font-family" = "Roboto", padding = "3px 8px", "color" = Government_policies),
                          textsize = "15px", direction = "auto")) %>% 
     
-    addCircleMarkers(data = country_overview_large, lat = ~ latitude, lng = ~ longitude, weight = 1, radius = ~(Subsidy_removal_total)^(1/1.5), 
-                     fillOpacity = 0.2, color = Subsidy_removal, group = "Subsidy Removal",
-                     label = sprintf("<strong>%s</strong><br/>Subsidy Removals: %g", 
-                                     country_overview_large$Country, country_overview_large$Subsidy_removal_total) %>% lapply(htmltools::HTML),
+    addCircleMarkers(data = country_overview_large, lat = ~ latitude, lng = ~ longitude, weight = 1, 
+                     radius = ~ifelse(Non_Government_policies_total > 0, (Non_Government_policies_total)^(1/2), 0),
+                     fillOpacity = 0.2, color = Non_Government_policies, group = "Non-Governmental Policies",
+                     label = sprintf("<strong>%s</strong><br/>Non-Governmental Policies: %g", 
+                                     country_overview_large$Country, country_overview_large$Non_Government_policies_total) %>% lapply(htmltools::HTML),
                      labelOptions = labelOptions(
-                         style = list("font-weight" = "normal", "font-family" = "Roboto", padding = "3px 8px", "color" = Subsidy_removal),
-                         textsize = "15px", direction = "auto")) %>% 
-    
-    addCircleMarkers(data = country_overview_large, lat = ~ latitude, lng = ~ longitude, weight = 1, radius = ~(Divestment_total)^(1/1.5), 
-                     fillOpacity = 0.2, color = Divestment, group = "Divestment",
-                     label = sprintf("<strong>%s</strong><br/>Divestments: %g", 
-                                     country_overview_large$Country, country_overview_large$Divestment_total) %>% lapply(htmltools::HTML),
-                     labelOptions = labelOptions(
-                         style = list("font-weight" = "normal", "font-family" = "Roboto", padding = "3px 8px", "color" = Divestment),
+                         style = list("font-weight" = "normal", "font-family" = "Roboto", padding = "3px 8px", "color" = Non_Government_policies),
                          textsize = "15px", direction = "auto"))
 
 
@@ -358,9 +358,6 @@ ui <- bootstrapPage(
                                 href = "css/styles.css"
                             )
                         ),
-                        tags$header(
-                            tags$h1(" Fossil Fuel Supply-Side Policies"),
-                        ),
                         tags$main(
                             tags$form(
                                 tags$legend("Select country from drop-down menu to show country profiles"),
@@ -398,6 +395,7 @@ ui <- bootstrapPage(
                         tags$div(
                             tags$h4("Last update: "), 
                             h6(paste0(Sys.Date())),
+                            tags$h2("About this app"), 
                             "This site will be updated on a regular basis (weekly). There are several other excellent Climate Change mapping tools available, including those run by", 
                             tags$a(href="https://www.climate-laws.org/#map-section", "the Grantham Research Institute on Climate Change and the Environment,"),
                             tags$a(href="https://climateactiontracker.org", "The Climate Action Tracker,"),"and",
@@ -405,7 +403,7 @@ ui <- bootstrapPage(
                             "Our aim is to complement these resources with a particular focus on supply-side policies, including a Fossil Fuel City Impact Map to help organizations to 
                         identify best practices in the field and facilitate target city choices by provinding a propensity action score.",
                             
-                            tags$br(),tags$br(),tags$h4("Background"), 
+                            tags$br(),tags$br(),tags$h2("Background"), 
                             "FFNPT Initiative is a coalition of civil society organisations, research institutions, grassroot activists and other partners around the world, working to 
                         influence policy making and investment decisions from local to global level, and lay foundation for a coordinated, rapid and equitable global phase out of fossil fuels.
                         In the context of the urgent need to decarbonise our economy to prevent catastrophic climate change and the fossil fuel industry’s plans to extract far more fossil fuels 
@@ -419,15 +417,15 @@ ui <- bootstrapPage(
                             tags$br(),
                             "More information on our work is avaialble  ",tags$a(href="https://fossilfueltreaty.org", "Fossil Fuely Treaty. "),
                             "An article discussing our campaign was published in ",tags$a(href="https://mondediplo.com/outsidein/fossil-fuel-disarmament", "Le Monde Diplomatique. "),
-                            tags$br(),tags$br(),tags$h4("Code"), 
+                            tags$br(),tags$br(),tags$h2("Code"), 
                             "Code and input data used to generate this Shiny mapping tool are available on ",tags$a(href="https://github.com/FUenal/FFNPT_Tracker", "Github."),
-                            tags$br(),tags$br(),tags$h4("Sources"),
+                            tags$br(),tags$br(),tags$h2("Sources"),
                             tags$b("Supply Side Policies: "), tags$a(href="https://fossilfueltreaty.org/home", "Sussex University,"),
-                            tags$br(),tags$br(),tags$h4("Author"),
+                            tags$br(),tags$br(),tags$h2("Author"),
                             "Dr Fatih Uenal, Fellow @ Faculty AI & University of Cambridge",tags$br(),
-                            tags$br(),tags$br(),tags$h4("Contact"),
+                            tags$br(),tags$br(),tags$h2("Contact"),
                             "mars.fatih@gmail.com",tags$br(),tags$br(),
-                            tags$img(src = "FFNPT_Logo.png", width = "100px", height = "100px"), tags$img(src = "faculty.png", width = "175px", height = "65px")
+                            tags$img(src = "FFNPT_Logo.png", width = "100px", height = "100px")
                         )
                )
     )          
@@ -474,15 +472,15 @@ server = function(input, output, session) {
             clearShapes() %>%
             
             addPolygons(stroke = FALSE, smoothFactor = 0.2, fillOpacity = 0.4, fillColor = ~cv_pal(country_overview_large$CAT_rating),
-                        label = sprintf("<strong>%s</strong><br/>CAT Rating: %s<br/>Government policies: %g<br/>Non-governmental policies: %d", 
-                                        country_overview_large$Country, country_overview_large$CAT_rating, country_overview_large$Government_policies_total, 
-                                        country_overview_large$Non_Government_policies_total) %>% lapply(htmltools::HTML),
+                        label = sprintf("<strong>%s</strong><br/>CAT Rating: %s<br/>Moratoria, bans, & limits: %g<br/>Subsidy Removals: %d<br/>Divestments: %g", 
+                                        country_overview_large$Country, country_overview_large$CAT_rating, country_overview_large$Moratoria_bans_limits, 
+                                        country_overview_large$Subsidy_removal, country_overview_large$Divestment) %>% lapply(htmltools::HTML),
                         labelOptions = labelOptions(
                             style = list("font-weight" = "normal", "font-family" = "Roboto", padding = "3px 8px", "color" = cv_pal),
                             textsize = "15px", direction = "auto")) %>%
             
-            
-            addCircleMarkers(data = country_overview_large, lat = ~ latitude, lng = ~ longitude, weight = 1, radius = ~(Policy_total)^(1/3), 
+            addCircleMarkers(data = country_overview_large, lat = ~ latitude, lng = ~ longitude, weight = 1, 
+                             radius = ~ifelse(Policy_total > 0, (Policy_total)^(1/2), 0), 
                              fillOpacity = 0.2, color = All_policies, group = "All Policies",
                              label = sprintf("<strong>%s</strong><br/>Moratoria, bans, & limits: %g<br/>Subsidy Removals: %d<br/>Divestments: %g", 
                                              country_overview_large$Country, country_overview_large$Moratoria_bans_limits_total, country_overview_large$Subsidy_removal_total, 
@@ -491,28 +489,22 @@ server = function(input, output, session) {
                                  style = list("font-weight" = "normal", "font-family" = "Roboto", padding = "3px 8px", "color" = All_policies),
                                  textsize = "15px", direction = "auto")) %>% 
             
-            addCircleMarkers(data = country_overview_large, lat = ~ latitude, lng = ~ longitude, weight = 1, radius = ~(Moratoria_bans_limits_total)^(1/3), 
-                             fillOpacity = 0.2, color = Moratoria_bans_limits, group = "Moratoria, Bans, & Limits",
-                             label = sprintf("<strong>%s</strong><br/>Moratoria, bans, & limits: %g", 
-                                             country_overview_large$Country, country_overview_large$Moratoria_bans_limits_total) %>% lapply(htmltools::HTML),
+            addCircleMarkers(data = country_overview_large, lat = ~ latitude, lng = ~ longitude, weight = 1, 
+                             radius = ~ifelse(Government_policies_total > 0, (Government_policies_total)^(1/2), 0),
+                             fillOpacity = 0.2, color = Government_policies, group = "Governmental Policies",
+                             label = sprintf("<strong>%s</strong><br/>Governmental Policies: %g", 
+                                             country_overview_large$Country, country_overview_large$Government_policies_total) %>% lapply(htmltools::HTML),
                              labelOptions = labelOptions(
-                                 style = list("font-weight" = "normal", "font-family" = "Roboto", padding = "3px 8px", "color" = Moratoria_bans_limits),
+                                 style = list("font-weight" = "normal", "font-family" = "Roboto", padding = "3px 8px", "color" = Government_policies),
                                  textsize = "15px", direction = "auto")) %>% 
             
-            addCircleMarkers(data = country_overview_large, lat = ~ latitude, lng = ~ longitude, weight = 1, radius = ~(Subsidy_removal_total)^(1/3), 
-                             fillOpacity = 0.2, color = Subsidy_removal, group = "Subsidy Removal",
-                             label = sprintf("<strong>%s</strong><br/>Subsidy Removals: %g", 
-                                             country_overview_large$Country, country_overview_large$Subsidy_removal_total) %>% lapply(htmltools::HTML),
+            addCircleMarkers(data = country_overview_large, lat = ~ latitude, lng = ~ longitude, weight = 1, 
+                             radius = ~ifelse(Non_Government_policies_total > 0, (Non_Government_policies_total)^(1/2), 0),
+                             fillOpacity = 0.2, color = Non_Government_policies, group = "Non-Governmental Policies",
+                             label = sprintf("<strong>%s</strong><br/>Non-Governmental Policies: %g", 
+                                             country_overview_large$Country, country_overview_large$Non_Government_policies_total) %>% lapply(htmltools::HTML),
                              labelOptions = labelOptions(
-                                 style = list("font-weight" = "normal", "font-family" = "Roboto", padding = "3px 8px", "color" = Subsidy_removal),
-                                 textsize = "15px", direction = "auto")) %>% 
-            
-            addCircleMarkers(data = country_overview_large, lat = ~ latitude, lng = ~ longitude, weight = 1, radius = ~(Divestment_total)^(1/3), 
-                             fillOpacity = 0.2, color = Divestment, group = "Divestment",
-                             label = sprintf("<strong>%s</strong><br/>Divestments: %g", 
-                                             country_overview_large$Country, country_overview_large$Divestment_total) %>% lapply(htmltools::HTML),
-                             labelOptions = labelOptions(
-                                 style = list("font-weight" = "normal", "font-family" = "Roboto", padding = "3px 8px", "color" = Divestment),
+                                 style = list("font-weight" = "normal", "font-family" = "Roboto", padding = "3px 8px", "color" = Non_Government_policies),
                                  textsize = "15px", direction = "auto"))
     })
     output$cumulative_mbl_plot <- renderPlot({
@@ -532,7 +524,7 @@ server = function(input, output, session) {
             tags$p(
                 "The data presented here is based on the Fossil Fuel Database ",
                 "which automatically searches the internet to identify ",
-                "existing climate change upply-side policies. Click here ",
+                "existing climate change supply-side policies. Click here ",
                 tags$a(
                     href = "https://fossilfueltreaty.org",
                     "for more information"

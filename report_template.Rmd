@@ -1,11 +1,12 @@
 ---
+title: "Fossil Fuel Supply-Side Policies"
 output: html_document
 params: 
-    selection: null
-    data: null
-    data_mbl: null
-    data_sr: null
-    data_div: null
+    selection: input$country
+    data: "country_overview_largeDF"
+    data_mbl: "moratoria_bans_limitsDF"
+    data_sr: "subsidiy_removalDF"
+    data_div: "divestmentDF"
 ---
 
 ```{r setup, include=FALSE}
@@ -18,40 +19,99 @@ includeMarkdown(
 )
 ```
 
-# **`r params$selection`**
-
-### Overview of policies for `r params$selection`:
-
-#### Total number of supply-side policies: `r sum(params$data['Policy_total'])`
-    Moratoria, Bans, Limitations:  `r sum(params$data['Moratoria_bans_limits'])`
-    Subsidy Removals: `r sum(params$data['Subsidy_removal'])`
-    Number of Divestments: `r sum(params$data['Divestment'])`
-                                         
-### Breakdown of policies across sectors (government vs. non-government) and levels (country vs. state/city vs. organization): 
-#### Government Policies
-    Number of All Governmental Policies: `r sum(params$data['Government_policies_total'])`
-    Number of national level governmental policies: `r sum(params$data['mbl_country'])`
-    Number of state/city governmental level policies (Moratoria, bans, & limits): `r sum(params$data['mbl_city_region'])`
-    Number of state/city governmental level policies (Divestments): `r sum(params$data['divestment_city_region'])`
-
-#### Non-Governmental Policies
-    Number of non-governmental policies: `r sum(params$data['Non_Government_policies_total'])`
-    Number of Divestment policies: `r sum(params$data['divestment_city_region'])`
-
-
-```{r echo=FALSE, eval=TRUE}
-# pkgs
-suppressPackageStartupMessages(library(tidyverse))
-suppressPackageStartupMessages(library(kableExtra))
-
-```
-
 ```{r echo=FALSE, eval=FALSE}
 includeMarkdown(
     rmarkdown::render("report_template.Rmd", params = list(selection = input$country, data_mbl = moratoria_bans_limitsDF()))
 )
 ```
 
+```{r echo=FALSE, eval=FALSE}
+includeMarkdown(
+    rmarkdown::render("report_template.Rmd", params = list(selection = input$country, data_div = divestmentDF()))
+)
+```
 
+```{r echo=FALSE, eval=FALSE}
+includeMarkdown(
+    rmarkdown::render("report_template.Rmd", params = list(selection = input$country, data_sr = subsidiy_removalDF()))
+)
+```
+
+## **`r params$selection`**
+
+### Overview Supply-Side Policies:
+
+    Total number of supply-side policies: `r sum(params$data['Policy_total'])`
+    Moratoria, Bans, Limitations:  `r sum(params$data['Moratoria_bans_limits'])`
+    Subsidy Removals: `r sum(params$data['Subsidy_removal'])`
+    Number of Divestments: `r sum(params$data['Divestment'])`
+                                         
+```{r echo=FALSE, eval=TRUE, fig.width=10, fig.height=3}
+### MAP FUNCTIONS ###
+# pkgs
+suppressPackageStartupMessages(library(tidyverse))
+suppressPackageStartupMessages(library(kableExtra))
+suppressPackageStartupMessages(library(ggplot2))
+
+# plot mbl over time
+g1 <- params$data_mbl %>% ggplot(aes(x = date, y = Policy)) + 
+        geom_bar(position="stack", stat="identity", fill = Moratoria_bans_limits) + 
+        ylab("Number of Policies") +  xlab("Year") + theme_bw() + ylim(0,30) +
+        scale_fill_manual(values=c(Moratoria_bans_limits)) +
+        xlim(c(moratoria_bans_limits_min_date,moratoria_bans_limits_max_date)) + 
+        scale_x_date(date_labels = "%Y", limits=c(moratoria_bans_limits_min_date,moratoria_bans_limits_max_date)) +
+        ggtitle("Moratoria, Bans, & Limits") + 
+        theme(legend.title = element_blank(), legend.position = "", plot.title = element_text(size=12, hjust = 0.5), 
+              plot.margin = margin(5, 10, 5, 5))
+
+g2 <- params$data_div %>% ggplot(aes(x = date, y = Policy)) + 
+        geom_bar(position="stack", stat="identity", fill = Divestment) + 
+        ylab("") +  xlab("Year") + theme_bw() + ylim(0,300) +
+        scale_fill_manual(values=c(Divestment)) +
+        xlim(c(divestment_min_date,divestment_max_date)) + 
+        scale_x_date(date_labels = "%Y", limits=c(divestment_min_date,divestment_max_date)) +
+        ggtitle("Divestments") + 
+        theme(legend.title = element_blank(), legend.position = "", plot.title = element_text(size=12, hjust = 0.5), 
+              plot.margin = margin(5, 10, 5, 5))
+
+ g3 <- params$data_sr %>% ggplot(aes(x = date, y = Policy)) + 
+        geom_bar(position="stack", stat="identity", fill = Subsidy_removal) + 
+        ylab("") +  xlab("Year") + theme_bw() + ylim(0,8) +
+        scale_fill_manual(values=c(Subsidy_removal)) +
+        xlim(c(subsidiy_removal_min_date,subsidiy_removal_max_date)) + 
+        scale_x_date(date_labels = "%Y", limits=c(subsidiy_removal_min_date,subsidiy_removal_max_date)) +
+         ggtitle("Subsidy Removals") + 
+        theme(legend.title = element_blank(), legend.position = "", plot.title = element_text(size=12, hjust = 0.5), 
+              plot.margin = margin(5, 10, 5, 5))
+
+ grid.arrange(g1, g2, g3, ncol=3)
+```
+
+
+### Breakdown of policies across sectors and levels: 
+
+#### Government Policies
+
+    Total number of Governmental Policies: `r sum(params$data['Government_policies_total'])`
+        National level governmental policies: `r sum(params$data['mbl_country'])`
+        State/city governmental level policies (Moratoria, bans, & limits): `r sum(params$data['mbl_city_region'])`
+        State/city governmental level policies (Divestments): `r sum(params$data['divestment_city_region'])`
+
+#### Non-Governmental Policies
+
+    Total number of non-governmental policies: `r sum(params$data['Non_Government_policies_total'])`
+        Divestment policies: `r sum(params$data['divestment_city_region'])`
+
+### Overview and context:
+
+#### Climate Action Tracker Rating: *`r params$data['CAT_rating']`*
+
+#### % Global Emissions: *XYZ*
+
+#### Global Climate Risk Index: *XYZ*
+
+#### Income group (World Bank): *XYZ*
+
+#### Main political groups: *XYZ*
 
 
