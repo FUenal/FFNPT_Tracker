@@ -1,5 +1,5 @@
 ## Supply-side policies interactive mapping tool: script to scrape and reformat "Divestment" data from scratch
-## Dr. Fatih Uenal, Faculty AI <-  Data Science Fellow (mars.fatih@gmail.com), last updated February 2021
+## Dr. Fatih Uenal, Faculty AI <-  Data Science Fellow (mars.fatih@gmail.com), last updated March 2021
 
 ## Data extracted from "Go fossil free." data obtained from following website
 # https://gofossilfree.org/divestment/commitments/

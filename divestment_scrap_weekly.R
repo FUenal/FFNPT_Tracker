@@ -16,6 +16,9 @@ if(!require(purrr)) install.packages("purrr", repos = "http://cran.us.r-project.
 if(!require(stringr)) install.packages("stringr", repos = "http://cran.us.r-project.org")
 if(!require(dplyr)) install.packages("dplyr", repos = "http://cran.us.r-project.org")
 if(!require(robotstxt)) install.packages("robotstxt", repos = "http://cran.us.r-project.org")
+if(!require(devtools)) install.packages("devtools", repos = "http://cran.us.r-project.org")
+if(!require(qdapRegex)) install.packages("qdapRegex", repos = "http://cran.us.r-project.org")
+
 
 ## Initialize port for browser (necessary for mac users)
 browser <- remoteDriver(port = 5556)
@@ -45,8 +48,8 @@ demoTableHeadEntries <- map_chr(demoTableHead, function(t) t$getElementAttribute
 
 demoTableRows <- demoTable$findChildElements(using = "css", "tbody > tr")
 
-## length(demoTableRows)
-## 1310 rows - confirm with webpage
+#length(demoTableRows)
+## Check length: 1313 rows - confirm with webpage
 
 ## process a row
 demoTableRowEntries <- map(demoTableRows, function(t) {
@@ -61,6 +64,7 @@ demoTableRowEntries <- map(demoTableRows, function(t) {
 
 ## create larger data.frame to hold results
 df <- do.call('rbind', demoTableRowEntries)
+head(df)
 
 ## Removing HTML tags and Attributes etc. in column 1
 ## using stringr for this:
@@ -99,18 +103,33 @@ df <- df %>% mutate_at(5, function(t) {
         str_replace(t,  pattern = '\">→</a>', replacement = "'")
 })
 
+
+## Removing urls in quotation marks in Organization column
+df$Name_of_Organisation <- gsub("'", '', df$Name_of_Organisation)
+
+df$Name_of_Organisation <- rm_url(df$Name_of_Organisation, pattern=pastex("@rm_url"))
+
 ## Add Column value for Policy count
 
 df$Policy <- 1 
-        
+
 ## drop first column
-#df <- df %>% select(-X)
+df <- df %>% select(-X)
 #str(df)
 #head(df)
 
 ## create csv file for usage
 write.csv(df, file = "input_data/divestment_scrape.csv")
 df <- read.csv("input_data/divestment_scrape.csv")
+
+head(df)
+str(df)
+x
+
+
+## Alternative cleaning method to reomve urls in quotation marks
+# df$Name_of_Organisation  <- gsub("(')(.*)[']", "", df$Name_of_Organisation)
+
 
 ## This becomes more powerful when you go to other pages and take advantage of the same structure:
 ## First show navigation using the webpage, then show automation - steps below

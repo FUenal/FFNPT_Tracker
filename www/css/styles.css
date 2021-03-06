@@ -1,5 +1,12 @@
-html, body {
+html, body, #map {
     font-family: -apple-system, BlinkMacSystemFont, 'Roboto';
+    height: 100%;
+    width: 100vw;
+}
+
+body {
+    padding: 0;
+    margin: 0;
 }
 
 main, header {
@@ -16,7 +23,16 @@ main {
     padding-bottom: 1px;
 }
 
-h1, h2, h3 {
+h1 {
+    text-align: center;
+    color: #252525;
+    line-height: 1.4;
+    margin: 0;
+    padding: 0;
+    margin-bottom: 12px;
+}
+
+h2, h3 {
     color: #252525;
     line-height: 1.4;
     margin: 0;
@@ -52,7 +68,7 @@ button {
     border: 2px solid #666A86;
     background-color: #666A86;
     color: #f3f3f3;
-    font-size: 11pt;
+    font-size: 12pt;
     text-transform: uppercase;
     letter-spacing: 2px;
     font-weight: 600;
@@ -68,8 +84,8 @@ button:hover {
 select {
     padding: 6px 0;
     padding-left: 6px;
-    width: 250px;
-    font-size: 10pt;
+    width: 325px;
+    font-size: 12pt;
     text-transform: uppercase;
     letter-spacing: 2px;
     font-weight: 400;
@@ -82,13 +98,13 @@ select {
 }
 
 legend {
-    font-size: 20pt;
+    font-size: 14pt;
     margin-bottom: 12px;
     color: #252525;
 }
 
 label {
-    font-size: 10pt;
+    font-size: 12pt;
     color: #252525;
 }
 
@@ -96,6 +112,7 @@ form {
     background-color: white;
     padding: 1px;
     margin: 1px 0;
+    text-align: center;
 }
 
 form label {
@@ -114,11 +131,11 @@ form select {
 #report {
     margin: 0;
     padding: 0;
-    font-size: 16pt;
+    font-size: 14pt;
 }
 
 #report pre code {
-    font-size: 14pt;
+    font-size: 13pt;
 }
 
 .shiny-html-output .container-fluid,

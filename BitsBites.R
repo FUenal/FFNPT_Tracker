@@ -43,6 +43,44 @@ country_overview_large['Subsidy_removal'] <- sum(subsidiy_removal$a)[match(count
 country_overview_large['Divestment'] <- divestment$d[match(country_overview_large$ISO3, divestment$ISO3)]
 country_overview_large <- country_overview_large %>% mutate(policy_total = country_overview_large$Moratoria_bans_limits+country_overview_large$Subsidy_removal +
                                                                     country_overview_large$Divestment)
+
+##############################################################################################################################
+# function to make a selected table output for MBL
+mbl_table = function(moratoria_bans_limits){
+        mbl = moratoria_bans_limits %>% 
+                group_by(moratoria_bans_limits$City_state_or_province) %>% 
+                select(c("City_state_or_province", "Category", "Fuel_type", "Fuel_subtype", "Sources_and_more_info")) %>% 
+                replace(is.na(.), "--")
+        names(mbl) = c("City state or province", "Category", "Fuel type", "Fuel subtype", "Sources")
+        mbl
+}
+
+# function to make a selected table output for SR
+sr_table = function(subsidiy_removal){
+        sr = subsidiy_removal %>% 
+                group_by(Category) %>%
+                select(c("Category", "Fuel_type", "Fuel_subtype", "Description", "Sources_and_more_info")) %>% 
+                replace(is.na(.), "--") 
+        names(sr) = c("Category", "Fuel type", "Fuel subtype", "Description", "Sources")
+        sr
+}   
+
+# function to make a selected table output for DIV
+div_table = function(divestment_new){
+        div = divestment_new %>% 
+                group_by(Category) %>% 
+                select(c("Category", "Type", "Organisation", "Organisation_type", "Sources_and_more_info"))%>% 
+                replace(is.na(.), "--")
+        names(div) = c("Category", "Type", "Organisation", "Organisation Type", "Sources")
+        div
+}
+
+# Check correctness of data table functions
+#mbl_table(moratoria_bans_limits)
+#sr_table(subsidiy_removal)
+#div_table(divestment_new)
+##############################################################################################################################
+
 # create plotting parameters for map
 bins = c(0,10,50,100,500) 
 cv_pal <- colorBin("Greens", domain =  country_overview_large$policy_total, bins = bins)
@@ -102,6 +140,7 @@ basemap = leaflet(plot_map) %>%
                          labelOptions = labelOptions(
                                  style = list("font-weight" = "normal", "font-family" = "Roboto", padding = "3px 8px", "color" = All_policies),
                                  textsize = "15px", direction = "auto")) %>% 
+        
         
         addCircleMarkers(data = country_overview_large, lat = ~ latitude, lng = ~ longitude, weight = 1, radius = ~(Moratoria_bans_limits_total)^(1/1.5), 
                          fillOpacity = 0.2, color = Moratoria_bans_limits, group = "Moratoria, Bans, & Limits",
@@ -590,4 +629,47 @@ observeEvent(input$render, {
 })
 }
 
+# Filter out country_overview_large for 0 values
+reactive_db = reactive({
+        country_overview_large %>% filter(Policy_total>0)
+})
+
+reactive_db_large = reactive({
+        country_overview_large = reactive_db() %>% filter(ISO3 %in% worldcountry$ADM0_A3)
+        #large_countries = reactive %>% filter(alpha3 %in% worldcountry$ADM0_A3)
+        worldcountry_subset = worldcountry[worldcountry$ADM0_A3 %in% country_overview_large$ISO3, ]
+        country_overview_large = country_overview_large[match(worldcountry_subset$ADM0_A3, country_overview_large$ISO3),]
+        country_overview_large
+})
+
+
+## Mobile Responisveness testing
+
+tabPanel("Supply Side Policy Mapper",
+         div(class="outer",
+             tags$head(includeCSS("styles.css")),
+             leafletOutput("mymap", width="100%", height="100%"),
+             
+             absolutePanel(id = "controls", class = "panel panel-default",
+                           top = 75, left = 55, width = 300, fixed=TRUE,
+                           draggable = TRUE, height = "auto",
+                           
+                           span(tags$i(h6("Reported numbers of policies are subject to variation in policy types between countries.")), style="color:#045a8d"),
+                           h4(textOutput("policy_count"), align = "right"),
+                           h5(textOutput("gov_pol_count"), align = "right"),
+                           h5(textOutput("Non_gov_pol_count"), align = "right"),
+                           #h6(textOutput("mbl_count"), align = "right"), 
+                           #h6(textOutput("div_count"), align = "right"), 
+                           #h6(textOutput("sr_count"), align = "right"), 
+                           plotOutput("cumulative_mbl_plot", height="185px", width="100%"),
+                           plotOutput("cumulative_div_plot", height="175px", width="100%"),
+                           plotOutput("cumulative_sr_plot", height="175px", width="100%"),
+                           
+             ),
+             
+             absolutePanel(id = "logo", class = "card", bottom = 20, left = 20, width = 80, fixed=TRUE, draggable = FALSE, height = "auto",
+                           tags$a(href='https://fossilfueltreaty.org', tags$img(src='output-onlinepngtools.png',height='80',width='80')))
+             
+         )
+),
 

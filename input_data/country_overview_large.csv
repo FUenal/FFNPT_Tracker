@@ -1,230 +1,230 @@
-"","Country","Moratoria_bans_limits","Subsidy_removal","Divestment","Sources","Notes","ISO2","ISO3","UN","CAT_rating","latitude","longitude","global_level","continent_level","mbl_country","mbl_city_region","divestment_city_region","divestment_non_government","subsidy_removal","Moratoria_bans_limits_total","Divestment_total","Subsidy_removal_total","Policy_total","Government_policies_total","Non_Government_policies_total"
-"1","Aruba",0,0,0,FALSE,FALSE,"AW","ABW",533,"No Data",12.5,-69.9667,"Global","North America",0,0,0,0,0,0,0,0,0,0,0
-"2","Afghanistan",0,0,0,FALSE,FALSE,"AF","AFG",4,"No Data",33,65,"Global","Asia",0,0,0,0,0,0,0,0,0,0,0
-"3","Angola",0,0,0,FALSE,FALSE,"AO","AGO",24,"No Data",-12.5,18.5,"Global","Africa",0,0,0,1,0,0,1,0,1,0,1
-"4","Anguilla",0,0,0,FALSE,FALSE,"AI","AIA",660,"No Data",18.25,-63.1667,"Global","North America",0,0,0,0,0,0,0,0,0,0,0
-"5","Albania",0,0,0,FALSE,FALSE,"AL","ALB",8,"No Data",41,20,"Global","Europe",0,0,0,0,0,0,0,0,0,0,0
-"6","Andorra",0,0,0,FALSE,FALSE,"AD","AND",20,"No Data",42.5,1.6,"Global","Europe",0,0,0,0,0,0,0,0,0,0,0
-"7","United Arab Emirates",0,0,0,FALSE,FALSE,"AE","ARE",784,"Highly Insufficient",24,54,"Global","Asia",0,0,0,0,0,0,0,0,0,0,0
-"8","Argentina",2,0,2,FALSE,FALSE,"AR","ARG",32,"Critically Insufficient",-34,-64,"Global","South America",0,2,0,4,0,2,4,0,6,2,4
-"9","Armenia",0,0,0,FALSE,FALSE,"AM","ARM",51,"No Data",40,45,"Global","Asia",0,0,0,0,0,0,0,0,0,0,0
-"10","American Samoa",0,0,0,FALSE,FALSE,"AS","ASM",16,"No Data",-14.3333,-170,"Global","Oceania",0,0,0,0,0,0,0,0,0,0,0
-"11","Antarctica",0,0,0,FALSE,FALSE,"AQ","ATA",10,"No Data",-90,0,"Global","Antarctica",0,1,0,0,0,1,0,0,1,1,0
-"12","French Southern Territories",0,0,0,FALSE,FALSE,"TF","ATF",260,"No Data",-43,67,"Global","Antarctica",0,0,0,0,0,0,0,0,0,0,0
-"13","Antigua and Barbuda",0,0,0,FALSE,FALSE,"AG","ATG",28,"No Data",17.05,-61.8,"Global","North America",0,0,0,0,0,0,0,0,0,0,0
-"14","Australia",5,1,89,FALSE,FALSE,"AU","AUS",36,"Insufficient",-27,133,"Global","Oceania",0,5,29,60,1,5,89,1,95,35,60
-"15","Austria",0,0,1,FALSE,FALSE,"AT","AUT",40,"Insufficient",47.3333,13.3333,"Global","Europe",0,0,0,1,0,0,1,0,1,0,1
-"16","Azerbaijan",0,0,0,FALSE,FALSE,"AZ","AZE",31,"No Data",40.5,47.5,"Global","Asia",0,0,0,0,0,0,0,0,0,0,0
-"17","Burundi",0,0,0,FALSE,FALSE,"BI","BDI",108,"No Data",-3.5,30,"Global","Africa",0,0,0,0,0,0,0,0,0,0,0
-"18","Belgium",0,0,16,FALSE,FALSE,"BE","BEL",56,"Insufficient",50.8333,4,"Global","Europe",0,0,0,17,0,0,17,0,17,0,17
-"19","Benin",0,0,0,FALSE,FALSE,"BJ","BEN",204,"No Data",9.5,2.25,"Global","Africa",0,0,0,0,0,0,0,0,0,0,0
-"20","Burkina Faso",0,0,0,FALSE,FALSE,"BF","BFA",854,"No Data",13,-2,"Global","Africa",0,0,0,0,0,0,0,0,0,0,0
-"21","Bangladesh",0,0,0,FALSE,FALSE,"BD","BGD",50,"No Data",24,90,"Global","Asia",0,0,0,0,0,0,0,0,0,0,0
-"22","Bulgaria",1,0,0,FALSE,FALSE,"BG","BGR",100,"Insufficient",43,25,"Global","Europe",1,0,0,0,0,1,0,0,1,1,0
-"23","Bahrain",0,0,0,FALSE,FALSE,"BH","BHR",48,"No Data",26,50.55,"Global","Asia",0,0,0,0,0,0,0,0,0,0,0
-"24","Bahamas",0,0,0,FALSE,FALSE,"BS","BHS",44,"No Data",24.25,-76,"Global","North America",0,0,0,0,0,0,0,0,0,0,0
-"25","Bosnia and Herzegovina",0,0,0,FALSE,FALSE,"BA","BIH",70,"No Data",44,18,"Global","Europe",0,0,0,0,0,0,0,0,0,0,0
-"26","Saint-Barthélemy",0,0,0,FALSE,FALSE,"BL","BLM",652,"No Data",17.9,-62.83,"Global","North America",0,0,0,0,0,0,0,0,0,0,0
-"27","Belarus",0,0,0,FALSE,FALSE,"BY","BLR",112,"No Data",53,28,"Global","Europe",0,0,0,0,0,0,0,0,0,0,0
-"28","Belize",1,0,0,FALSE,FALSE,"BZ","BLZ",84,"No Data",17.25,-88.75,"Global","North America",1,0,0,0,0,1,0,0,1,1,0
-"29","Bermuda",0,0,0,FALSE,FALSE,"BM","BMU",60,"No Data",32.3333,-64.75,"Global","North America",0,0,0,0,0,0,0,0,0,0,0
-"30","Bolivia",0,0,0,FALSE,FALSE,"BO","BOL",68,"No Data",-17,-65,"Global","South America",0,0,0,0,0,0,0,0,0,0,0
-"31","Brazil",1,0,1,FALSE,FALSE,"BR","BRA",76,"Insufficient",-10,-55,"Global","South America",0,1,0,1,0,1,1,0,2,1,1
-"32","Barbados",0,0,0,FALSE,FALSE,"BB","BRB",52,"No Data",13.1667,-59.5333,"Global","North America",0,0,0,0,0,0,0,0,0,0,0
-"33","Brunei Darussalam",0,0,0,FALSE,FALSE,"BN","BRN",96,"No Data",4.5,114.6667,"Global","Asia",0,0,0,0,0,0,0,0,0,0,0
-"34","Bhutan",0,0,0,FALSE,FALSE,"BT","BTN",64,"2°C Compatible",27.5,90.5,"Global","Asia",0,0,0,0,0,0,0,0,0,0,0
-"35","Botswana",0,0,0,FALSE,FALSE,"BW","BWA",72,"No Data",-22,24,"Global","Africa",0,0,0,0,0,0,0,0,0,0,0
-"36","Central African Republic",0,0,0,FALSE,FALSE,"CF","CAF",140,"No Data",7,21,"Global","Africa",0,0,0,0,0,0,0,0,0,0,0
-"37","Canada",9,2,44,FALSE,FALSE,"CA","CAN",124,"Insufficient",60,-95,"Global","North America",0,9,1,44,2,9,45,2,56,12,44
-"38","Switzerland",1,0,11,FALSE,FALSE,"CH","CHE",756,"Insufficient",47,8,"Global","Europe",0,1,0,11,0,1,11,0,12,1,11
-"39","Chile",0,0,0,FALSE,FALSE,"CL","CHL",152,"Insufficient",-30,-71,"Global","South America",0,0,0,0,0,0,0,0,0,0,0
-"40","China",1,1,1,FALSE,FALSE,"CN","CHN",156,"Highly Insufficient",35,105,"Global","Asia",1,0,0,1,1,1,1,1,3,2,1
-"41","Côte d'Ivoire",0,0,0,FALSE,FALSE,"CI","CIV",384,"No Data",8,-5,"Global","Africa",0,0,0,0,0,0,0,0,0,0,0
-"42","Cameroon",0,0,1,FALSE,FALSE,"CM","CMR",120,"No Data",6,12,"Global","Africa",0,0,0,1,0,0,1,0,1,0,1
-"43","Congo, (Kinshasa)",0,0,0,FALSE,FALSE,"CD","COD",180,"No Data",0,25,"Global","Africa",0,0,0,0,0,0,0,0,0,0,0
-"44","Congo (Brazzaville)",0,0,0,FALSE,FALSE,"CG","COG",178,"No Data",-1,15,"Global","Africa",0,0,0,0,0,0,0,0,0,0,0
-"45","Cook Islands",0,0,0,FALSE,FALSE,"CK","COK",184,"No Data",-21.2333,-159.7667,"Global","Oceania",0,0,0,0,0,0,0,0,0,0,0
-"46","Colombia",0,0,0,FALSE,FALSE,"CO","COL",170,"No Data",4,-72,"Global","South America",0,0,0,1,0,0,1,0,1,0,1
-"47","Comoros",0,0,0,FALSE,FALSE,"KM","COM",174,"No Data",-12.1667,44.25,"Global","Africa",0,0,0,0,0,0,0,0,0,0,0
-"48","Cape Verde",0,0,0,FALSE,FALSE,"CV","CPV",132,"No Data",16,-24,"Global","Africa",0,0,0,0,0,0,0,0,0,0,0
-"49","Costa Rica",1,0,0,FALSE,FALSE,"CR","CRI",188,"Highly Insufficient",10,-84,"Global","North America",1,0,0,0,0,1,0,0,1,1,0
-"50","Cuba",0,0,0,FALSE,FALSE,"CU","CUB",192,"No Data",21.5,-80,"Global","North America",0,0,0,0,0,0,0,0,0,0,0
-"51","Cayman Islands",0,0,0,FALSE,FALSE,"KY","CYM",136,"No Data",19.5,-80.5,"Global","North America",0,0,0,0,0,0,0,0,0,0,0
-"52","Cyprus",0,0,0,FALSE,FALSE,"CY","CYP",196,"Insufficient",35,33,"Global","Europe",0,0,0,0,0,0,0,0,0,0,0
-"53","Czech Republic",1,0,0,FALSE,FALSE,"CZ","CZE",203,"Insufficient",49.75,15.5,"Global","Europe",1,0,0,1,0,1,1,0,2,1,1
-"54","Germany",1,1,24,FALSE,FALSE,"DE","DEU",276,"Insufficient",51,9,"Global","Europe",1,0,9,16,1,1,25,1,27,11,16
-"55","Djibouti",0,0,0,FALSE,FALSE,"DJ","DJI",262,"No Data",11.5,43,"Global","Africa",0,0,0,0,0,0,0,0,0,0,0
-"56","Dominica",0,0,0,FALSE,FALSE,"DM","DMA",212,"No Data",15.4167,-61.3333,"Global","North America",0,0,0,0,0,0,0,0,0,0,0
-"57","Denmark",2,1,11,FALSE,FALSE,"DK","DNK",208,"Insufficient",56,10,"Global","Europe",1,1,6,5,1,2,11,1,14,9,5
-"58","Dominican Republic",0,0,0,FALSE,FALSE,"DO","DOM",214,"No Data",19,-70.6667,"Global","North America",0,0,0,1,0,0,1,0,1,0,1
-"59","Algeria",0,0,0,FALSE,FALSE,"DZ","DZA",12,"No Data",28,3,"Global","Africa",0,0,0,0,0,0,0,0,0,0,0
-"60","Ecuador",0,0,0,FALSE,FALSE,"EC","ECU",218,"No Data",-2,-77.5,"Global","South America",0,0,0,0,0,0,0,0,0,0,0
-"61","Egypt",0,0,0,FALSE,FALSE,"EG","EGY",818,"No Data",27,30,"Global","Africa",0,0,0,0,0,0,0,0,0,0,0
-"62","Eritrea",0,0,0,FALSE,FALSE,"ER","ERI",232,"No Data",15,39,"Global","Africa",0,0,0,0,0,0,0,0,0,0,0
-"63","Spain",2,3,0,FALSE,FALSE,"ES","ESP",724,"Insufficient",40,-4,"Global","Europe",0,2,0,2,3,2,2,3,7,5,2
-"64","Estonia",0,0,0,FALSE,FALSE,"EE","EST",233,"Insufficient",59,26,"Global","Europe",0,0,0,0,0,0,0,0,0,0,0
-"65","Ethiopia",0,0,0,FALSE,FALSE,"ET","ETH",231,"2°C Compatible",8,38,"Global","Africa",0,0,0,0,0,0,0,0,0,0,0
-"66","Finland",0,0,0,FALSE,FALSE,"FI","FIN",246,"Insufficient",64,26,"Global","Europe",0,0,0,0,0,0,0,0,0,0,0
-"67","Fiji",0,0,0,FALSE,FALSE,"FJ","FJI",242,"No Data",-18,175,"Global","Oceania",0,0,0,0,0,0,0,0,0,0,0
-"68","Falkland Islands (Malvinas)",0,0,0,FALSE,FALSE,"FK","FLK",238,"No Data",-51.75,-59,"Global","South America",0,0,0,0,0,0,0,0,0,0,0
-"69","France",2,0,43,FALSE,FALSE,"FR","FRA",250,"Insufficient",46,2,"Global","Europe",2,0,32,11,0,2,43,0,45,34,11
-"70","Faroe Islands",0,0,0,FALSE,FALSE,"FO","FRO",234,"No Data",62,-7,"Global","Europe",0,0,0,0,0,0,0,0,0,0,0
-"71","Micronesia, Federated States of",0,0,0,FALSE,FALSE,"FM","FSM",583,"No Data",6.9167,158.25,"Global","Oceania",0,0,0,0,0,0,0,0,0,0,0
-"72","Gabon",0,0,0,FALSE,FALSE,"GA","GAB",266,"No Rating",-1,11.75,"Global","Africa",0,0,0,0,0,0,0,0,0,0,0
-"73","United Kingdom",5,3,149,FALSE,FALSE,"GB","GBR",826,"Insufficient",54,-2,"Global","Europe",1,4,16,145,3,5,161,3,169,24,145
-"74","Georgia",0,0,0,FALSE,FALSE,"GE","GEO",268,"No Data",42,43.5,"Global","Asia",0,0,0,0,0,0,0,0,0,0,0
-"75","Guernsey",0,0,0,FALSE,FALSE,"GG","GGY",831,"No Data",49.5,-2.56,"Global","Europe",0,0,0,0,0,0,0,0,0,0,0
-"76","Ghana",0,0,0,FALSE,FALSE,"GH","GHA",288,"No Data",8,-2,"Global","Africa",0,0,0,0,0,0,0,0,0,0,0
-"77","Guinea",0,0,0,FALSE,FALSE,"GN","GIN",324,"No Data",11,-10,"Global","Africa",0,0,0,0,0,0,0,0,0,0,0
-"78","Gambia",0,0,0,FALSE,FALSE,"GM","GMB",270,"1.5°C Paris Agreement Compatible",13.4667,-16.5667,"Global","Africa",0,0,0,0,0,0,0,0,0,0,0
-"79","Guinea-Bissau",0,0,0,FALSE,FALSE,"GW","GNB",624,"No Data",12,-15,"Global","Africa",0,0,0,0,0,0,0,0,0,0,0
-"80","Equatorial Guinea",0,0,0,FALSE,FALSE,"GQ","GNQ",226,"No Data",2,10,"Global","Africa",0,0,0,0,0,0,0,0,0,0,0
-"81","Greece",0,0,0,FALSE,FALSE,"GR","GRC",300,"Insufficient",39,22,"Global","Europe",0,0,0,0,0,0,0,0,0,0,0
-"82","Grenada",0,0,0,FALSE,FALSE,"GD","GRD",308,"No Data",12.1167,-61.6667,"Global","North America",0,0,0,0,0,0,0,0,0,0,0
-"83","Greenland",0,0,0,FALSE,FALSE,"GL","GRL",304,"No Data",72,-40,"Global","North America",0,0,0,0,0,0,0,0,0,0,0
-"84","Guatemala",0,0,0,FALSE,FALSE,"GT","GTM",320,"No Data",15.5,-90.25,"Global","North America",0,0,0,0,0,0,0,0,0,0,0
-"85","Guam",0,0,0,FALSE,FALSE,"GU","GUM",316,"No Data",13.4667,144.7833,"Global","Oceania",0,0,0,0,0,0,0,0,0,0,0
-"86","Guyana",0,0,0,FALSE,FALSE,"GY","GUY",328,"No Data",5,-59,"Global","South America",0,0,0,0,0,0,0,0,0,0,0
-"87","Hong Kong, SAR China",0,0,0,FALSE,FALSE,"HK","HKG",344,"No Data",22.25,114.1667,"Global","Asia",0,0,0,0,0,0,0,0,0,0,0
-"88","Heard and Mcdonald Islands",0,0,0,FALSE,FALSE,"HM","HMD",334,"No Data",-53.1,72.5167,"Global","Antarctica",0,0,0,0,0,0,0,0,0,0,0
-"89","Honduras",0,0,0,FALSE,FALSE,"HN","HND",340,"No Data",15,-86.5,"Global","North America",0,0,0,0,0,0,0,0,0,0,0
-"90","Croatia",0,0,0,FALSE,FALSE,"HR","HRV",191,"Insufficient",45.1667,15.5,"Global","Europe",0,0,0,0,0,0,0,0,0,0,0
-"91","Haiti",0,0,0,FALSE,FALSE,"HT","HTI",332,"No Data",19,-72.4167,"Global","North America",0,0,0,0,0,0,0,0,0,0,0
-"92","Hungary",0,0,0,FALSE,FALSE,"HU","HUN",348,"Insufficient",47,20,"Global","Europe",0,0,0,0,0,0,0,0,0,0,0
-"93","Indonesia",0,0,0,FALSE,FALSE,"ID","IDN",360,"Highly Insufficient",-5,120,"Global","Asia",0,0,0,0,0,0,0,0,0,0,0
-"94","Isle of Man",0,0,0,FALSE,FALSE,"IM","IMN",833,"No Data",54.23,-4.55,"Global","Europe",0,0,0,0,0,0,0,0,0,0,0
-"95","India",0,0,2,FALSE,FALSE,"IN","IND",356,"2°C Compatible",20,77,"Global","Asia",0,0,0,3,0,0,3,0,3,0,3
-"96","British Indian Ocean Territory",0,0,0,FALSE,FALSE,"IO","IOT",86,"No Data",-6,71.5,"Global","Asia",0,0,0,0,0,0,0,0,0,0,0
-"97","Ireland",5,0,10,FALSE,FALSE,"IE","IRL",372,"Insufficient",53,-8,"Global","Europe",1,4,1,13,0,5,14,0,19,6,13
-"98","Iran, Islamic Republic of",0,0,0,FALSE,FALSE,"IR","IRN",364,"No Data",32,53,"Global","Asia",0,0,0,0,0,0,0,0,0,0,0
-"99","Iraq",0,0,0,FALSE,FALSE,"IQ","IRQ",368,"No Data",33,44,"Global","Asia",0,0,0,0,0,0,0,0,0,0,0
-"100","Iceland",0,0,0,FALSE,FALSE,"IS","ISL",352,"No Data",65,-18,"Global","Europe",0,0,0,0,0,0,0,0,0,0,0
-"101","Israel",0,0,0,FALSE,FALSE,"IL","ISR",376,"No Data",31.5,34.75,"Global","Asia",0,0,0,0,0,0,0,0,0,0,0
-"102","Italy",0,0,23,FALSE,FALSE,"IT","ITA",380,"Insufficient",42.8333,12.8333,"Global","Europe",0,0,1,26,0,0,27,0,27,1,26
-"103","Jamaica",0,0,0,FALSE,FALSE,"JM","JAM",388,"No Data",18.25,-77.5,"Global","North America",0,0,0,0,0,0,0,0,0,0,0
-"104","Jersey",0,0,0,FALSE,FALSE,"JE","JEY",832,"No Data",49.21,-2.13,"Global","Europe",0,0,0,0,0,0,0,0,0,0,0
-"105","Jordan",0,0,0,FALSE,FALSE,"JO","JOR",400,"No Data",31,36,"Global","Asia",0,0,0,0,0,0,0,0,0,0,0
-"106","Japan",0,1,0,FALSE,FALSE,"JP","JPN",392,"Highly Insufficient",36,138,"Global","Asia",0,0,0,0,1,0,0,1,1,1,0
-"107","Kazakhstan",0,0,0,FALSE,FALSE,"KZ","KAZ",398,"Insufficient",48,68,"Global","Asia",0,0,0,0,0,0,0,0,0,0,0
-"108","Kenya",0,0,1,FALSE,FALSE,"KE","KEN",404,"2°C Compatible",1,38,"Global","Africa",0,0,0,6,0,0,6,0,6,0,6
-"109","Kyrgyzstan",0,0,0,FALSE,FALSE,"KG","KGZ",417,"No Data",41,75,"Global","Asia",0,0,0,0,0,0,0,0,0,0,0
-"110","Cambodia",0,0,0,FALSE,FALSE,"KH","KHM",116,"No Data",13,105,"Global","Asia",0,0,0,0,0,0,0,0,0,0,0
-"111","Kiribati",0,0,0,FALSE,FALSE,"KI","KIR",296,"No Data",1.4167,173,"Global","Oceania",0,0,0,0,0,0,0,0,0,0,0
-"112","Saint Kitts and Nevis",0,0,0,FALSE,FALSE,"KN","KNA",659,"No Data",17.3333,-62.75,"Global","North America",0,0,0,0,0,0,0,0,0,0,0
-"113","Korea (South)",0,1,0,FALSE,FALSE,"KR","KOR",410,"Highly Insufficient",37,127.5,"Global","Asia",0,0,0,0,1,0,0,1,1,1,0
-"114","Kuwait",0,0,0,FALSE,FALSE,"KW","KWT",414,"No Data",29.3375,47.6581,"Global","Asia",0,0,0,0,0,0,0,0,0,0,0
-"115","Lao PDR",0,0,0,FALSE,FALSE,"LA","LAO",418,"No Data",18,105,"Global","Asia",0,0,0,0,0,0,0,0,0,0,0
-"116","Lebanon",0,0,0,FALSE,FALSE,"LB","LBN",422,"No Data",33.8333,35.8333,"Global","Asia",0,0,0,0,0,0,0,0,0,0,0
-"117","Liberia",0,0,1,FALSE,FALSE,"LR","LBR",430,"No Data",6.5,-9.5,"Global","Africa",0,0,1,0,0,0,1,0,1,1,0
-"118","Libya",0,0,0,FALSE,FALSE,"LY","LBY",434,"No Data",25,17,"Global","Africa",0,0,0,0,0,0,0,0,0,0,0
-"119","Saint Lucia",0,0,0,FALSE,FALSE,"LC","LCA",662,"No Data",13.8833,-61.1333,"Global","North America",0,0,0,0,0,0,0,0,0,0,0
-"120","Liechtenstein",0,0,0,FALSE,FALSE,"LI","LIE",438,"No Data",47.1667,9.5333,"Global","Europe",0,0,0,0,0,0,0,0,0,0,0
-"121","Sri Lanka",0,0,0,FALSE,FALSE,"LK","LKA",144,"No Data",7,81,"Global","Asia",0,0,0,1,0,0,1,0,1,0,1
-"122","Lesotho",0,0,0,FALSE,FALSE,"LS","LSO",426,"No Data",-29.5,28.5,"Global","Africa",0,0,0,1,0,0,1,0,1,0,1
-"123","Lithuania",0,0,0,FALSE,FALSE,"LT","LTU",440,"Insufficient",56,24,"Global","Europe",0,0,0,0,0,0,0,0,0,0,0
-"124","Luxembourg",1,0,0,FALSE,FALSE,"LU","LUX",442,"Insufficient",49.75,6.1667,"Global","Europe",1,0,0,0,0,1,0,0,1,1,0
-"125","Latvia",0,0,0,FALSE,FALSE,"LV","LVA",428,"Insufficient",57,25,"Global","Europe",0,0,0,0,0,0,0,0,0,0,0
-"126","Macao, SAR China",0,0,0,FALSE,FALSE,"MO","MAC",446,"No Data",22.1667,113.55,"Global","Asia",0,0,0,0,0,0,0,0,0,0,0
-"127","Saint-Martin (French part)",0,0,0,FALSE,FALSE,"MF","MAF",663,"No Data",18.07,-63.05,"Global","North America",0,0,0,0,0,0,0,0,0,0,0
-"128","Morocco",0,0,0,FALSE,FALSE,"MA","MAR",504,"1.5°C Paris Agreement Compatible",32,-5,"Global","Africa",0,0,0,0,0,0,0,0,0,0,0
-"129","Monaco",0,0,0,FALSE,FALSE,"MC","MCO",492,"No Data",43.7333,7.4,"Global","Europe",0,0,0,0,0,0,0,0,0,0,0
-"130","Moldova",0,0,0,FALSE,FALSE,"MD","MDA",498,"No Data",47,29,"Global","Europe",0,0,0,0,0,0,0,0,0,0,0
-"131","Madagascar",0,0,0,FALSE,FALSE,"MG","MDG",450,"No Data",-20,47,"Global","Africa",0,0,0,0,0,0,0,0,0,0,0
-"132","Maldives",0,0,0,FALSE,FALSE,"MV","MDV",462,"No Data",3.25,73,"Global","Asia",0,0,0,0,0,0,0,0,0,0,0
-"133","Mexico",0,0,0,FALSE,FALSE,"MX","MEX",484,"Insufficient",23,-102,"Global","North America",0,0,0,2,0,0,2,0,2,0,2
-"134","Marshall Islands",0,0,1,FALSE,FALSE,"MH","MHL",584,"No Data",9,168,"Global","Oceania",0,0,0,1,0,0,1,0,1,0,1
-"135","Macedonia, Republic of",0,0,0,FALSE,FALSE,"MK","MKD",807,"No Data",41.8333,22,"Global","Europe",0,0,0,0,0,0,0,0,0,0,0
-"136","Mali",0,0,0,FALSE,FALSE,"ML","MLI",466,"No Data",17,-4,"Global","Africa",0,0,0,0,0,0,0,0,0,0,0
-"137","Malta",0,0,0,FALSE,FALSE,"MT","MLT",470,"Insufficient",35.8333,14.5833,"Global","Europe",0,0,0,0,0,0,0,0,0,0,0
-"138","Myanmar",0,0,0,FALSE,FALSE,"MM","MMR",104,"No Data",22,98,"Global","Asia",0,0,0,0,0,0,0,0,0,0,0
-"139","Montenegro",0,0,0,FALSE,FALSE,"ME","MNE",499,"No Data",42,19,"Global","Europe",0,0,0,0,0,0,0,0,0,0,0
-"140","Mongolia",0,0,0,FALSE,FALSE,"MN","MNG",496,"No Data",46,105,"Global","Asia",0,0,0,0,0,0,0,0,0,0,0
-"141","Northern Mariana Islands",0,0,0,FALSE,FALSE,"MP","MNP",580,"No Data",15.2,145.75,"Global","Oceania",0,0,0,0,0,0,0,0,0,0,0
-"142","Mozambique",0,0,0,FALSE,FALSE,"MZ","MOZ",508,"No Data",-18.25,35,"Global","Africa",0,0,0,0,0,0,0,0,0,0,0
-"143","Mauritania",0,0,0,FALSE,FALSE,"MR","MRT",478,"No Data",20,-12,"Global","Africa",0,0,0,0,0,0,0,0,0,0,0
-"144","Montserrat",0,0,0,FALSE,FALSE,"MS","MSR",500,"No Data",16.75,-62.2,"Global","North America",0,0,0,0,0,0,0,0,0,0,0
-"145","Mauritius",0,0,0,FALSE,FALSE,"MU","MUS",480,"No Data",-20.2833,57.55,"Global","Africa",0,0,0,0,0,0,0,0,0,0,0
-"146","Malawi",0,0,0,FALSE,FALSE,"MW","MWI",454,"No Data",-13.5,34,"Global","Africa",0,0,0,0,0,0,0,0,0,0,0
-"147","Malaysia",0,0,0,FALSE,FALSE,"MY","MYS",458,"No Data",2.5,112.5,"Global","Asia",0,0,0,1,0,0,1,0,1,0,1
-"148","Namibia",0,0,0,FALSE,FALSE,"NA","NAM",516,"No Data",-22,17,"Global","Africa",0,0,0,0,0,0,0,0,0,0,0
-"149","New Caledonia",0,0,0,FALSE,FALSE,"NC","NCL",540,"No Data",-21.5,165.5,"Global","Oceania",0,0,0,0,0,0,0,0,0,0,0
-"150","Niger",0,0,0,FALSE,FALSE,"NE","NER",562,"No Data",16,8,"Global","Africa",0,0,0,0,0,0,0,0,0,0,0
-"151","Norfolk Island",0,0,0,FALSE,FALSE,"NF","NFK",574,"No Data",-29.0333,167.95,"Global","Oceania",0,0,0,0,0,0,0,0,0,0,0
-"152","Nigeria",0,0,1,FALSE,FALSE,"NG","NGA",566,"No Data",10,8,"Global","Africa",0,0,0,1,0,0,1,0,1,0,1
-"153","Nicaragua",0,0,0,FALSE,FALSE,"NI","NIC",558,"No Data",13,-85,"Global","North America",0,0,0,0,0,0,0,0,0,0,0
-"154","Niue",0,0,0,FALSE,FALSE,"NU","NIU",570,"No Data",-19.0333,-169.8667,"Global","Oceania",0,0,0,0,0,0,0,0,0,0,0
-"155","Netherlands",2,0,8,FALSE,FALSE,"NL","NLD",528,"Insufficient",52.5,5.75,"Global","Europe",1,1,2,6,0,2,8,0,10,4,6
-"156","Norway",0,0,7,FALSE,FALSE,"NO","NOR",578,"Insufficient",62,10,"Global","Europe",0,0,2,6,0,0,8,0,8,2,6
-"157","Nepal",0,0,0,FALSE,FALSE,"NP","NPL",524,"No Rating",28,84,"Global","Asia",0,0,0,0,0,0,0,0,0,0,0
-"158","Nauru",0,0,0,FALSE,FALSE,"NR","NRU",520,"No Data",-0.5333,166.9167,"Global","Oceania",0,0,0,0,0,0,0,0,0,0,0
-"159","New Zealand",2,2,18,FALSE,FALSE,"NZ","NZL",554,"Insufficient",-41,174,"Global","Oceania",1,1,4,14,2,2,18,2,22,8,14
-"160","Oman",0,0,0,FALSE,FALSE,"OM","OMN",512,"No Data",21,57,"Global","Asia",0,0,0,0,0,0,0,0,0,0,0
-"161","Pakistan",1,0,0,FALSE,FALSE,"PK","PAK",586,"No Data",30,70,"Global","Asia",1,0,0,0,0,1,0,0,1,1,0
-"162","Panama",0,0,0,FALSE,FALSE,"PA","PAN",591,"No Data",9,-80,"Global","North America",0,0,0,0,0,0,0,0,0,0,0
-"163","Pitcairn",0,0,0,FALSE,FALSE,"PN","PCN",612,"No Data",-24.7,-127.4,"Global","Oceania",0,0,0,0,0,0,0,0,0,0,0
-"164","Peru",0,0,0,FALSE,FALSE,"PE","PER",604,"Insufficient",-10,-76,"Global","South America",0,0,0,2,0,0,2,0,2,0,2
-"165","Philippines",1,0,0,FALSE,FALSE,"PH","PHL",608,"2°C Compatible",13,122,"Global","Asia",1,0,0,0,0,1,0,0,1,1,0
-"166","Palau",0,0,0,FALSE,FALSE,"PW","PLW",585,"No Data",7.5,134.5,"Global","Oceania",0,0,0,0,0,0,0,0,0,0,0
-"167","Papua New Guinea",0,0,1,FALSE,FALSE,"PG","PNG",598,"No Data",-6,147,"Global","Oceania",0,0,0,1,0,0,1,0,1,0,1
-"168","Poland",0,1,0,FALSE,FALSE,"PL","POL",616,"Insufficient",52,20,"Global","Europe",0,0,0,0,1,0,0,1,1,1,0
-"169","Puerto Rico",0,0,0,FALSE,FALSE,"PR","PRI",630,"No Data",18.25,-66.5,"Global","North America",0,0,0,0,0,0,0,0,0,0,0
-"170","Korea (North)",0,0,0,FALSE,FALSE,"KP","PRK",408,"No Data",40,127,"Global","Asia",0,0,0,0,0,0,0,0,0,0,0
-"171","Portugal",0,1,1,FALSE,FALSE,"PT","PRT",620,"Insufficient",39.5,-8,"Global","Europe",0,0,0,1,1,0,1,1,2,1,1
-"172","Paraguay",0,0,0,FALSE,FALSE,"PY","PRY",600,"No Data",-23,-58,"Global","South America",0,0,0,0,0,0,0,0,0,0,0
-"173","French Polynesia",0,0,0,FALSE,FALSE,"PF","PYF",258,"No Data",-15,-140,"Global","Oceania",0,0,0,0,0,0,0,0,0,0,0
-"174","Qatar",0,0,0,FALSE,FALSE,"QA","QAT",634,"No Data",25.5,51.25,"Global","Asia",0,0,0,0,0,0,0,0,0,0,0
-"175","Romania",0,0,0,FALSE,FALSE,"RO","ROU",642,"Insufficient",46,25,"Global","Europe",0,0,0,0,0,0,0,0,0,0,0
-"176","Russian Federation",0,1,0,FALSE,FALSE,"RU","RUS",643,"Critically Insufficient",60,100,"Global","Europe",0,0,0,0,1,0,0,1,1,1,0
-"177","Rwanda",0,0,1,FALSE,FALSE,"RW","RWA",646,"No Data",-2,30,"Global","Africa",0,0,0,1,0,0,1,0,1,0,1
-"178","Saudi Arabia",0,0,0,FALSE,FALSE,"SA","SAU",682,"Critically Insufficient",25,45,"Global","Asia",0,0,0,0,0,0,0,0,0,0,0
-"179","Sudan",0,0,0,FALSE,FALSE,"SD","SDN",736,"No Data",15,30,"Global","Africa",0,0,0,0,0,0,0,0,0,0,0
-"180","Senegal",0,0,1,FALSE,FALSE,"SN","SEN",686,"No Data",14,-14,"Global","Africa",0,0,0,1,0,0,1,0,1,0,1
-"181","Singapore",0,0,0,FALSE,FALSE,"SG","SGP",702,"Highly Insufficient",1.3667,103.8,"Global","Asia",0,0,0,0,0,0,0,0,0,0,0
-"182","South Georgia and the South Sandwich Islands",0,0,0,FALSE,FALSE,"GS","SGS",239,"No Data",-54.5,-37,"Global","South America",0,0,0,0,0,0,0,0,0,0,0
-"183","Saint Helena",0,0,0,FALSE,FALSE,"SH","SHN",654,"No Data",-15.9333,-5.7,"Global","Africa",0,0,0,0,0,0,0,0,0,0,0
-"184","Solomon Islands",0,0,0,FALSE,FALSE,"SB","SLB",90,"No Data",-8,159,"Global","Oceania",0,0,0,0,0,0,0,0,0,0,0
-"185","Sierra Leone",0,0,1,FALSE,FALSE,"SL","SLE",694,"No Data",8.5,-11.5,"Global","Africa",0,0,0,1,0,0,1,0,1,0,1
-"186","El Salvador",1,0,0,FALSE,FALSE,"SV","SLV",222,"No Data",13.8333,-88.9167,"Global","North America",1,0,0,0,0,1,0,0,1,1,0
-"187","San Marino",0,0,0,FALSE,FALSE,"SM","SMR",674,"No Data",43.7667,12.4167,"Global","Europe",0,0,0,0,0,0,0,0,0,0,0
-"188","Somalia",0,0,0,FALSE,FALSE,"SO","SOM",706,"No Data",10,49,"Global","Africa",0,0,0,0,0,0,0,0,0,0,0
-"189","Saint Pierre and Miquelon",0,0,0,FALSE,FALSE,"PM","SPM",666,"No Data",46.8333,-56.3333,"Global","North America",0,0,0,0,0,0,0,0,0,0,0
-"190","Serbia",0,0,0,FALSE,FALSE,"RS","SRB",688,"No Data",44,21,"Global","Europe",0,0,0,0,0,0,0,0,0,0,0
-"191","Sao Tome and Principe",0,0,0,FALSE,FALSE,"ST","STP",678,"No Data",1,7,"Global","Africa",0,0,0,0,0,0,0,0,0,0,0
-"192","Suriname",0,0,0,FALSE,FALSE,"SR","SUR",740,"No Data",4,-56,"Global","South America",0,0,0,0,0,0,0,0,0,0,0
-"193","Slovakia",0,1,0,FALSE,FALSE,"SK","SVK",703,"Insufficient",48.6667,19.5,"Global","Europe",0,0,0,0,1,0,0,1,1,1,0
-"194","Slovenia",0,0,0,FALSE,FALSE,"SI","SVN",705,"Insufficient",46,15,"Global","Europe",0,0,0,0,0,0,0,0,0,0,0
-"195","Sweden",0,0,17,FALSE,FALSE,"SE","SWE",752,"Insufficient",62,15,"Global","Europe",0,0,8,9,0,0,17,0,17,8,9
-"196","Swaziland",0,0,0,FALSE,FALSE,"SZ","SWZ",748,"No Data",-26.5,31.5,"Global","Africa",0,0,0,0,0,0,0,0,0,0,0
-"197","Seychelles",0,0,0,FALSE,FALSE,"SC","SYC",690,"No Data",-4.5833,55.6667,"Global","Africa",0,0,0,0,0,0,0,0,0,0,0
-"198","Syrian Arab Republic (Syria)",0,0,0,FALSE,FALSE,"SY","SYR",760,"No Data",35,38,"Global","Asia",0,0,0,0,0,0,0,0,0,0,0
-"199","Turks and Caicos Islands",0,0,0,FALSE,FALSE,"TC","TCA",796,"No Data",21.75,-71.5833,"Global","North America",0,0,0,0,0,0,0,0,0,0,0
-"200","Chad",0,0,0,FALSE,FALSE,"TD","TCD",148,"No Data",15,19,"Global","Africa",0,0,0,0,0,0,0,0,0,0,0
-"201","Togo",0,0,0,FALSE,FALSE,"TG","TGO",768,"No Data",8,1.1667,"Global","Africa",0,0,0,0,0,0,0,0,0,0,0
-"202","Thailand",0,0,0,FALSE,FALSE,"TH","THA",764,"No Data",15,100,"Global","Asia",0,0,0,1,0,0,1,0,1,0,1
-"203","Tajikistan",0,0,0,FALSE,FALSE,"TJ","TJK",762,"No Data",39,71,"Global","Asia",0,0,0,0,0,0,0,0,0,0,0
-"204","Turkmenistan",0,0,0,FALSE,FALSE,"TM","TKM",795,"No Data",40,60,"Global","Asia",0,0,0,0,0,0,0,0,0,0,0
-"205","Timor-Leste",0,0,0,FALSE,FALSE,"TL","TLS",626,"No Data",-8.55,125.5167,"Global","Asia",0,0,0,0,0,0,0,0,0,0,0
-"206","Tonga",0,0,0,FALSE,FALSE,"TO","TON",776,"No Data",-20,-175,"Global","Oceania",0,0,0,0,0,0,0,0,0,0,0
-"207","Trinidad and Tobago",0,0,0,FALSE,FALSE,"TT","TTO",780,"No Data",11,-61,"Global","North America",0,0,0,0,0,0,0,0,0,0,0
-"208","Tunisia",0,0,0,FALSE,FALSE,"TN","TUN",788,"No Data",34,9,"Global","Africa",0,0,0,0,0,0,0,0,0,0,0
-"209","Turkey",0,0,0,FALSE,FALSE,"TR","TUR",792,"Critically Insufficient",39,35,"Global","Asia",0,0,0,0,0,0,0,0,0,0,0
-"210","Taiwan, Republic of China",0,0,0,FALSE,FALSE,"TW","TWN",158,"No Data",23.5,121,"Global","Asia",0,0,0,0,0,0,0,0,0,0,0
-"211","Tanzania, United Republic of",0,0,1,FALSE,FALSE,"TZ","TZA",834,"No Data",-6,35,"Global","Africa",0,0,0,1,0,0,1,0,1,0,1
-"212","Uganda",0,0,1,FALSE,FALSE,"UG","UGA",800,"No Data",1,32,"Global","Africa",0,0,0,4,0,0,4,0,4,0,4
-"213","Ukraine",0,0,0,FALSE,FALSE,"UA","UKR",804,"Critically Insufficient",49,32,"Global","Europe",0,0,0,0,0,0,0,0,0,0,0
-"214","Uruguay",1,0,0,FALSE,FALSE,"UY","URY",858,"No Data",-33,-56,"Global","South America",1,0,0,0,0,1,0,0,1,1,0
-"215","United States of America",84,0,295,FALSE,FALSE,"US","USA",840,"Critically Insufficient",38,-97,"Global","North America",0,86,41,267,0,86,308,0,394,127,267
-"216","Uzbekistan",0,0,0,FALSE,FALSE,"UZ","UZB",860,"No Data",41,64,"Global","Asia",0,0,0,0,0,0,0,0,0,0,0
-"217","Holy See (Vatican City State)",0,0,1,FALSE,FALSE,"VA","VAT",336,"No Data",41.9,12.45,"Global","Europe",0,0,0,1,0,0,1,0,1,0,1
-"218","Saint Vincent and Grenadines",0,0,0,FALSE,FALSE,"VC","VCT",670,"No Data",13.25,-61.2,"Global","North America",0,0,0,0,0,0,0,0,0,0,0
-"219","Venezuela (Bolivarian Republic)",0,0,0,FALSE,FALSE,"VE","VEN",862,"No Data",8,-66,"Global","South America",0,0,0,0,0,0,0,0,0,0,0
-"220","British Virgin Islands",0,0,0,FALSE,FALSE,"VG","VGB",92,"No Data",18.5,-64.5,"Global","North America",0,0,0,0,0,0,0,0,0,0,0
-"221","Virgin Islands, US",0,0,0,FALSE,FALSE,"VI","VIR",850,"No Data",18.3333,-64.8333,"Global","North America",0,0,0,0,0,0,0,0,0,0,0
-"222","Viet Nam",0,0,0,FALSE,FALSE,"VN","VNM",704,"Critically Insufficient",16,106,"Global","Asia",0,0,0,0,0,0,0,0,0,0,0
-"223","Vanuatu",0,0,0,FALSE,FALSE,"VU","VUT",548,"No Data",-16,167,"Global","Oceania",0,0,0,0,0,0,0,0,0,0,0
-"224","Wallis and Futuna Islands",0,0,0,FALSE,FALSE,"WF","WLF",876,"No Data",-13.3,-176.2,"Global","Oceania",0,0,0,0,0,0,0,0,0,0,0
-"225","Samoa",0,0,0,FALSE,FALSE,"WS","WSM",882,"No Data",-13.5833,-172.3333,"Global","Oceania",0,0,0,0,0,0,0,0,0,0,0
-"226","Yemen",0,0,0,FALSE,FALSE,"YE","YEM",887,"No Data",15,48,"Global","Asia",0,0,0,0,0,0,0,0,0,0,0
-"227","South Africa",2,0,5,FALSE,FALSE,"ZA","ZAF",710,"Highly Insufficient",-29,24,"Global","Africa",2,0,3,4,0,2,7,0,9,5,4
-"228","Zambia",0,0,0,FALSE,FALSE,"ZM","ZMB",894,"No Data",-15,30,"Global","Africa",0,0,0,1,0,0,1,0,1,0,1
-"229","Zimbabwe",0,0,0,FALSE,FALSE,"ZW","ZWE",716,"No Data",-20,30,"Global","Africa",0,0,0,0,0,0,0,0,0,0,0
+"","Country","MTCO2e","Moratoria_bans_limits","Subsidy_removal","Divestment","Sources","Notes","ISO2","ISO3","UN","CAT_rating","latitude","longitude","global_level","continent_level","mbl_country","mbl_city_region","divestment_city_region","divestment_non_government","subsidy_removal","Moratoria_bans_limits_total","Divestment_total","Subsidy_removal_total","Policy_total","Government_policies_total","Non_Government_policies_total","MTCO2e_cat"
+"1","Aruba",0,0,0,0,FALSE,FALSE,"AW","ABW",533,"No Data",12.5,-69.9667,"Global","North America",0,0,0,0,0,0,0,0,0,0,0,"No data"
+"2","Afghanistan",95.41,0,0,0,FALSE,FALSE,"AF","AFG",4,"No Data",33,65,"Global","Asia",0,0,0,0,0,0,0,0,0,0,0,"1-169 MTCO2e"
+"3","Angola",182.19,0,0,0,FALSE,FALSE,"AO","AGO",24,"No Data",-12.5,18.5,"Global","Africa",0,0,0,1,0,0,1,0,1,0,1,"169-500 MTCO2e"
+"4","Anguilla",0,0,0,0,FALSE,FALSE,"AI","AIA",660,"No Data",18.25,-63.1667,"Global","North America",0,0,0,0,0,0,0,0,0,0,0,"No data"
+"5","Albania",9.33,0,0,0,FALSE,FALSE,"AL","ALB",8,"No Data",41,20,"Global","Europe",0,0,0,0,0,0,0,0,0,0,0,"1-169 MTCO2e"
+"6","Andorra",0.56,0,0,0,FALSE,FALSE,"AD","AND",20,"No Data",42.5,1.6,"Global","Europe",0,0,0,0,0,0,0,0,0,0,0,"No data"
+"7","United Arab Emirates",259.43,0,0,0,FALSE,FALSE,"AE","ARE",784,"Highly Insufficient",24,54,"Global","Asia",0,0,0,0,0,0,0,0,0,0,0,"169-500 MTCO2e"
+"8","Argentina",469.73,2,0,2,FALSE,FALSE,"AR","ARG",32,"Critically Insufficient",-34,-64,"Global","South America",0,2,0,8,0,2,8,0,10,2,8,"169-500 MTCO2e"
+"9","Armenia",9.36,0,0,0,FALSE,FALSE,"AM","ARM",51,"No Data",40,45,"Global","Asia",0,0,0,0,0,0,0,0,0,0,0,"1-169 MTCO2e"
+"10","American Samoa",0,0,0,0,FALSE,FALSE,"AS","ASM",16,"No Data",-14.3333,-170,"Global","Oceania",0,0,0,0,0,0,0,0,0,0,0,"No data"
+"11","Antarctica",0,0,0,0,FALSE,FALSE,"AQ","ATA",10,"No Data",-90,0,"Global","Antarctica",0,1,0,0,0,1,0,0,1,1,0,"No data"
+"12","French Southern Territories",0,0,0,0,FALSE,FALSE,"TF","ATF",260,"No Data",-43,67,"Global","Antarctica",0,0,0,0,0,0,0,0,0,0,0,"No data"
+"13","Antigua and Barbuda",1.14,0,0,0,FALSE,FALSE,"AG","ATG",28,"No Data",17.05,-61.8,"Global","North America",0,0,0,0,0,0,0,0,0,0,0,"1-169 MTCO2e"
+"14","Australia",507.17,5,1,89,FALSE,FALSE,"AU","AUS",36,"Insufficient",-27,133,"Global","Oceania",0,5,31,176,1,5,207,1,213,37,176,"500-1000 MTCO2e"
+"15","Austria",70.62,0,0,1,FALSE,FALSE,"AT","AUT",40,"Insufficient",47.3333,13.3333,"Global","Europe",0,0,0,4,0,0,4,0,4,0,4,"1-169 MTCO2e"
+"16","Azerbaijan",73.05,0,0,0,FALSE,FALSE,"AZ","AZE",31,"No Data",40.5,47.5,"Global","Asia",0,0,0,0,0,0,0,0,0,0,0,"1-169 MTCO2e"
+"17","Burundi",7.95,0,0,0,FALSE,FALSE,"BI","BDI",108,"No Data",-3.5,30,"Global","Africa",0,0,0,0,0,0,0,0,0,0,0,"1-169 MTCO2e"
+"18","Belgium",107.63,0,0,16,FALSE,FALSE,"BE","BEL",56,"Insufficient",50.8333,4,"Global","Europe",0,0,0,25,0,0,25,0,25,0,25,"1-169 MTCO2e"
+"19","Benin",27.36,0,0,0,FALSE,FALSE,"BJ","BEN",204,"No Data",9.5,2.25,"Global","Africa",0,0,0,0,0,0,0,0,0,0,0,"1-169 MTCO2e"
+"20","Burkina Faso",38.61,0,0,0,FALSE,FALSE,"BF","BFA",854,"No Data",13,-2,"Global","Africa",0,0,0,0,0,0,0,0,0,0,0,"1-169 MTCO2e"
+"21","Bangladesh",203.15,0,0,0,FALSE,FALSE,"BD","BGD",50,"No Data",24,90,"Global","Asia",0,0,0,2,0,0,2,0,2,0,2,"169-500 MTCO2e"
+"22","Bulgaria",44.11,1,0,0,FALSE,FALSE,"BG","BGR",100,"Insufficient",43,25,"Global","Europe",1,0,0,0,0,1,0,0,1,1,0,"1-169 MTCO2e"
+"23","Bahrain",47.15,0,0,0,FALSE,FALSE,"BH","BHR",48,"No Data",26,50.55,"Global","Asia",0,0,0,0,0,0,0,0,0,0,0,"1-169 MTCO2e"
+"24","Bahamas",3.06,0,0,0,FALSE,FALSE,"BS","BHS",44,"No Data",24.25,-76,"Global","North America",0,0,0,0,0,0,0,0,0,0,0,"1-169 MTCO2e"
+"25","Bosnia and Herzegovina",27.28,0,0,0,FALSE,FALSE,"BA","BIH",70,"No Data",44,18,"Global","Europe",0,0,0,0,0,0,0,0,0,0,0,"1-169 MTCO2e"
+"26","Saint-Barthélemy",0,0,0,0,FALSE,FALSE,"BL","BLM",652,"No Data",17.9,-62.83,"Global","North America",0,0,0,0,0,0,0,0,0,0,0,"No data"
+"27","Belarus",80.62,0,0,0,FALSE,FALSE,"BY","BLR",112,"No Data",53,28,"Global","Europe",0,0,0,0,0,0,0,0,0,0,0,"1-169 MTCO2e"
+"28","Belize",4.94,1,0,0,FALSE,FALSE,"BZ","BLZ",84,"No Data",17.25,-88.75,"Global","North America",1,0,0,0,0,1,0,0,1,1,0,"1-169 MTCO2e"
+"29","Bermuda",0,0,0,0,FALSE,FALSE,"BM","BMU",60,"No Data",32.3333,-64.75,"Global","North America",0,0,0,0,0,0,0,0,0,0,0,"No data"
+"30","Bolivia",150.52,0,0,0,FALSE,FALSE,"BO","BOL",68,"No Data",-17,-65,"Global","South America",0,0,0,0,0,0,0,0,0,0,0,"1-169 MTCO2e"
+"31","Brazil",1381.11,1,0,1,FALSE,FALSE,"BR","BRA",76,"Insufficient",-10,-55,"Global","South America",0,1,0,2,0,1,2,0,3,1,2,"1000-5000 MTCO2e"
+"32","Barbados",3.82,0,0,0,FALSE,FALSE,"BB","BRB",52,"No Data",13.1667,-59.5333,"Global","North America",0,0,0,0,0,0,0,0,0,0,0,"1-169 MTCO2e"
+"33","Brunei Darussalam",16.64,0,0,0,FALSE,FALSE,"BN","BRN",96,"No Data",4.5,114.6667,"Global","Asia",0,0,0,0,0,0,0,0,0,0,0,"1-169 MTCO2e"
+"34","Bhutan",-1.47,0,0,0,FALSE,FALSE,"BT","BTN",64,"2°C Compatible",27.5,90.5,"Global","Asia",0,0,0,0,0,0,0,0,0,0,0,"<0 MTCO2e"
+"35","Botswana",69.97,0,0,0,FALSE,FALSE,"BW","BWA",72,"No Data",-22,24,"Global","Africa",0,0,0,0,0,0,0,0,0,0,0,"1-169 MTCO2e"
+"36","Central African Republic",75.62,0,0,0,FALSE,FALSE,"CF","CAF",140,"No Data",7,21,"Global","Africa",0,0,0,0,0,0,0,0,0,0,0,"1-169 MTCO2e"
+"37","Canada",779.08,9,2,44,FALSE,FALSE,"CA","CAN",124,"Insufficient",60,-95,"Global","North America",0,9,1,49,2,9,50,2,61,12,49,"500-1000 MTCO2e"
+"38","Switzerland",46.66,1,0,11,FALSE,FALSE,"CH","CHE",756,"Insufficient",47,8,"Global","Europe",0,1,0,15,0,1,15,0,16,1,15,"1-169 MTCO2e"
+"39","Chile",3.62,0,0,0,FALSE,FALSE,"CL","CHL",152,"Insufficient",-30,-71,"Global","South America",0,0,0,0,0,0,0,0,0,0,0,"1-169 MTCO2e"
+"40","China",11577.98,1,1,1,FALSE,FALSE,"CN","CHN",156,"Highly Insufficient",35,105,"Global","Asia",1,0,0,1,1,1,1,1,3,2,1,">10000 MTCO2e"
+"41","Côte d'Ivoire",30.2,0,0,0,FALSE,FALSE,"CI","CIV",384,"No Data",8,-5,"Global","Africa",0,0,0,0,0,0,0,0,0,0,0,"1-169 MTCO2e"
+"42","Cameroon",208.95,0,0,1,FALSE,FALSE,"CM","CMR",120,"No Data",6,12,"Global","Africa",0,0,0,1,0,0,1,0,1,0,1,"169-500 MTCO2e"
+"43","Congo, (Kinshasa)",224.74,0,0,0,FALSE,FALSE,"CD","COD",180,"No Data",0,25,"Global","Africa",0,0,0,0,0,0,0,0,0,0,0,"169-500 MTCO2e"
+"44","Congo (Brazzaville)",48.99,0,0,0,FALSE,FALSE,"CG","COG",178,"No Data",-1,15,"Global","Africa",0,0,0,0,0,0,0,0,0,0,0,"1-169 MTCO2e"
+"45","Cook Islands",0.09,0,0,0,FALSE,FALSE,"CK","COK",184,"No Data",-21.2333,-159.7667,"Global","Oceania",0,0,0,0,0,0,0,0,0,0,0,"No data"
+"46","Colombia",222.64,0,0,0,FALSE,FALSE,"CO","COL",170,"No Data",4,-72,"Global","South America",0,0,0,2,0,0,2,0,2,0,2,"169-500 MTCO2e"
+"47","Comoros",0.61,0,0,0,FALSE,FALSE,"KM","COM",174,"No Data",-12.1667,44.25,"Global","Africa",0,0,0,0,0,0,0,0,0,0,0,"No data"
+"48","Cape Verde",0.6,0,0,0,FALSE,FALSE,"CV","CPV",132,"No Data",16,-24,"Global","Africa",0,0,0,0,0,0,0,0,0,0,0,"No data"
+"49","Costa Rica",4.59,1,0,0,FALSE,FALSE,"CR","CRI",188,"Highly Insufficient",10,-84,"Global","North America",1,0,0,0,0,1,0,0,1,1,0,"1-169 MTCO2e"
+"50","Cuba",31.75,0,0,0,FALSE,FALSE,"CU","CUB",192,"No Data",21.5,-80,"Global","North America",0,0,0,0,0,0,0,0,0,0,0,"1-169 MTCO2e"
+"51","Cayman Islands",0,0,0,0,FALSE,FALSE,"KY","CYM",136,"No Data",19.5,-80.5,"Global","North America",0,0,0,0,0,0,0,0,0,0,0,"No data"
+"52","Cyprus",8.23,0,0,0,FALSE,FALSE,"CY","CYP",196,"Insufficient",35,33,"Global","Europe",0,0,0,0,0,0,0,0,0,0,0,"1-169 MTCO2e"
+"53","Czech Republic",111.53,1,0,0,FALSE,FALSE,"CZ","CZE",203,"Insufficient",49.75,15.5,"Global","Europe",1,0,0,1,0,1,1,0,2,1,1,"1-169 MTCO2e"
+"54","Germany",810.14,1,1,24,FALSE,FALSE,"DE","DEU",276,"Insufficient",51,9,"Global","Europe",1,0,12,25,1,1,37,1,39,14,25,"500-1000 MTCO2e"
+"55","Djibouti",1.47,0,0,0,FALSE,FALSE,"DJ","DJI",262,"No Data",11.5,43,"Global","Africa",0,0,0,0,0,0,0,0,0,0,0,"1-169 MTCO2e"
+"56","Dominica",0.37,0,0,0,FALSE,FALSE,"DM","DMA",212,"No Data",15.4167,-61.3333,"Global","North America",0,0,0,0,0,0,0,0,0,0,0,"No data"
+"57","Denmark",47.28,2,1,11,FALSE,FALSE,"DK","DNK",208,"Insufficient",56,10,"Global","Europe",1,1,6,7,1,2,13,1,16,9,7,"1-169 MTCO2e"
+"58","Dominican Republic",29.11,0,0,0,FALSE,FALSE,"DO","DOM",214,"No Data",19,-70.6667,"Global","North America",0,0,0,1,0,0,1,0,1,0,1,"1-169 MTCO2e"
+"59","Algeria",209.41,0,0,0,FALSE,FALSE,"DZ","DZA",12,"No Data",28,3,"Global","Africa",0,0,0,0,0,0,0,0,0,0,0,"169-500 MTCO2e"
+"60","Ecuador",98.95,0,0,0,FALSE,FALSE,"EC","ECU",218,"No Data",-2,-77.5,"Global","South America",0,0,0,1,0,0,1,0,1,0,1,"1-169 MTCO2e"
+"61","Egypt",316.11,0,0,0,FALSE,FALSE,"EG","EGY",818,"No Data",27,30,"Global","Africa",0,0,0,0,0,0,0,0,0,0,0,"169-500 MTCO2e"
+"62","Eritrea",7.9,0,0,0,FALSE,FALSE,"ER","ERI",232,"No Data",15,39,"Global","Africa",0,0,0,0,0,0,0,0,0,0,0,"1-169 MTCO2e"
+"63","Spain",282.81,2,3,0,FALSE,FALSE,"ES","ESP",724,"Insufficient",40,-4,"Global","Europe",0,2,0,5,3,2,5,3,10,5,5,"169-500 MTCO2e"
+"64","Estonia",19.45,0,0,0,FALSE,FALSE,"EE","EST",233,"Insufficient",59,26,"Global","Europe",0,0,0,1,0,0,1,0,1,0,1,"1-169 MTCO2e"
+"65","Ethiopia",189.82,0,0,0,FALSE,FALSE,"ET","ETH",231,"2°C Compatible",8,38,"Global","Africa",0,0,0,0,0,0,0,0,0,0,0,"169-500 MTCO2e"
+"66","Finland",62.81,0,0,0,FALSE,FALSE,"FI","FIN",246,"Insufficient",64,26,"Global","Europe",0,0,0,1,0,0,1,0,1,0,1,"1-169 MTCO2e"
+"67","Fiji",0.24,0,0,0,FALSE,FALSE,"FJ","FJI",242,"No Data",-18,175,"Global","Oceania",0,0,0,1,0,0,1,0,1,0,1,"No data"
+"68","Falkland Islands (Malvinas)",0,0,0,0,FALSE,FALSE,"FK","FLK",238,"No Data",-51.75,-59,"Global","South America",0,0,0,0,0,0,0,0,0,0,0,"No data"
+"69","France",349.4,2,0,43,FALSE,FALSE,"FR","FRA",250,"Insufficient",46,2,"Global","Europe",2,0,36,23,0,2,59,0,61,38,23,"169-500 MTCO2e"
+"70","Faroe Islands",0,0,0,0,FALSE,FALSE,"FO","FRO",234,"No Data",62,-7,"Global","Europe",0,0,0,0,0,0,0,0,0,0,0,"No data"
+"71","Micronesia, Federated States of",0.23,0,0,0,FALSE,FALSE,"FM","FSM",583,"No Data",6.9167,158.25,"Global","Oceania",0,0,0,0,0,0,0,0,0,0,0,"No data"
+"72","Gabon",-84.89,0,0,0,FALSE,FALSE,"GA","GAB",266,"No Rating",-1,11.75,"Global","Africa",0,0,0,0,0,0,0,0,0,0,0,"<0 MTCO2e"
+"73","United Kingdom",462.81,5,3,149,FALSE,FALSE,"GB","GBR",826,"Insufficient",54,-2,"Global","Europe",1,4,14,265,3,5,279,3,287,22,265,"169-500 MTCO2e"
+"74","Georgia",17.41,0,0,0,FALSE,FALSE,"GE","GEO",268,"No Data",42,43.5,"Global","Asia",0,0,0,0,0,0,0,0,0,0,0,"1-169 MTCO2e"
+"75","Guernsey",0,0,0,0,FALSE,FALSE,"GG","GGY",831,"No Data",49.5,-2.56,"Global","Europe",0,0,0,0,0,0,0,0,0,0,0,"No data"
+"76","Ghana",51.26,0,0,0,FALSE,FALSE,"GH","GHA",288,"No Data",8,-2,"Global","Africa",0,0,0,0,0,0,0,0,0,0,0,"1-169 MTCO2e"
+"77","Guinea",45.4,0,0,0,FALSE,FALSE,"GN","GIN",324,"No Data",11,-10,"Global","Africa",0,0,0,0,0,0,0,0,0,0,0,"1-169 MTCO2e"
+"78","Gambia",2.32,0,0,0,FALSE,FALSE,"GM","GMB",270,"1.5°C Paris Agreement Compatible",13.4667,-16.5667,"Global","Africa",0,0,0,0,0,0,0,0,0,0,0,"1-169 MTCO2e"
+"79","Guinea-Bissau",4.11,0,0,0,FALSE,FALSE,"GW","GNB",624,"No Data",12,-15,"Global","Africa",0,0,0,0,0,0,0,0,0,0,0,"1-169 MTCO2e"
+"80","Equatorial Guinea",24.5,0,0,0,FALSE,FALSE,"GQ","GNQ",226,"No Data",2,10,"Global","Africa",0,0,0,0,0,0,0,0,0,0,0,"1-169 MTCO2e"
+"81","Greece",86.34,0,0,0,FALSE,FALSE,"GR","GRC",300,"Insufficient",39,22,"Global","Europe",0,0,0,0,0,0,0,0,0,0,0,"1-169 MTCO2e"
+"82","Grenada",2.31,0,0,0,FALSE,FALSE,"GD","GRD",308,"No Data",12.1167,-61.6667,"Global","North America",0,0,0,0,0,0,0,0,0,0,0,"1-169 MTCO2e"
+"83","Greenland",0,0,0,0,FALSE,FALSE,"GL","GRL",304,"No Data",72,-40,"Global","North America",0,0,0,0,0,0,0,0,0,0,0,"No data"
+"84","Guatemala",43.59,0,0,0,FALSE,FALSE,"GT","GTM",320,"No Data",15.5,-90.25,"Global","North America",0,0,0,0,0,0,0,0,0,0,0,"1-169 MTCO2e"
+"85","Guam",0,0,0,0,FALSE,FALSE,"GU","GUM",316,"No Data",13.4667,144.7833,"Global","Oceania",0,0,0,0,0,0,0,0,0,0,0,"No data"
+"86","Guyana",37.6,0,0,0,FALSE,FALSE,"GY","GUY",328,"No Data",5,-59,"Global","South America",0,0,0,0,0,0,0,0,0,0,0,"1-169 MTCO2e"
+"87","Hong Kong, SAR China",0,0,0,0,FALSE,FALSE,"HK","HKG",344,"No Data",22.25,114.1667,"Global","Asia",0,0,0,1,0,0,1,0,1,0,1,"No data"
+"88","Heard and Mcdonald Islands",0,0,0,0,FALSE,FALSE,"HM","HMD",334,"No Data",-53.1,72.5167,"Global","Antarctica",0,0,0,0,0,0,0,0,0,0,0,"No data"
+"89","Honduras",51.12,0,0,0,FALSE,FALSE,"HN","HND",340,"No Data",15,-86.5,"Global","North America",0,0,0,0,0,0,0,0,0,0,0,"1-169 MTCO2e"
+"90","Croatia",18.9,0,0,0,FALSE,FALSE,"HR","HRV",191,"Insufficient",45.1667,15.5,"Global","Europe",0,0,0,0,0,0,0,0,0,0,0,"1-169 MTCO2e"
+"91","Haiti",10.02,0,0,0,FALSE,FALSE,"HT","HTI",332,"No Data",19,-72.4167,"Global","North America",0,0,0,0,0,0,0,0,0,0,0,"1-169 MTCO2e"
+"92","Hungary",61.15,0,0,0,FALSE,FALSE,"HU","HUN",348,"Insufficient",47,20,"Global","Europe",0,0,0,0,0,0,0,0,0,0,0,"1-169 MTCO2e"
+"93","Indonesia",2228.89,0,0,0,FALSE,FALSE,"ID","IDN",360,"Highly Insufficient",-5,120,"Global","Asia",0,0,0,1,0,0,1,0,1,0,1,"1000-5000 MTCO2e"
+"94","Isle of Man",0,0,0,0,FALSE,FALSE,"IM","IMN",833,"No Data",54.23,-4.55,"Global","Europe",0,0,0,0,0,0,0,0,0,0,0,"No data"
+"95","India",3230.06,0,0,2,FALSE,FALSE,"IN","IND",356,"2°C Compatible",20,77,"Global","Asia",0,0,0,4,0,0,4,0,4,0,4,"1000-5000 MTCO2e"
+"96","British Indian Ocean Territory",0,0,0,0,FALSE,FALSE,"IO","IOT",86,"No Data",-6,71.5,"Global","Asia",0,0,0,0,0,0,0,0,0,0,0,"No data"
+"97","Ireland",65.59,5,0,10,FALSE,FALSE,"IE","IRL",372,"Insufficient",53,-8,"Global","Europe",1,4,1,22,0,5,23,0,28,6,22,"1-169 MTCO2e"
+"98","Iran, Islamic Republic of",862.87,0,0,0,FALSE,FALSE,"IR","IRN",364,"No Data",32,53,"Global","Asia",0,0,0,0,0,0,0,0,0,0,0,"500-1000 MTCO2e"
+"99","Iraq",195.4,0,0,0,FALSE,FALSE,"IQ","IRQ",368,"No Data",33,44,"Global","Asia",0,0,0,0,0,0,0,0,0,0,0,"169-500 MTCO2e"
+"100","Iceland",3.15,0,0,0,FALSE,FALSE,"IS","ISL",352,"No Data",65,-18,"Global","Europe",0,0,0,0,0,0,0,0,0,0,0,"1-169 MTCO2e"
+"101","Israel",89.35,0,0,0,FALSE,FALSE,"IL","ISR",376,"No Data",31.5,34.75,"Global","Asia",0,0,0,0,0,0,0,0,0,0,0,"1-169 MTCO2e"
+"102","Italy",377.27,0,0,23,FALSE,FALSE,"IT","ITA",380,"Insufficient",42.8333,12.8333,"Global","Europe",0,0,0,36,0,0,36,0,36,0,36,"169-500 MTCO2e"
+"103","Jamaica",9.76,0,0,0,FALSE,FALSE,"JM","JAM",388,"No Data",18.25,-77.5,"Global","North America",0,0,0,0,0,0,0,0,0,0,0,"1-169 MTCO2e"
+"104","Jersey",0,0,0,0,FALSE,FALSE,"JE","JEY",832,"No Data",49.21,-2.13,"Global","Europe",0,0,0,0,0,0,0,0,0,0,0,"No data"
+"105","Jordan",35.07,0,0,0,FALSE,FALSE,"JO","JOR",400,"No Data",31,36,"Global","Asia",0,0,0,0,0,0,0,0,0,0,0,"1-169 MTCO2e"
+"106","Japan",1262.19,0,1,0,FALSE,FALSE,"JP","JPN",392,"Highly Insufficient",36,138,"Global","Asia",0,0,0,0,1,0,0,1,1,1,0,"1000-5000 MTCO2e"
+"107","Kazakhstan",274.51,0,0,0,FALSE,FALSE,"KZ","KAZ",398,"Insufficient",48,68,"Global","Asia",0,0,0,0,0,0,0,0,0,0,0,"169-500 MTCO2e"
+"108","Kenya",48.5,0,0,1,FALSE,FALSE,"KE","KEN",404,"2°C Compatible",1,38,"Global","Africa",0,0,0,10,0,0,10,0,10,0,10,"1-169 MTCO2e"
+"109","Kyrgyzstan",15.81,0,0,0,FALSE,FALSE,"KG","KGZ",417,"No Data",41,75,"Global","Asia",0,0,0,0,0,0,0,0,0,0,0,"1-169 MTCO2e"
+"110","Cambodia",65.46,0,0,0,FALSE,FALSE,"KH","KHM",116,"No Data",13,105,"Global","Asia",0,0,0,0,0,0,0,0,0,0,0,"1-169 MTCO2e"
+"111","Kiribati",0.1,0,0,0,FALSE,FALSE,"KI","KIR",296,"No Data",1.4167,173,"Global","Oceania",0,0,0,0,0,0,0,0,0,0,0,"No data"
+"112","Saint Kitts and Nevis",0.36,0,0,0,FALSE,FALSE,"KN","KNA",659,"No Data",17.3333,-62.75,"Global","North America",0,0,0,0,0,0,0,0,0,0,0,"No data"
+"113","Korea (South)",657.41,0,1,0,FALSE,FALSE,"KR","KOR",410,"Highly Insufficient",37,127.5,"Global","Asia",0,0,0,0,1,0,0,1,1,1,0,"500-1000 MTCO2e"
+"114","Kuwait",109.81,0,0,0,FALSE,FALSE,"KW","KWT",414,"No Data",29.3375,47.6581,"Global","Asia",0,0,0,0,0,0,0,0,0,0,0,"1-169 MTCO2e"
+"115","Lao PDR",52.29,0,0,0,FALSE,FALSE,"LA","LAO",418,"No Data",18,105,"Global","Asia",0,0,0,0,0,0,0,0,0,0,0,"1-169 MTCO2e"
+"116","Lebanon",33.77,0,0,0,FALSE,FALSE,"LB","LBN",422,"No Data",33.8333,35.8333,"Global","Asia",0,0,0,1,0,0,1,0,1,0,1,"1-169 MTCO2e"
+"117","Liberia",10.67,0,0,1,FALSE,FALSE,"LR","LBR",430,"No Data",6.5,-9.5,"Global","Africa",0,0,1,0,0,0,1,0,1,1,0,"1-169 MTCO2e"
+"118","Libya",86.54,0,0,0,FALSE,FALSE,"LY","LBY",434,"No Data",25,17,"Global","Africa",0,0,0,0,0,0,0,0,0,0,0,"1-169 MTCO2e"
+"119","Saint Lucia",0.72,0,0,0,FALSE,FALSE,"LC","LCA",662,"No Data",13.8833,-61.1333,"Global","North America",0,0,0,0,0,0,0,0,0,0,0,"No data"
+"120","Liechtenstein",0.09,0,0,0,FALSE,FALSE,"LI","LIE",438,"No Data",47.1667,9.5333,"Global","Europe",0,0,0,0,0,0,0,0,0,0,0,"No data"
+"121","Sri Lanka",37.47,0,0,0,FALSE,FALSE,"LK","LKA",144,"No Data",7,81,"Global","Asia",0,0,0,1,0,0,1,0,1,0,1,"1-169 MTCO2e"
+"122","Lesotho",5.22,0,0,0,FALSE,FALSE,"LS","LSO",426,"No Data",-29.5,28.5,"Global","Africa",0,0,0,1,0,0,1,0,1,0,1,"1-169 MTCO2e"
+"123","Lithuania",17.66,0,0,0,FALSE,FALSE,"LT","LTU",440,"Insufficient",56,24,"Global","Europe",0,0,0,0,0,0,0,0,0,0,0,"1-169 MTCO2e"
+"124","Luxembourg",9.78,1,0,0,FALSE,FALSE,"LU","LUX",442,"Insufficient",49.75,6.1667,"Global","Europe",1,0,0,1,0,1,1,0,2,1,1,"1-169 MTCO2e"
+"125","Latvia",-2.33,0,0,0,FALSE,FALSE,"LV","LVA",428,"Insufficient",57,25,"Global","Europe",0,0,0,0,0,0,0,0,0,0,0,"<0 MTCO2e"
+"126","Macao, SAR China",0,0,0,0,FALSE,FALSE,"MO","MAC",446,"No Data",22.1667,113.55,"Global","Asia",0,0,0,0,0,0,0,0,0,0,0,"No data"
+"127","Saint-Martin (French part)",0,0,0,0,FALSE,FALSE,"MF","MAF",663,"No Data",18.07,-63.05,"Global","North America",0,0,0,0,0,0,0,0,0,0,0,"No data"
+"128","Morocco",88.05,0,0,0,FALSE,FALSE,"MA","MAR",504,"1.5°C Paris Agreement Compatible",32,-5,"Global","Africa",0,0,0,0,0,0,0,0,0,0,0,"1-169 MTCO2e"
+"129","Monaco",0,0,0,0,FALSE,FALSE,"MC","MCO",492,"No Data",43.7333,7.4,"Global","Europe",0,0,0,0,0,0,0,0,0,0,0,"No data"
+"130","Moldova",11.81,0,0,0,FALSE,FALSE,"MD","MDA",498,"No Data",47,29,"Global","Europe",0,0,0,0,0,0,0,0,0,0,0,"1-169 MTCO2e"
+"131","Madagascar",58.13,0,0,0,FALSE,FALSE,"MG","MDG",450,"No Data",-20,47,"Global","Africa",0,0,0,0,0,0,0,0,0,0,0,"1-169 MTCO2e"
+"132","Maldives",2.12,0,0,0,FALSE,FALSE,"MV","MDV",462,"No Data",3.25,73,"Global","Asia",0,0,0,0,0,0,0,0,0,0,0,"1-169 MTCO2e"
+"133","Mexico",694.52,0,0,0,FALSE,FALSE,"MX","MEX",484,"Insufficient",23,-102,"Global","North America",0,0,0,2,0,0,2,0,2,0,2,"500-1000 MTCO2e"
+"134","Marshall Islands",0.22,0,0,1,FALSE,FALSE,"MH","MHL",584,"No Data",9,168,"Global","Oceania",0,0,0,1,0,0,1,0,1,0,1,"No data"
+"135","Macedonia, Republic of",10.53,0,0,0,FALSE,FALSE,"MK","MKD",807,"No Data",41.8333,22,"Global","Europe",0,0,0,0,0,0,0,0,0,0,0,"1-169 MTCO2e"
+"136","Mali",48.5,0,0,0,FALSE,FALSE,"ML","MLI",466,"No Data",17,-4,"Global","Africa",0,0,0,0,0,0,0,0,0,0,0,"1-169 MTCO2e"
+"137","Malta",1.87,0,0,0,FALSE,FALSE,"MT","MLT",470,"Insufficient",35.8333,14.5833,"Global","Europe",0,0,0,1,0,0,1,0,1,0,1,"1-169 MTCO2e"
+"138","Myanmar",220.03,0,0,0,FALSE,FALSE,"MM","MMR",104,"No Data",22,98,"Global","Asia",0,0,0,1,0,0,1,0,1,0,1,"169-500 MTCO2e"
+"139","Montenegro",3.43,0,0,0,FALSE,FALSE,"ME","MNE",499,"No Data",42,19,"Global","Europe",0,0,0,0,0,0,0,0,0,0,0,"1-169 MTCO2e"
+"140","Mongolia",67.59,0,0,0,FALSE,FALSE,"MN","MNG",496,"No Data",46,105,"Global","Asia",0,0,0,0,0,0,0,0,0,0,0,"1-169 MTCO2e"
+"141","Northern Mariana Islands",0,0,0,0,FALSE,FALSE,"MP","MNP",580,"No Data",15.2,145.75,"Global","Oceania",0,0,0,0,0,0,0,0,0,0,0,"No data"
+"142","Mozambique",74.1,0,0,0,FALSE,FALSE,"MZ","MOZ",508,"No Data",-18.25,35,"Global","Africa",0,0,0,0,0,0,0,0,0,0,0,"1-169 MTCO2e"
+"143","Mauritania",11.59,0,0,0,FALSE,FALSE,"MR","MRT",478,"No Data",20,-12,"Global","Africa",0,0,0,0,0,0,0,0,0,0,0,"1-169 MTCO2e"
+"144","Montserrat",0,0,0,0,FALSE,FALSE,"MS","MSR",500,"No Data",16.75,-62.2,"Global","North America",0,0,0,0,0,0,0,0,0,0,0,"No data"
+"145","Mauritius",6.51,0,0,0,FALSE,FALSE,"MU","MUS",480,"No Data",-20.2833,57.55,"Global","Africa",0,0,0,0,0,0,0,0,0,0,0,"1-169 MTCO2e"
+"146","Malawi",21.32,0,0,0,FALSE,FALSE,"MW","MWI",454,"No Data",-13.5,34,"Global","Africa",0,0,0,1,0,0,1,0,1,0,1,"1-169 MTCO2e"
+"147","Malaysia",162.95,0,0,0,FALSE,FALSE,"MY","MYS",458,"No Data",2.5,112.5,"Global","Asia",0,0,0,1,0,0,1,0,1,0,1,"1-169 MTCO2e"
+"148","Namibia",20.3,0,0,0,FALSE,FALSE,"NA","NAM",516,"No Data",-22,17,"Global","Africa",0,0,0,0,0,0,0,0,0,0,0,"1-169 MTCO2e"
+"149","New Caledonia",0,0,0,0,FALSE,FALSE,"NC","NCL",540,"No Data",-21.5,165.5,"Global","Oceania",0,0,0,0,0,0,0,0,0,0,0,"No data"
+"150","Niger",42.76,0,0,0,FALSE,FALSE,"NE","NER",562,"No Data",16,8,"Global","Africa",0,0,0,0,0,0,0,0,0,0,0,"1-169 MTCO2e"
+"151","Norfolk Island",0,0,0,0,FALSE,FALSE,"NF","NFK",574,"No Data",-29.0333,167.95,"Global","Oceania",0,0,0,0,0,0,0,0,0,0,0,"No data"
+"152","Nigeria",475.77,0,0,1,FALSE,FALSE,"NG","NGA",566,"No Data",10,8,"Global","Africa",0,0,0,3,0,0,3,0,3,0,3,"169-500 MTCO2e"
+"153","Nicaragua",20.44,0,0,0,FALSE,FALSE,"NI","NIC",558,"No Data",13,-85,"Global","North America",0,0,0,0,0,0,0,0,0,0,0,"1-169 MTCO2e"
+"154","Niue",0.06,0,0,0,FALSE,FALSE,"NU","NIU",570,"No Data",-19.0333,-169.8667,"Global","Oceania",0,0,0,0,0,0,0,0,0,0,0,"No data"
+"155","Netherlands",187.8,2,0,8,FALSE,FALSE,"NL","NLD",528,"Insufficient",52.5,5.75,"Global","Europe",1,1,2,11,0,2,13,0,15,4,11,"169-500 MTCO2e"
+"156","Norway",25.02,0,0,7,FALSE,FALSE,"NO","NOR",578,"Insufficient",62,10,"Global","Europe",0,0,1,8,0,0,9,0,9,1,8,"1-169 MTCO2e"
+"157","Nepal",61.33,0,0,0,FALSE,FALSE,"NP","NPL",524,"No Rating",28,84,"Global","Asia",0,0,0,0,0,0,0,0,0,0,0,"1-169 MTCO2e"
+"158","Nauru",0.07,0,0,0,FALSE,FALSE,"NR","NRU",520,"No Data",-0.5333,166.9167,"Global","Oceania",0,0,0,0,0,0,0,0,0,0,0,"No data"
+"159","New Zealand",63.22,2,2,18,FALSE,FALSE,"NZ","NZL",554,"Insufficient",-41,174,"Global","Oceania",1,1,4,15,2,2,19,2,23,8,15,"1-169 MTCO2e"
+"160","Oman",77.82,0,0,0,FALSE,FALSE,"OM","OMN",512,"No Data",21,57,"Global","Asia",0,0,0,0,0,0,0,0,0,0,0,"1-169 MTCO2e"
+"161","Pakistan",417.96,1,0,0,FALSE,FALSE,"PK","PAK",586,"No Data",30,70,"Global","Asia",1,0,0,1,0,1,1,0,2,1,1,"169-500 MTCO2e"
+"162","Panama",26.66,0,0,0,FALSE,FALSE,"PA","PAN",591,"No Data",9,-80,"Global","North America",0,0,0,1,0,0,1,0,1,0,1,"1-169 MTCO2e"
+"163","Pitcairn",0,0,0,0,FALSE,FALSE,"PN","PCN",612,"No Data",-24.7,-127.4,"Global","Oceania",0,0,0,0,0,0,0,0,0,0,0,"No data"
+"164","Peru",169.48,0,0,0,FALSE,FALSE,"PE","PER",604,"Insufficient",-10,-76,"Global","South America",0,0,0,2,0,0,2,0,2,0,2,"169-500 MTCO2e"
+"165","Philippines",149.76,1,0,0,FALSE,FALSE,"PH","PHL",608,"2°C Compatible",13,122,"Global","Asia",1,0,0,2,0,1,2,0,3,1,2,"1-169 MTCO2e"
+"166","Palau",0.29,0,0,0,FALSE,FALSE,"PW","PLW",585,"No Data",7.5,134.5,"Global","Oceania",0,0,0,0,0,0,0,0,0,0,0,"No data"
+"167","Papua New Guinea",65.31,0,0,1,FALSE,FALSE,"PG","PNG",598,"No Data",-6,147,"Global","Oceania",0,0,0,0,0,0,0,0,0,0,0,"1-169 MTCO2e"
+"168","Poland",349.85,0,1,0,FALSE,FALSE,"PL","POL",616,"Insufficient",52,20,"Global","Europe",0,0,0,0,1,0,0,1,1,1,0,"169-500 MTCO2e"
+"169","Puerto Rico",0,0,0,0,FALSE,FALSE,"PR","PRI",630,"No Data",18.25,-66.5,"Global","North America",0,0,0,0,0,0,0,0,0,0,0,"No data"
+"170","Korea (North)",67.48,0,0,0,FALSE,FALSE,"KP","PRK",408,"No Data",40,127,"Global","Asia",0,0,0,0,0,0,0,0,0,0,0,"1-169 MTCO2e"
+"171","Portugal",68.45,0,1,1,FALSE,FALSE,"PT","PRT",620,"Insufficient",39.5,-8,"Global","Europe",0,0,0,2,1,0,2,1,3,1,2,"1-169 MTCO2e"
+"172","Paraguay",194.87,0,0,0,FALSE,FALSE,"PY","PRY",600,"No Data",-23,-58,"Global","South America",0,0,0,0,0,0,0,0,0,0,0,"169-500 MTCO2e"
+"173","French Polynesia",0,0,0,0,FALSE,FALSE,"PF","PYF",258,"No Data",-15,-140,"Global","Oceania",0,0,0,0,0,0,0,0,0,0,0,"No data"
+"174","Qatar",94.98,0,0,0,FALSE,FALSE,"QA","QAT",634,"No Data",25.5,51.25,"Global","Asia",0,0,0,0,0,0,0,0,0,0,0,"1-169 MTCO2e"
+"175","Romania",-58.56,0,0,0,FALSE,FALSE,"RO","ROU",642,"Insufficient",46,25,"Global","Europe",0,0,0,0,0,0,0,0,0,0,0,"<0 MTCO2e"
+"176","Russian Federation",2434.46,0,1,0,FALSE,FALSE,"RU","RUS",643,"Critically Insufficient",60,100,"Global","Europe",0,0,0,0,1,0,0,1,1,1,0,"1000-5000 MTCO2e"
+"177","Rwanda",7.58,0,0,1,FALSE,FALSE,"RW","RWA",646,"No Data",-2,30,"Global","Africa",0,0,0,1,0,0,1,0,1,0,1,"1-169 MTCO2e"
+"178","Saudi Arabia",664.23,0,0,0,FALSE,FALSE,"SA","SAU",682,"Critically Insufficient",25,45,"Global","Asia",0,0,0,0,0,0,0,0,0,0,0,"500-1000 MTCO2e"
+"179","Sudan",151.83,0,0,0,FALSE,FALSE,"SD","SDN",736,"No Data",15,30,"Global","Africa",0,0,0,0,0,0,0,0,0,0,0,"1-169 MTCO2e"
+"180","Senegal",34.92,0,0,1,FALSE,FALSE,"SN","SEN",686,"No Data",14,-14,"Global","Africa",0,0,0,1,0,0,1,0,1,0,1,"1-169 MTCO2e"
+"181","Singapore",64.11,0,0,0,FALSE,FALSE,"SG","SGP",702,"Highly Insufficient",1.3667,103.8,"Global","Asia",0,0,0,1,0,0,1,0,1,0,1,"1-169 MTCO2e"
+"182","South Georgia and the South Sandwich Islands",0,0,0,0,FALSE,FALSE,"GS","SGS",239,"No Data",-54.5,-37,"Global","South America",0,0,0,0,0,0,0,0,0,0,0,"No data"
+"183","Saint Helena",0,0,0,0,FALSE,FALSE,"SH","SHN",654,"No Data",-15.9333,-5.7,"Global","Africa",0,0,0,0,0,0,0,0,0,0,0,"No data"
+"184","Solomon Islands",2.86,0,0,0,FALSE,FALSE,"SB","SLB",90,"No Data",-8,159,"Global","Oceania",0,0,0,0,0,0,0,0,0,0,0,"1-169 MTCO2e"
+"185","Sierra Leone",13.56,0,0,1,FALSE,FALSE,"SL","SLE",694,"No Data",8.5,-11.5,"Global","Africa",0,0,0,1,0,0,1,0,1,0,1,"1-169 MTCO2e"
+"186","El Salvador",13.46,1,0,0,FALSE,FALSE,"SV","SLV",222,"No Data",13.8333,-88.9167,"Global","North America",1,0,0,0,0,1,0,0,1,1,0,"1-169 MTCO2e"
+"187","San Marino",0,0,0,0,FALSE,FALSE,"SM","SMR",674,"No Data",43.7667,12.4167,"Global","Europe",0,0,0,0,0,0,0,0,0,0,0,"No data"
+"188","Somalia",40.06,0,0,0,FALSE,FALSE,"SO","SOM",706,"No Data",10,49,"Global","Africa",0,0,0,1,0,0,1,0,1,0,1,"1-169 MTCO2e"
+"189","Saint Pierre and Miquelon",0,0,0,0,FALSE,FALSE,"PM","SPM",666,"No Data",46.8333,-56.3333,"Global","North America",0,0,0,0,0,0,0,0,0,0,0,"No data"
+"190","Serbia",62.92,0,0,0,FALSE,FALSE,"RS","SRB",688,"No Data",44,21,"Global","Europe",0,0,0,0,0,0,0,0,0,0,0,"1-169 MTCO2e"
+"191","Sao Tome and Principe",0.18,0,0,0,FALSE,FALSE,"ST","STP",678,"No Data",1,7,"Global","Africa",0,0,0,0,0,0,0,0,0,0,0,"No data"
+"192","Suriname",7.68,0,0,0,FALSE,FALSE,"SR","SUR",740,"No Data",4,-56,"Global","South America",0,0,0,0,0,0,0,0,0,0,0,"1-169 MTCO2e"
+"193","Slovakia",33.48,0,1,0,FALSE,FALSE,"SK","SVK",703,"Insufficient",48.6667,19.5,"Global","Europe",0,0,0,0,1,0,0,1,1,1,0,"1-169 MTCO2e"
+"194","Slovenia",10.98,0,0,0,FALSE,FALSE,"SI","SVN",705,"Insufficient",46,15,"Global","Europe",0,0,0,0,0,0,0,0,0,0,0,"1-169 MTCO2e"
+"195","Sweden",45.48,0,0,17,FALSE,FALSE,"SE","SWE",752,"Insufficient",62,15,"Global","Europe",0,0,10,12,0,0,22,0,22,10,12,"1-169 MTCO2e"
+"196","Swaziland",0,0,0,0,FALSE,FALSE,"SZ","SWZ",748,"No Data",-26.5,31.5,"Global","Africa",0,0,0,0,0,0,0,0,0,0,0,"No data"
+"197","Seychelles",0.69,0,0,0,FALSE,FALSE,"SC","SYC",690,"No Data",-4.5833,55.6667,"Global","Africa",0,0,0,0,0,0,0,0,0,0,0,"No data"
+"198","Syrian Arab Republic (Syria)",43.9,0,0,0,FALSE,FALSE,"SY","SYR",760,"No Data",35,38,"Global","Asia",0,0,0,0,0,0,0,0,0,0,0,"1-169 MTCO2e"
+"199","Turks and Caicos Islands",0,0,0,0,FALSE,FALSE,"TC","TCA",796,"No Data",21.75,-71.5833,"Global","North America",0,0,0,0,0,0,0,0,0,0,0,"No data"
+"200","Chad",102.57,0,0,0,FALSE,FALSE,"TD","TCD",148,"No Data",15,19,"Global","Africa",0,0,0,0,0,0,0,0,0,0,0,"1-169 MTCO2e"
+"201","Togo",14.86,0,0,0,FALSE,FALSE,"TG","TGO",768,"No Data",8,1.1667,"Global","Africa",0,0,0,0,0,0,0,0,0,0,0,"1-169 MTCO2e"
+"202","Thailand",418.07,0,0,0,FALSE,FALSE,"TH","THA",764,"No Data",15,100,"Global","Asia",0,0,0,1,0,0,1,0,1,0,1,"169-500 MTCO2e"
+"203","Tajikistan",13.93,0,0,0,FALSE,FALSE,"TJ","TJK",762,"No Data",39,71,"Global","Asia",0,0,0,0,0,0,0,0,0,0,0,"1-169 MTCO2e"
+"204","Turkmenistan",126.56,0,0,0,FALSE,FALSE,"TM","TKM",795,"No Data",40,60,"Global","Asia",0,0,0,0,0,0,0,0,0,0,0,"1-169 MTCO2e"
+"205","Timor-Leste",12.87,0,0,0,FALSE,FALSE,"TL","TLS",626,"No Data",-8.55,125.5167,"Global","Asia",0,0,0,0,0,0,0,0,0,0,0,"1-169 MTCO2e"
+"206","Tonga",0.31,0,0,0,FALSE,FALSE,"TO","TON",776,"No Data",-20,-175,"Global","Oceania",0,0,0,0,0,0,0,0,0,0,0,"No data"
+"207","Trinidad and Tobago",22.35,0,0,0,FALSE,FALSE,"TT","TTO",780,"No Data",11,-61,"Global","North America",0,0,0,0,0,0,0,0,0,0,0,"1-169 MTCO2e"
+"208","Tunisia",39.25,0,0,0,FALSE,FALSE,"TN","TUN",788,"No Data",34,9,"Global","Africa",0,0,0,0,0,0,0,0,0,0,0,"1-169 MTCO2e"
+"209","Turkey",396.03,0,0,0,FALSE,FALSE,"TR","TUR",792,"Critically Insufficient",39,35,"Global","Asia",0,0,0,0,0,0,0,0,0,0,0,"169-500 MTCO2e"
+"210","Taiwan, Republic of China",0,0,0,0,FALSE,FALSE,"TW","TWN",158,"No Data",23.5,121,"Global","Asia",0,0,0,0,0,0,0,0,0,0,0,"No data"
+"211","Tanzania, United Republic of",319.78,0,0,1,FALSE,FALSE,"TZ","TZA",834,"No Data",-6,35,"Global","Africa",0,0,0,1,0,0,1,0,1,0,1,"169-500 MTCO2e"
+"212","Uganda",81.13,0,0,1,FALSE,FALSE,"UG","UGA",800,"No Data",1,32,"Global","Africa",0,0,0,5,0,0,5,0,5,0,5,"1-169 MTCO2e"
+"213","Ukraine",283.65,0,0,0,FALSE,FALSE,"UA","UKR",804,"Critically Insufficient",49,32,"Global","Europe",0,0,0,0,0,0,0,0,0,0,0,"169-500 MTCO2e"
+"214","Uruguay",26.52,1,0,0,FALSE,FALSE,"UY","URY",858,"No Data",-33,-56,"Global","South America",1,0,0,0,0,1,0,0,1,1,0,"1-169 MTCO2e"
+"215","United States of America",5833.01,84,0,295,FALSE,FALSE,"US","USA",840,"Critically Insufficient",38,-97,"Global","North America",3,83,44,357,0,86,401,0,487,130,357,"5000-10000 MTCO2e"
+"216","Uzbekistan",213.33,0,0,0,FALSE,FALSE,"UZ","UZB",860,"No Data",41,64,"Global","Asia",0,0,0,0,0,0,0,0,0,0,0,"169-500 MTCO2e"
+"217","Holy See (Vatican City State)",0,0,0,1,FALSE,FALSE,"VA","VAT",336,"No Data",41.9,12.45,"Global","Europe",0,0,0,1,0,0,1,0,1,0,1,"No data"
+"218","Saint Vincent and Grenadines",0.37,0,0,0,FALSE,FALSE,"VC","VCT",670,"No Data",13.25,-61.2,"Global","North America",0,0,0,0,0,0,0,0,0,0,0,"No data"
+"219","Venezuela (Bolivarian Republic)",352.08,0,0,0,FALSE,FALSE,"VE","VEN",862,"No Data",8,-66,"Global","South America",0,0,0,0,0,0,0,0,0,0,0,"169-500 MTCO2e"
+"220","British Virgin Islands",0,0,0,0,FALSE,FALSE,"VG","VGB",92,"No Data",18.5,-64.5,"Global","North America",0,0,0,0,0,0,0,0,0,0,0,"No data"
+"221","Virgin Islands, US",0,0,0,0,FALSE,FALSE,"VI","VIR",850,"No Data",18.3333,-64.8333,"Global","North America",0,0,0,0,0,0,0,0,0,0,0,"No data"
+"222","Viet Nam",320.67,0,0,0,FALSE,FALSE,"VN","VNM",704,"Critically Insufficient",16,106,"Global","Asia",0,0,0,0,0,0,0,0,0,0,0,"169-500 MTCO2e"
+"223","Vanuatu",0.84,0,0,0,FALSE,FALSE,"VU","VUT",548,"No Data",-16,167,"Global","Oceania",0,0,0,0,0,0,0,0,0,0,0,"No data"
+"224","Wallis and Futuna Islands",0,0,0,0,FALSE,FALSE,"WF","WLF",876,"No Data",-13.3,-176.2,"Global","Oceania",0,0,0,0,0,0,0,0,0,0,0,"No data"
+"225","Samoa",0.66,0,0,0,FALSE,FALSE,"WS","WSM",882,"No Data",-13.5833,-172.3333,"Global","Oceania",0,0,0,0,0,0,0,0,0,0,0,"No data"
+"226","Yemen",22.74,0,0,0,FALSE,FALSE,"YE","YEM",887,"No Data",15,48,"Global","Asia",0,0,0,0,0,0,0,0,0,0,0,"1-169 MTCO2e"
+"227","South Africa",503.05,2,0,5,FALSE,FALSE,"ZA","ZAF",710,"Highly Insufficient",-29,24,"Global","Africa",2,0,1,5,0,2,6,0,8,3,5,"500-1000 MTCO2e"
+"228","Zambia",495.17,0,0,0,FALSE,FALSE,"ZM","ZMB",894,"No Data",-15,30,"Global","Africa",0,0,0,1,0,0,1,0,1,0,1,"169-500 MTCO2e"
+"229","Zimbabwe",66.16,0,0,0,FALSE,FALSE,"ZW","ZWE",716,"No Data",-20,30,"Global","Africa",0,0,0,0,0,0,0,0,0,0,0,"1-169 MTCO2e"

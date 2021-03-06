@@ -37,14 +37,16 @@ includeMarkdown(
 )
 ```
 
-## **`r params$selection`**
 
-### Overview Supply-Side Policies:
+
+## Overview: `r params$selection`
+
 
     Total number of supply-side policies: `r sum(params$data['Policy_total'])`
-    Moratoria, Bans, Limitations:  `r sum(params$data['Moratoria_bans_limits'])`
-    Subsidy Removals: `r sum(params$data['Subsidy_removal'])`
-    Number of Divestments: `r sum(params$data['Divestment'])`
+    Moratoria, Bans, Limitations:  `r sum(params$data['Moratoria_bans_limits_total'])`
+    Subsidy Removals: `r sum(params$data['Subsidy_removal_total'])`
+    Number of Divestments: `r sum(params$data['Divestment_total'])`
+    
                                          
 ```{r echo=FALSE, eval=TRUE, fig.width=10, fig.height=3}
 ### MAP FUNCTIONS ###
@@ -66,7 +68,7 @@ g1 <- params$data_mbl %>% ggplot(aes(x = date, y = Policy)) +
 
 g2 <- params$data_div %>% ggplot(aes(x = date, y = Policy)) + 
         geom_bar(position="stack", stat="identity", fill = Divestment) + 
-        ylab("") +  xlab("Year") + theme_bw() + ylim(0,300) +
+        ylab("") +  xlab("Year") + theme_bw() + ylim(0,50) +
         scale_fill_manual(values=c(Divestment)) +
         xlim(c(divestment_min_date,divestment_max_date)) + 
         scale_x_date(date_labels = "%Y", limits=c(divestment_min_date,divestment_max_date)) +
@@ -87,31 +89,77 @@ g2 <- params$data_div %>% ggplot(aes(x = date, y = Policy)) +
  grid.arrange(g1, g2, g3, ncol=3)
 ```
 
+## Breakdown of policies across sectors and levels 
 
-### Breakdown of policies across sectors and levels: 
 
 #### Government Policies
 
     Total number of Governmental Policies: `r sum(params$data['Government_policies_total'])`
-        National level governmental policies: `r sum(params$data['mbl_country'])`
+        National level governmental policies (Subsidy Removal): `r sum(params$data['Subsidy_removal'])`
+        National level governmental policies (Moratoria, bans, & limits): `r sum(params$data['mbl_country'])`
         State/city governmental level policies (Moratoria, bans, & limits): `r sum(params$data['mbl_city_region'])`
         State/city governmental level policies (Divestments): `r sum(params$data['divestment_city_region'])`
 
-#### Non-Governmental Policies
+
+#### Non-Governmental Policies  
 
     Total number of non-governmental policies: `r sum(params$data['Non_Government_policies_total'])`
-        Divestment policies: `r sum(params$data['divestment_city_region'])`
-
-### Overview and context:
-
-#### Climate Action Tracker Rating: *`r params$data['CAT_rating']`*
-
-#### % Global Emissions: *XYZ*
-
-#### Global Climate Risk Index: *XYZ*
-
-#### Income group (World Bank): *XYZ*
-
-#### Main political groups: *XYZ*
 
 
+## Policy details for `r params$selection`  
+
+
+
+### Moratoria, Bans & Limits
+```{r echo=FALSE, eval=TRUE}
+# create dataframe for selected output
+mbl = params$data_mbl %>% 
+    group_by(City_state_or_province) %>%
+    select(c("City_state_or_province", "Category", "Fuel_type", "Fuel_subtype", "Start", "End", "Sources_and_more_info")) %>% 
+    replace(is.na(.), "--")
+    names(mbl) = c("City state or province", "Category", "Fuel type", "Fuel subtype", "Start", "End", "Sources")
+```
+
+```{r,fig.fig.align='left'}
+kableExtra::kable(mbl) %>% kable_styling()
+```
+
+<p>&nbsp;</p>
+
+
+### Subsidy Removals
+```{r echo=FALSE, eval=TRUE}
+# create dataframe for selected output
+sr = params$data_sr %>% 
+    group_by(Category) %>%
+    select(c("Category", "Fuel_type", "Fuel_subtype", "Description", "Start", "Sources_and_more_info")) %>% 
+    replace(is.na(.), "--") 
+    names(sr) = c("Category", "Fuel type", "Fuel subtype", "Description", "Start", "Sources")
+```
+
+
+```{r,fig.fig.align='left'}
+kableExtra::kable(sr) %>% kable_styling()
+```
+
+<p>&nbsp;</p>
+
+
+### Divestments
+
+```{r echo=FALSE, eval=TRUE}
+# create dataframe for selected output
+div = params$data_div %>% 
+    group_by(Category) %>%
+    select(c("Category", "Type", "Organisation", "Organisation_type", "Start", "Sources_and_more_info"))%>% 
+    replace(is.na(.), "--")
+    names(div) = c("Category", "Type", "Organisation", "Organisation Type", "Start", "Sources")
+```
+
+
+```{r,fig.fig.align='left'}
+kableExtra::kable(div) %>% kable_styling()
+```
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>

@@ -123,3 +123,15 @@ grid.arrange(g1, g2, g3, ncol=3)
 ```
 
 `r plotOutput(params$data_mbl(cumulative_mbl_plot))`
+
+### Overview and context:
+
+#### Climate Action Tracker Rating: *`r params$data['CAT_rating']`*
+
+#### % Global Emissions: *XYZ*
+
+#### Global Climate Risk Index: *XYZ*
+
+#### Income group (World Bank): *XYZ*
+
+#### Main political groups: *XYZ*
