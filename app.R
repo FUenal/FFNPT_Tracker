@@ -4,7 +4,7 @@
 #' CREATED: 19-03-2021
 #' MODIFIED: 19-03-2021
 #' PURPOSE: Supply-side policies interactive mapping tool
-#' PACKAGES: see below
+#' PACKAGES: various, see below
 #' COMMENTS: NA
 #'//////////////////////////////////////////////////////////////////////////////
 
@@ -17,8 +17,8 @@
 
 
 # update data with automated script
-# source("CAT_data_daily.R") # option to update daily new policy 
-
+# source("divestment_scrap_weekly.R") # option to update weekly new divestment policies 
+# source("manual_scrap_weekly.R") # option to update weekly new manual entry policies
 
 # load required packages
 if(!require(magrittr)) install.packages("magrittr", repos = "http://cran.us.r-project.org")
@@ -45,12 +45,12 @@ if(!require(xlsx)) install.packages("xlsx", repos = "http://cran.us.r-project.or
 # if(!require(shinyjs)) install.packages("shinyjs", repos = "http://cran.us.r-project.org")
 
 # set mapping color for each category of policy
-All_policies  = "016c59"
+#All_policies  = "016c59"
 Moratoria_bans_limits = "#cc4c02"
 Subsidy_removal = "#662506"
 Divestment = "#045a8d"
-Government_policies = "#062A89"
-Non_Government_policies = "#42C04F"
+Government_policies = "#4d004b"
+Non_Government_policies = "#016c59"
 
 
 # Added ISO-normed country codes manually into the main xlsx data sheet (sheet 8) and manually updated country 
@@ -127,11 +127,12 @@ country_overview_large$CAT_rating <- factor(country_overview_large$CAT_rating, l
                                             labels = c("Critically Insufficient","Highly Insufficient","Insufficient", 
                                                        "2°C Compatible","1.5°C Paris Agreement Compatible", "Role Model","No Rating","No Data"))
 
-# Factor and label MTCO2e
+# Factor, label, and reorder MTCO2e
 country_overview_large$MTCO2e_cat <- cut(country_overview_large$MTCO2e, breaks = c(-100, -1, 1, 169, 500, 1000, 5000, 10000, 20000), 
                                          labels = c("<0 MTCO2e", "No data", "1-169 MTCO2e", "169-500 MTCO2e", "500-1000 MTCO2e", "1000-5000 MTCO2e", 
                                                     "5000-10000 MTCO2e", ">10000 MTCO2e"), right = FALSE)
 
+country_overview_large$MTCO2e_cat = factor(country_overview_large$MTCO2e_cat,levels(country_overview_large$MTCO2e_cat)[c(2,1,3:8)])
 
 # write country_overview_large file
 #write.csv(country_overview_large, file = "input_data/country_overview_large.csv")
@@ -236,8 +237,11 @@ cumulative_sr_plot = function(subsidiy_removal) {
 
 ## create plotting parameters for map
 #cv_pal <- colorFactor(palette = c("#FF0D0D","#FF4E11", "#FF8E15", "#FAB733", "#ACB334", "#69B34C", "#B1B6B9"), country_overview_large$CAT_rating)
-cv_pal <- colorFactor(palette = c("#FCDE9C", "#EFEFEF", "#BEC5A9", "#8DA8AD", "#668BA8", "#466A9F", "#2C4B93", "#062A89"), country_overview_large$MTCO2e_cat)
+cv_pal <- colorFactor(palette = c("#EFEFEF", "#FCDE9C", "#BEC5A9", "#8DA8AD", "#668BA8", "#466A9F", "#2C4B93", "#062A89"), country_overview_large$MTCO2e_cat)
 plot_map <- worldcountry[worldcountry$ADM0_A3 %in% country_overview_large$ISO3, ]
+
+## Filter data for mapping by selecting only rows with policies > 0
+country_overview_large_map = country_overview_large %>% filter(Government_policies_total > 0 & Non_Government_policies_total > 0)
 
 # create base map 
 basemap = leaflet(plot_map) %>% 
@@ -249,35 +253,35 @@ basemap = leaflet(plot_map) %>%
     hideGroup(c("Governmental Policies", "Non-Governmental Policies")) %>%
     addProviderTiles(providers$CartoDB.Positron) %>%
     fitBounds(~-100,-60,~60,70) %>%
-    addLegend("bottomright", colors = c("#FCDE9C", "#EFEFEF", "#BEC5A9", "#8DA8AD", "#668BA8", "#466A9F", "#2C4B93", "#062A89"), 
-              labels =  c("< 0", "No data", "1-169","169-500","500-1000","1000-5000",  
-                          "5000-10000",">10000"),values = ~country_overview_large$MTCO2e_cat,
-              title = "<small>Country Greenhouse<br/>Gas Emissions (CAIT 2016)<br/>(MtCO2e)</small>") %>% 
+    addLegend("bottomright", colors = c("#EFEFEF", "#FCDE9C", "#BEC5A9", "#8DA8AD", "#668BA8", "#466A9F", "#2C4B93", "#062A89"), 
+              labels =  c("<small>No data</small>", "<small>< 0</small>", "<small>1-169</small>","<small>169-500</small>","<small>500-1000</small>","<small>1000-5000</small>",  
+                          "<small>5000-10000</small>","<small>> 10000</small>"),values = ~country_overview_large$MTCO2e_cat,
+              title = "<small><small>Country Greenhouse<br/>Gas Emissions<br/>(CAIT 2016)(MtCO2e)</small></small>") %>% 
     
     addPolygons(stroke = FALSE, smoothFactor = 0.2, fillOpacity = 0.4, fillColor = ~cv_pal(country_overview_large$MTCO2e_cat),
-                label = sprintf("<strong>%s</strong><br/>Greenhouse Gas Emissions: %s MtCO2e<br/>Moratoria, bans, & limits: %g<br/>Subsidy Removals: %d<br/>Divestments: %g", 
+                label = sprintf("<strong>%s</strong><br/><small>Greenhouse Gas Emissions: %s MtCO2e</small><br/><small>Moratoria, Bans, & Limits: %g</small><br/><small>Subsidy Removals: %d</small><br/><small>Divestments: %g</small>", 
                                 country_overview_large$Country, country_overview_large$MTCO2e, country_overview_large$Moratoria_bans_limits, 
                                 country_overview_large$Subsidy_removal, country_overview_large$Divestment) %>% lapply(htmltools::HTML),
                 labelOptions = labelOptions(
                     style = list("font-weight" = "normal", "font-family" = "Roboto", padding = "3px 8px", "color" = cv_pal),
                     textsize = "15px", direction = "auto")) %>%
     
-    addCircleMarkers(data = country_overview_large, lat = ~ latitude, lng = ~ longitude, weight = 1, 
-                     radius = ~ifelse(Government_policies_total > 0, (Government_policies_total)^(1/2), 0),
+    addCircleMarkers(data = country_overview_large_map, lat = ~ latitude, lng = ~ longitude, weight = 1, 
+                     radius = ~(Government_policies_total)^(0.55),
                      fillOpacity = 0.2, color = Government_policies, group = "Governmental Policies",
-                     label = sprintf("<strong>%s</strong><br/>Governmental Policies: %g", 
-                                     country_overview_large$Country, country_overview_large$Government_policies_total) %>% lapply(htmltools::HTML),
+                     label = sprintf("<strong>%s</strong><br/>Governmental Policies: %g", country_overview_large_map$Country, 
+                                     country_overview_large_map$Government_policies_total) %>% lapply(htmltools::HTML),
                      labelOptions = labelOptions(
-                         style = list("font-weight" = "normal", "font-family" = "Roboto", padding = "3px 8px", "color" = Government_policies),
+                         style = list("font-weight" = "normal", padding = "3px 8px", "color" = Government_policies),
                          textsize = "15px", direction = "auto")) %>% 
     
-    addCircleMarkers(data = country_overview_large, lat = ~ latitude, lng = ~ longitude, weight = 1, 
-                     radius = ~ifelse(Non_Government_policies_total > 0, (Non_Government_policies_total)^(1/2), 0),
+    addCircleMarkers(data = country_overview_large_map, lat = ~ latitude, lng = ~ longitude, weight = 1, 
+                     radius = ~(Non_Government_policies_total)^(0.55),
                      fillOpacity = 0.2, color = Non_Government_policies, group = "Non-Governmental Policies",
-                     label = sprintf("<strong>%s</strong><br/>Non-Governmental Policies: %g", 
-                                     country_overview_large$Country, country_overview_large$Non_Government_policies_total) %>% lapply(htmltools::HTML),
+                     label = sprintf("<strong>%s</strong><br/>Non-Governmental Policies: %g", country_overview_large_map$Country, 
+                                     country_overview_large_map$Non_Government_policies_total) %>% lapply(htmltools::HTML),
                      labelOptions = labelOptions(
-                         style = list("font-weight" = "normal", "font-family" = "Roboto", padding = "3px 8px", "color" = Non_Government_policies),
+                         style = list("font-weight" = "normal", padding = "3px 8px", "color" = Non_Government_policies),
                          textsize = "15px", direction = "auto"))
 
 
@@ -293,7 +297,7 @@ ui <- bootstrapPage(
                             leafletOutput("mymap", width="100%", height="100%"),
                             
                             absolutePanel(id = "controls", class = "panel panel-default",
-                                          top = 75, left = 55, width = 350, fixed=TRUE,
+                                          top = 75, left = 55, width = 300, fixed=TRUE,
                                           draggable = TRUE, height = "auto",
                                           
                                           span(tags$i(h6("Reported numbers of policies are subject to variation in policy types between countries.")), style="color:#045a8d"),
@@ -368,8 +372,7 @@ ui <- bootstrapPage(
                             tags$img(src = "FFNPT_Logo.png", width = "80px", height = "80px"),
                             tags$h3("About this app"), 
                             "This site will be updated on a regular basis (weekly). There are several other excellent Climate Change mapping tools available, including those run by", 
-                            tags$a(href="https://www.climate-laws.org/#map-section", "the Grantham Research Institute on Climate Change and the Environment,"),
-                            tags$a(href="https://climateactiontracker.org", "The Climate Action Tracker,"),"and",
+                            tags$a(href="https://www.climate-laws.org/#map-section", "the Grantham Research Institute on Climate Change and the Environment"), "and",
                             tags$a(href="http://cait.wri.org/historical/Country%20GHG%20Emissions#", "CAIT Climate Data Explorer."),
                             "Our aim is to complement these resources with a particular focus on supply-side policies, including a Fossil Fuel City Impact Map to help organizations to 
                         identify best practices in the field and facilitate target city choices by provinding a propensity action score.",
@@ -392,7 +395,7 @@ ui <- bootstrapPage(
                             "Code and input data used to generate this Shiny mapping tool are available on ",tags$a(href="https://github.com/FUenal/FFNPT_Tracker", "Github."),tags$br(),  
                             tags$br(),tags$h3("Sources"),
                             tags$p("The data presented here is based on the Fossil Fuel Database which automatically searches the internet to identify existing climate change supply-side policies. Click here ",
-                            tags$a(href = "https://fossilfueltreaty.org","for more information"),"."),  
+                            tags$a(href = "https://fossilfueltreaty.org","for more information"),"."), tags$p("We also rely on data from the", tags$a(href="http://cait.wri.org/historical/Country%20GHG%20Emissions#", "CAIT Climate Data Explorer.")),  
                             tags$br(),tags$h3("Author"),
                             "Dr Fatih Uenal, Fellow @ Faculty AI & University of Cambridge",tags$br(),  
                             tags$br(),tags$h3("Contact"),

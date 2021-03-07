@@ -47,7 +47,6 @@ includeMarkdown(
     Subsidy Removals: `r sum(params$data['Subsidy_removal_total'])`
     Number of Divestments: `r sum(params$data['Divestment_total'])`
     
-                                         
 ```{r echo=FALSE, eval=TRUE, fig.width=10, fig.height=3}
 ### MAP FUNCTIONS ###
 # pkgs
