@@ -15,13 +15,14 @@ div.outer {
 /* Customize fonts */
 body, label, input, button, select { 
   font-family: 'Roboto', Roboto;
-  font-weight: 200;
+  font-weight: 300;
 }
 h1, h2, h3, h4 { font-weight: 400; }
 
 #controls {
   /* Appearance */
   background-color: white;
+  font-family: 'Roboto', Roboto;
   padding: 0 10px 10px 10px;
   cursor: move;
   /* Fade out while not hovering */
@@ -53,11 +54,13 @@ h1, h2, h3, h4 { font-weight: 400; }
 }
 
 html, body, #map {
+    font-family: 'Roboto', Roboto;
     height: 100%;
     width: 100vw;
 }
 
 body {
+    font-family: 'Roboto', Roboto;
     padding: 0;
     margin: 0;
 }

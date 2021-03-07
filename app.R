@@ -51,7 +51,10 @@ Subsidy_removal = "#662506"
 Divestment = "#045a8d"
 Government_policies = "#4d004b"
 Non_Government_policies = "#016c59"
+Cities_regions_states = "#ACB334"
 
+## Colour choices CAT Tracker
+# #FF0D0D","#FF4E11", "#FF8E15", "#FAB733", "#ACB334", "#69B34C", "#B1B6B9"
 
 # Added ISO-normed country codes manually into the main xlsx data sheet (sheet 8) and manually updated country 
 # names in all sheets to standard format. Cleaning & Wrangling Process is documented in the BitsBites.R file
@@ -64,6 +67,7 @@ moratoria_bans_limits = read_xlsx("input_data/FF NPT Tracker DRAFT WIP.xlsx", sh
 subsidiy_removal = read_xlsx("input_data/FF NPT Tracker DRAFT WIP.xlsx", sheet = 6)
 divestment = read_xlsx("input_data/FF NPT Tracker DRAFT WIP.xlsx", sheet = 7)
 divestment_new = read_xlsx("input_data/FF NPT Tracker DRAFT WIP.xlsx", sheet = 8)
+#world_cities = read_xlsx("input_data/FF NPT Tracker DRAFT WIP.xlsx", sheet = 10)
 #divestment_scrape = read.csv("input_data/divestment_scrape.csv")
 countries = read.csv("input_data/countries_codes_and_coordinates.csv")
 worldcountry = geojson_read("input_data/50m.geojson", what = "sp")
@@ -74,6 +78,11 @@ country_overview['latitude'] <- countries$latitude[match(country_overview$ISO3, 
 country_overview['longitude'] <- countries$longitude[match(country_overview$ISO3, countries$ISO3)]
 country_overview['global_level'] <- countries$global_level[match(country_overview$ISO3, countries$ISO3)]
 country_overview['continent_level'] <- countries$continent_level[match(country_overview$ISO3, countries$ISO3)]
+#state_city_breakdown['latitude'] <- world_cities$lat[match(state_city_breakdown$State_city_region, world_cities$city_ascii)]
+#state_city_breakdown['longitude'] <- world_cities$lng[match(state_city_breakdown$State_city_region, world_cities$city_ascii)]
+#state_city_breakdown['latitude'] <- world_cities$lat[match(state_city_breakdown$State_city_region, world_cities$admin_name)]
+#state_city_breakdown['longitude'] <- world_cities$lng[match(state_city_breakdown$State_city_region, world_cities$admin_name)]
+
 
 # Added ISO Codes to all sheets manually due to mismatching name.
 
@@ -120,6 +129,26 @@ country_overview_large <- country_overview_large %>% group_by(ISO3) %>%
 
 country_overview_large <- country_overview_large %>% group_by(ISO3) %>% 
     mutate(Non_Government_policies_total = divestment_non_government)
+
+## Total number of state, city, region policies
+state_city_breakdown_map <- state_city_breakdown %>% 
+    select(c("State_city_region", "Country", "latitude", "longitude", "ISO3", "Moratoria_bans_limits", "Subsidy_removal", "Divestment", "FFNPT")) %>% 
+    replace(is.na(.), 0)
+
+state_city_breakdown_map <- state_city_breakdown_map %>% group_by(State_city_region) %>%  
+    mutate(Moratoria_bans_limits_total = sum(Moratoria_bans_limits))
+
+state_city_breakdown_map <- state_city_breakdown_map %>% group_by(State_city_region) %>% 
+    mutate(Divestment_total = sum(Divestment))
+
+state_city_breakdown_map <- state_city_breakdown_map %>% group_by(State_city_region) %>% 
+    mutate(Subsidy_removal_total = sum(Subsidy_removal))
+
+state_city_breakdown_map <- state_city_breakdown_map %>% group_by(State_city_region) %>% 
+    mutate(ffnpt_total = sum(FFNPT))
+
+state_city_breakdown_map <- state_city_breakdown_map %>% group_by(State_city_region) %>% 
+    mutate(City_region_state_total = sum(Moratoria_bans_limits + Divestment + Subsidy_removal + FFNPT))
 
 
 # Factor and label CAT_rating
@@ -240,17 +269,20 @@ cumulative_sr_plot = function(subsidiy_removal) {
 cv_pal <- colorFactor(palette = c("#EFEFEF", "#FCDE9C", "#BEC5A9", "#8DA8AD", "#668BA8", "#466A9F", "#2C4B93", "#062A89"), country_overview_large$MTCO2e_cat)
 plot_map <- worldcountry[worldcountry$ADM0_A3 %in% country_overview_large$ISO3, ]
 
+
 ## Filter data for mapping by selecting only rows with policies > 0
 country_overview_large_map = country_overview_large %>% filter(Government_policies_total > 0 & Non_Government_policies_total > 0)
+
+#state_city_breakdown
 
 # create base map 
 basemap = leaflet(plot_map) %>% 
     addTiles() %>% 
     addLayersControl(
         position = "topright",
-        overlayGroups = c("Governmental Policies", "Non-Governmental Policies"),
+        overlayGroups = c("Cities, States, Regions", "Governmental Policies", "Non-Governmental Policies"),
         options = layersControlOptions(collapsed = FALSE)) %>% 
-    hideGroup(c("Governmental Policies", "Non-Governmental Policies")) %>%
+    hideGroup(c("Cities, States, Regions", "Governmental Policies", "Non-Governmental Policies")) %>%
     addProviderTiles(providers$CartoDB.Positron) %>%
     fitBounds(~-100,-60,~60,70) %>%
     addLegend("bottomright", colors = c("#EFEFEF", "#FCDE9C", "#BEC5A9", "#8DA8AD", "#668BA8", "#466A9F", "#2C4B93", "#062A89"), 
@@ -272,7 +304,7 @@ basemap = leaflet(plot_map) %>%
                      label = sprintf("<strong>%s</strong><br/>Governmental Policies: %g", country_overview_large_map$Country, 
                                      country_overview_large_map$Government_policies_total) %>% lapply(htmltools::HTML),
                      labelOptions = labelOptions(
-                         style = list("font-weight" = "normal", padding = "3px 8px", "color" = Government_policies),
+                         style = list("font-weight" = "normal", "font-family" = "Roboto", padding = "3px 8px", "color" = Government_policies),
                          textsize = "15px", direction = "auto")) %>% 
     
     addCircleMarkers(data = country_overview_large_map, lat = ~ latitude, lng = ~ longitude, weight = 1, 
@@ -281,9 +313,18 @@ basemap = leaflet(plot_map) %>%
                      label = sprintf("<strong>%s</strong><br/>Non-Governmental Policies: %g", country_overview_large_map$Country, 
                                      country_overview_large_map$Non_Government_policies_total) %>% lapply(htmltools::HTML),
                      labelOptions = labelOptions(
-                         style = list("font-weight" = "normal", padding = "3px 8px", "color" = Non_Government_policies),
+                         style = list("font-weight" = "normal", "font-family" = "Roboto", padding = "3px 8px", "color" = Non_Government_policies),
+                         textsize = "15px", direction = "auto")) %>%
+    
+    addCircleMarkers(data = state_city_breakdown_map, lat = ~ latitude, lng = ~ longitude, weight = 1, 
+                     radius = ~(City_region_state_total)^(0.9),
+                     fillOpacity = 0.2, color = Cities_regions_states, group = "Cities, States, Regions",
+                     label = sprintf("<strong>%s</strong><br/><small>Moratoria, Bans, Limits: %g</small><br/><small>Subsidy Removals: %d</small><br/><small>Divestments: %g</small><br/><small>FF NPT: %g</small>", 
+                                     state_city_breakdown_map$State_city_region, state_city_breakdown_map$Moratoria_bans_limits_total,state_city_breakdown_map$Subsidy_removal_total,
+                                     state_city_breakdown_map$Divestment_total, state_city_breakdown_map$ffnpt_total) %>% lapply(htmltools::HTML),
+                     labelOptions = labelOptions(
+                         style = list("font-weight" = "normal", "font-family" = "Roboto", padding = "3px 8px", "color" = Cities_regions_states),
                          textsize = "15px", direction = "auto"))
-
 
 ### SHINY UI ###
 ui <- bootstrapPage(
@@ -301,7 +342,7 @@ ui <- bootstrapPage(
                                           draggable = TRUE, height = "auto",
                                           
                                           span(tags$i(h6("Reported numbers of policies are subject to variation in policy types between countries.")), style="color:#045a8d"),
-                                          h4(textOutput("policy_count"), align = "right"),
+                                          h3(textOutput("policy_count"), align = "right"),
                                           h5(textOutput("gov_pol_count"), align = "right"),
                                           h5(textOutput("Non_gov_pol_count"), align = "right"),
                                           #h6(textOutput("mbl_count"), align = "right"), 
@@ -351,7 +392,6 @@ ui <- bootstrapPage(
                                     class = "action-button shiny-bound-input",
                                     "Show"
                                 )
-                                
                             ),
                             tags$article(
                                 `aria-label` = "report",

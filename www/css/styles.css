@@ -1,5 +1,5 @@
 html, body, #map {
-    font-family: -apple-system, BlinkMacSystemFont, 'Roboto';
+    font-family: 'Roboto', Roboto;
     height: 100%;
     width: 100vw;
 }
@@ -7,6 +7,7 @@ html, body, #map {
 body {
     padding: 0;
     margin: 0;
+    font-family: 'Roboto', Roboto;
 }
 
 main, header {
@@ -25,6 +26,7 @@ main {
 
 h1 {
     text-align: center;
+    font-family: 'Roboto', Roboto;
     color: #252525;
     line-height: 1.4;
     margin: 0;
@@ -34,6 +36,7 @@ h1 {
 
 h2, h3 {
     color: #252525;
+    font-family: 'Roboto', Roboto;
     line-height: 1.4;
     margin: 0;
     padding: 0;
@@ -43,14 +46,17 @@ h2, h3 {
 p {
     color: #3f454b;
     line-height: 1.8;
+    font-family: 'Roboto', Roboto;
 }
 
 header h1, header h2 {
     line-height: 1.1;
+    font-family: 'Roboto', Roboto;
 }
 
 header h2 {
     font-weight: 400;
+    font-family: 'Roboto', Roboto;
 }
 
 button, select {
@@ -69,6 +75,7 @@ button {
     background-color: #666A86;
     color: #f3f3f3;
     font-size: 12pt;
+    font-family: 'Roboto', Roboto;
     text-transform: uppercase;
     letter-spacing: 2px;
     font-weight: 600;
@@ -85,10 +92,11 @@ select {
     padding: 6px 0;
     padding-left: 6px;
     width: 325px;
-    font-size: 12pt;
+    font-size: 10pt;
+    font-family: 'Roboto', Roboto;
     text-transform: uppercase;
     letter-spacing: 2px;
-    font-weight: 400;
+    font-weight: 200;
     cursor: pointer;
     border: none;
     background: url(menu-chevron-down.svg) no-repeat;
@@ -98,26 +106,30 @@ select {
 }
 
 legend {
-    font-size: 14pt;
+    font-size: 12pt;
+    font-family: 'Roboto', Roboto;
     margin-bottom: 12px;
     color: #252525;
 }
 
 label {
-    font-size: 12pt;
+    font-size: 11pt;
+    font-family: 'Roboto', Roboto;
+    opacity: 0.55;
     color: #252525;
 }
 
 form {
     background-color: white;
+    font-family: 'Roboto', Roboto;
     padding: 1px;
     margin: 1px 0;
-    text-align: center;
 }
 
 form label {
     display: block;
-    margin-bottom: 10px;
+    font-family: 'Roboto', Roboto;
+    margin-bottom: 1px;
 }
 
 form button, form select {
@@ -131,11 +143,13 @@ form select {
 #report {
     margin: 0;
     padding: 0;
-    font-size: 14pt;
+    font-family: 'Roboto', Roboto;
+    font-size: 12pt;
 }
 
 #report pre code {
-    font-size: 13pt;
+    font-family: 'Roboto', Roboto;
+    font-size: 12pt;
 }
 
 .shiny-html-output .container-fluid,
