@@ -1,9 +1,4 @@
 ## Fossil Fuel Policy Tracker & Interactive Mapping Tool
-Last updated: `r Sys.Date()`
-
-```r
-Sys.Date()
-```
 
 This github page contains the code and input data for the [Fossil Fuel Policy Tracker & Interactive Mapping Tool](https://fuenal.shinyapps.io/FFTNP_tracker-master/) developed by the Fossil Fuel Non-Proliferation Treats Initiative.
 
@@ -20,13 +15,13 @@ Follow [this]( https://fuenal.shinyapps.io/Fossil_Fuel_Policy_Tracker/) link for
 ## Analysis code
 
 Key elements of the analysis code are as follows:
-- *CAT_data_daily.R* – an R script that extracts and reformats information from the [Fossil Fuel Divestment Weppage](https://gofossilfree.org/divestment/commitments/). The output files are saved in the *input_data* folder.
+- *divestment_data_daily.R* – an R script that extracts and reformats information from the [Fossil Fuel Divestment Weppage](https://gofossilfree.org/divestment/commitments/). The output files are saved in the *input_data* folder.
 - *app.R* - an R script used to render the Shiny app. This consists of several plotting functions as well as the ui (user interface) and server code required to render the Shiny app. The script has become more complex over time as a growing number of interactive features has been added.
-- *input_data* - a folder containing dynamic input data relating to the evolving supply-side policy tracking(updated by *CAT_data_daily.R*) and static input data relating to previously identified and categorized policy database and country mapping coordinates.
+- *input_data* - a folder containing dynamic input data relating to the evolving supply-side policy tracking(updated by *divestment_data_daily.R*) and static input data relating to previously identified and categorized policy database and country mapping coordinates.
 
 ## Updates
 
-The [Shiny app](https://fuenal.shinyapps.io/FFTNP_tracker-master/) automatically updates itself based on the code in *CAT_data_daily.R*. 
+The [Shiny app](https://fuenal.shinyapps.io/FFTNP_tracker-master/) automatically updates itself based on the code in *divestment_data_daily.R*. 
 
 ## Other resources
 

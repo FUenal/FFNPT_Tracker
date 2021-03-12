@@ -31,7 +31,7 @@ if(!require(reshape2)) install.packages("reshape2", repos = "http://cran.us.r-pr
 if(!require(ggiraph)) install.packages("ggiraph", repos = "http://cran.us.r-project.org")
 if(!require(RColorBrewer)) install.packages("RColorBrewer", repos = "http://cran.us.r-project.org")
 if(!require(leaflet)) install.packages("leaflet", repos = "http://cran.us.r-project.org")
-if(!require(plotly)) install.packages("plotly", repos = "http://cran.us.r-project.org")
+#if(!require(plotly)) install.packages("plotly", repos = "http://cran.us.r-project.org")
 if(!require(geojsonio)) install.packages("geojsonio", repos = "http://cran.us.r-project.org")
 if(!require(shiny)) install.packages("shiny", repos = "http://cran.us.r-project.org")
 if(!require(shinyWidgets)) install.packages("shinyWidgets", repos = "http://cran.us.r-project.org")
@@ -42,16 +42,19 @@ if(!require(lubridate)) install.packages("lubridate", repos = "http://cran.us.r-
 if(!require(kableExtra)) install.packages("kableExtra", repos = "http://cran.us.r-project.org")
 if(!require(gridExtra)) install.packages("gridExtra", repos = "http://cran.us.r-project.org")
 if(!require(xlsx)) install.packages("xlsx", repos = "http://cran.us.r-project.org")
-# if(!require(shinyjs)) install.packages("shinyjs", repos = "http://cran.us.r-project.org")
+#if(!require(shinyjs)) install.packages("shinyjs", repos = "http://cran.us.r-project.org")
+
+# pkgs
+suppressPackageStartupMessages(library(shiny))
 
 # set mapping color for each category of policy
 #All_policies  = "016c59"
-Moratoria_bans_limits = "#cc4c02"
-Subsidy_removal = "#662506"
+Moratoria_bans_limits = "#253550" #"#cc4c02"
+Subsidy_removal = "#0C101E" #"#662506"
 Divestment = "#045a8d"
 Government_policies = "#4d004b"
 Non_Government_policies = "#016c59"
-Cities_regions_states = "#ACB334"
+Cities_regions_states = "#FF9100"  #"#ACB334"
 
 ## Colour choices CAT Tracker
 # #FF0D0D","#FF4E11", "#FF8E15", "#FAB733", "#ACB334", "#69B34C", "#B1B6B9"
@@ -64,11 +67,11 @@ country_overview = read_xlsx("input_data/FF NPT Tracker DRAFT WIP.xlsx", sheet =
 regional_breakdown = read_xlsx("input_data/FF NPT Tracker DRAFT WIP.xlsx", sheet = 3)
 state_city_breakdown = read_xlsx("input_data/FF NPT Tracker DRAFT WIP.xlsx", sheet = 4)
 moratoria_bans_limits = read_xlsx("input_data/FF NPT Tracker DRAFT WIP.xlsx", sheet = 5)
-subsidiy_removal = read_xlsx("input_data/FF NPT Tracker DRAFT WIP.xlsx", sheet = 6)
+subsidy_removal = read_xlsx("input_data/FF NPT Tracker DRAFT WIP.xlsx", sheet = 6)
 divestment = read_xlsx("input_data/FF NPT Tracker DRAFT WIP.xlsx", sheet = 7)
 divestment_new = read_xlsx("input_data/FF NPT Tracker DRAFT WIP.xlsx", sheet = 8)
 #world_cities = read_xlsx("input_data/FF NPT Tracker DRAFT WIP.xlsx", sheet = 10)
-#divestment_scrape = read.csv("input_data/divestment_scrape.csv")
+divestment_scraped = read.csv("input_data/divestment_scraped.csv")
 countries = read.csv("input_data/countries_codes_and_coordinates.csv")
 worldcountry = geojson_read("input_data/50m.geojson", what = "sp")
 country_geoms = read.csv("input_data/country_geoms.csv")
@@ -78,11 +81,6 @@ country_overview['latitude'] <- countries$latitude[match(country_overview$ISO3, 
 country_overview['longitude'] <- countries$longitude[match(country_overview$ISO3, countries$ISO3)]
 country_overview['global_level'] <- countries$global_level[match(country_overview$ISO3, countries$ISO3)]
 country_overview['continent_level'] <- countries$continent_level[match(country_overview$ISO3, countries$ISO3)]
-#state_city_breakdown['latitude'] <- world_cities$lat[match(state_city_breakdown$State_city_region, world_cities$city_ascii)]
-#state_city_breakdown['longitude'] <- world_cities$lng[match(state_city_breakdown$State_city_region, world_cities$city_ascii)]
-#state_city_breakdown['latitude'] <- world_cities$lat[match(state_city_breakdown$State_city_region, world_cities$admin_name)]
-#state_city_breakdown['longitude'] <- world_cities$lng[match(state_city_breakdown$State_city_region, world_cities$admin_name)]
-
 
 # Added ISO Codes to all sheets manually due to mismatching name.
 
@@ -100,16 +98,16 @@ moratoria_bans_limits <- moratoria_bans_limits %>% group_by(ISO3) %>% mutate(a =
 moratoria_bans_limits <- moratoria_bans_limits %>% group_by(ISO3) %>% mutate(b = sum(mbl_city_region))
 divestment_new <- divestment_new %>% group_by(ISO3) %>% mutate(a = sum(divestment_city_region))
 divestment_new <- divestment_new %>% group_by(ISO3) %>% mutate(b = sum(divestment_non_government))
-subsidiy_removal <- subsidiy_removal %>% group_by(ISO3) %>% mutate(a = sum(Policy))
+subsidy_removal <- subsidy_removal %>% group_by(ISO3) %>% mutate(a = sum(Policy))
 
 ## Transfer total number and breakdowns of policies to country_overview_large file
 country_overview_large['mbl_country'] <- moratoria_bans_limits$a[match(country_overview_large$ISO3, moratoria_bans_limits$ISO3)]
 country_overview_large['mbl_city_region'] <- moratoria_bans_limits$b[match(country_overview_large$ISO3, moratoria_bans_limits$ISO3)]
 country_overview_large['divestment_city_region'] <- divestment_new$a[match(country_overview_large$ISO3, divestment_new$ISO3)]
 country_overview_large['divestment_non_government'] <- divestment_new$b[match(country_overview_large$ISO3, divestment_new$ISO3)]
-country_overview_large['subsidy_removal'] <- subsidiy_removal$a[match(country_overview_large$ISO3, subsidiy_removal$ISO3)]
+country_overview_large['subsidy_removal'] <- subsidy_removal$a[match(country_overview_large$ISO3, subsidy_removal$ISO3)]
 
-## Total number of policies
+## Calculate total number of policies
 country_overview_large <- country_overview_large %>% group_by(ISO3) %>%  
     mutate(Moratoria_bans_limits_total = mbl_country + mbl_city_region)
 
@@ -150,6 +148,8 @@ state_city_breakdown_map <- state_city_breakdown_map %>% group_by(State_city_reg
 state_city_breakdown_map <- state_city_breakdown_map %>% group_by(State_city_region) %>% 
     mutate(City_region_state_total = sum(Moratoria_bans_limits + Divestment + Subsidy_removal + FFNPT))
 
+# Matching dates from original divestment file with newly scraped divestment file
+# divestment_new$Start <- divestment$Start[match(divestment_new$Organisation, divestment$Organisation)]
 
 # Factor and label CAT_rating
 country_overview_large$CAT_rating <- factor(country_overview_large$CAT_rating, levels = c(0,1,2,3,4,5,6,7), 
@@ -168,7 +168,7 @@ country_overview_large$MTCO2e_cat = factor(country_overview_large$MTCO2e_cat,lev
 
 ### DATA PROCESSING: Policies converting Year from numeric to date format###
 moratoria_bans_limits$Date <-lubridate::ymd(moratoria_bans_limits$Start, truncated = 2L)
-subsidiy_removal$Date <-lubridate::ymd(subsidiy_removal$Start, truncated = 2L)
+subsidy_removal$Date <-lubridate::ymd(subsidy_removal$Start, truncated = 2L)
 divestment$Date <-lubridate::ymd(divestment$Start, truncated = 2L)
 
 # extract dates from moratoria_bans_limits data
@@ -178,10 +178,10 @@ moratoria_bans_limits_max_date = max(moratoria_bans_limits$Date)
 moratoria_bans_limits_max_date_clean = format(as.POSIXct(moratoria_bans_limits_max_date),"%d/%m/%Y")
 
 # extract dates from moratoria_bans_limits data
-subsidiy_removal$date = as.Date(subsidiy_removal$Date, format="%d/%m/%Y")
-subsidiy_removal_min_date = min(subsidiy_removal$date)
-subsidiy_removal_max_date = max(subsidiy_removal$Date)
-subsidiy_removal_max_date_clean = format(as.POSIXct(subsidiy_removal_max_date),"%d/%m/%Y")
+subsidy_removal$date = as.Date(subsidy_removal$Date, format="%d/%m/%Y")
+subsidy_removal_min_date = min(subsidy_removal$date)
+subsidy_removal_max_date = max(subsidy_removal$Date)
+subsidy_removal_max_date_clean = format(as.POSIXct(subsidy_removal_max_date),"%d/%m/%Y")
 
 # extract dates from moratoria_bans_limits data
 divestment$date = as.Date(divestment$Date, format="%d/%m/%Y")
@@ -250,14 +250,14 @@ cumulative_div_plot = function(divestment_new) {
     g1
 }
 
-# function to plot cumulative subsidiy_removal by date
-cumulative_sr_plot = function(subsidiy_removal) {
-    g1 <- ggplot(subsidiy_removal, aes(x = date, y = Policy)) + 
+# function to plot cumulative subsidy_removal by date
+cumulative_sr_plot = function(subsidy_removal) {
+    g1 <- ggplot(subsidy_removal, aes(x = date, y = Policy)) + 
         geom_bar(position="stack", stat="identity", fill = Subsidy_removal) + 
         ylab("Subsidy Removals") +  xlab("Year") + theme_bw() + ylim(0,8) +
         scale_fill_manual(values=c(Subsidy_removal)) +
-        xlim(c(subsidiy_removal_min_date,subsidiy_removal_max_date)) + 
-        scale_x_date(date_labels = "%Y", limits=c(subsidiy_removal_min_date,subsidiy_removal_max_date)) +
+        xlim(c(subsidy_removal_min_date,subsidy_removal_max_date)) + 
+        scale_x_date(date_labels = "%Y", limits=c(subsidy_removal_min_date,subsidy_removal_max_date)) +
         theme(legend.title = element_blank(), legend.position = "", plot.title = element_text(size=10), 
               plot.margin = margin(5, 10, 5, 5))
     g1
@@ -282,7 +282,12 @@ basemap = leaflet(plot_map) %>%
         position = "topright",
         overlayGroups = c("Cities, States, Regions", "Governmental Policies", "Non-Governmental Policies"),
         options = layersControlOptions(collapsed = FALSE)) %>% 
-    hideGroup(c("Cities, States, Regions", "Governmental Policies", "Non-Governmental Policies")) %>%
+    hideGroup(c("Cities, States, Regions", "Governmental Policies", "Non-Governmental Policies")) %>% 
+    htmlwidgets::onRender("
+        function() {
+            $('.leaflet-control-layers-overlays').prepend('<label style=\"text-align:center\"><strong>Policy type and level</strong><br/></label>');
+        }
+    ") %>%
     addProviderTiles(providers$CartoDB.Positron) %>%
     fitBounds(~-100,-60,~60,70) %>%
     addLegend("bottomright", colors = c("#EFEFEF", "#FCDE9C", "#BEC5A9", "#8DA8AD", "#668BA8", "#466A9F", "#2C4B93", "#062A89"), 
@@ -290,12 +295,12 @@ basemap = leaflet(plot_map) %>%
                           "<small>5000-10000</small>","<small>> 10000</small>"),values = ~country_overview_large$MTCO2e_cat,
               title = "<small><small>Country Greenhouse<br/>Gas Emissions<br/>(CAIT 2016)(MtCO2e)</small></small>") %>% 
     
-    addPolygons(stroke = FALSE, smoothFactor = 0.2, fillOpacity = 0.4, fillColor = ~cv_pal(country_overview_large$MTCO2e_cat),
+    addPolygons(stroke = FALSE, smoothFactor = 0.4, fillOpacity = 0.75, fillColor = ~cv_pal(country_overview_large$MTCO2e_cat),
                 label = sprintf("<strong>%s</strong><br/><small>Greenhouse Gas Emissions: %s MtCO2e</small><br/><small>Moratoria, Bans, & Limits: %g</small><br/><small>Subsidy Removals: %d</small><br/><small>Divestments: %g</small>", 
                                 country_overview_large$Country, country_overview_large$MTCO2e, country_overview_large$Moratoria_bans_limits, 
                                 country_overview_large$Subsidy_removal, country_overview_large$Divestment) %>% lapply(htmltools::HTML),
                 labelOptions = labelOptions(
-                    style = list("font-weight" = "normal", "font-family" = "Roboto", padding = "3px 8px", "color" = cv_pal),
+                    style = list("font-weight" = "normal", "font-family" = "Poppins", padding = "3px 8px", "color" = cv_pal),
                     textsize = "15px", direction = "auto")) %>%
     
     addCircleMarkers(data = country_overview_large_map, lat = ~ latitude, lng = ~ longitude, weight = 1, 
@@ -304,7 +309,7 @@ basemap = leaflet(plot_map) %>%
                      label = sprintf("<strong>%s</strong><br/>Governmental Policies: %g", country_overview_large_map$Country, 
                                      country_overview_large_map$Government_policies_total) %>% lapply(htmltools::HTML),
                      labelOptions = labelOptions(
-                         style = list("font-weight" = "normal", "font-family" = "Roboto", padding = "3px 8px", "color" = Government_policies),
+                         style = list("font-weight" = "normal", "font-family" = "Poppins", padding = "3px 8px", "color" = Government_policies),
                          textsize = "15px", direction = "auto")) %>% 
     
     addCircleMarkers(data = country_overview_large_map, lat = ~ latitude, lng = ~ longitude, weight = 1, 
@@ -313,25 +318,25 @@ basemap = leaflet(plot_map) %>%
                      label = sprintf("<strong>%s</strong><br/>Non-Governmental Policies: %g", country_overview_large_map$Country, 
                                      country_overview_large_map$Non_Government_policies_total) %>% lapply(htmltools::HTML),
                      labelOptions = labelOptions(
-                         style = list("font-weight" = "normal", "font-family" = "Roboto", padding = "3px 8px", "color" = Non_Government_policies),
+                         style = list("font-weight" = "normal", "font-family" = "Poppins", padding = "3px 8px", "color" = Non_Government_policies),
                          textsize = "15px", direction = "auto")) %>%
     
-    addCircleMarkers(data = state_city_breakdown_map, lat = ~ latitude, lng = ~ longitude, weight = 1, 
-                     radius = ~(City_region_state_total)^(0.9),
+    addCircleMarkers(data = state_city_breakdown_map, lat = ~ latitude, lng = ~ longitude, weight = 4, 
+                     radius = ~(City_region_state_total)^(0.89),
                      fillOpacity = 0.2, color = Cities_regions_states, group = "Cities, States, Regions",
                      label = sprintf("<strong>%s</strong><br/><small>Moratoria, Bans, Limits: %g</small><br/><small>Subsidy Removals: %d</small><br/><small>Divestments: %g</small><br/><small>FF NPT: %g</small>", 
                                      state_city_breakdown_map$State_city_region, state_city_breakdown_map$Moratoria_bans_limits_total,state_city_breakdown_map$Subsidy_removal_total,
                                      state_city_breakdown_map$Divestment_total, state_city_breakdown_map$ffnpt_total) %>% lapply(htmltools::HTML),
                      labelOptions = labelOptions(
-                         style = list("font-weight" = "normal", "font-family" = "Roboto", padding = "3px 8px", "color" = Cities_regions_states),
+                         style = list("font-weight" = "normal", "font-family" = "Poppins", padding = "3px 8px", "color" = Cities_regions_states),
                          textsize = "15px", direction = "auto"))
 
 ### SHINY UI ###
 ui <- bootstrapPage(
     navbarPage(theme = shinytheme("journal"), collapsible = TRUE,
-               HTML('<a style="text-decoration:none;cursor:default;color:#000000;" class="active" href="#">Fossil Fuel Policy Tracker</a><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">'), id="nav",
+               HTML('<a style="text-decoration:none;cursor:default;color:#000000;" class="active" href="#">Fossil Fuel Policy Tracker</a>'), id="nav",
                windowTitle = "Fossil Fuel Policy Tracker",
-               
+              
                tabPanel("Supply Side Policy Mapper",
                         div(class="outer",
                             tags$head(includeCSS("styles.css")),
@@ -345,9 +350,9 @@ ui <- bootstrapPage(
                                           h3(textOutput("policy_count"), align = "right"),
                                           h5(textOutput("gov_pol_count"), align = "right"),
                                           h5(textOutput("Non_gov_pol_count"), align = "right"),
-                                          #h6(textOutput("mbl_count"), align = "right"), 
-                                          #h6(textOutput("div_count"), align = "right"), 
-                                          #h6(textOutput("sr_count"), align = "right"), 
+                                          #h6(textOutput("mbl_count"), align = "right"), # Displays total number of moratoria, bans, and limits on the control panel
+                                          #h6(textOutput("div_count"), align = "right"), # Displays total number of divestments on the control panel
+                                          #h6(textOutput("sr_count"), align = "right"), # Displays total number of subsidy removals on the control panel
                                           plotOutput("cumulative_mbl_plot", height="185px", width="100%"),
                                           plotOutput("cumulative_div_plot", height="175px", width="100%"),
                                           plotOutput("cumulative_sr_plot", height="175px", width="100%"),
@@ -355,65 +360,60 @@ ui <- bootstrapPage(
                             ),
                             
                             absolutePanel(id = "logo", class = "card", bottom = 20, left = 20, width = 80, fixed=TRUE, draggable = FALSE, height = "auto",
-                                          tags$a(href='https://fossilfueltreaty.org', tags$img(src='output-onlinepngtools.png',height='80',width='80')))
+                                          tags$a(href='https://fossilfueltreaty.org', target="_blank", tags$img(src='output-onlinepngtools.png',height='80',width='80')))
                             
                         )
                ),
 
                tabPanel("Country Profiles",
-                            tags$head(
-                                tags$link(
-                                    type = "text/css",
-                                    rel = "stylesheet",
-                                    href = "css/styles.css"
-                                )
+                        sidebarLayout(
+                            sidebarPanel(width = 2,
+                                         selectInput(inputId = "country",
+                                                     label = "Select country from drop-down menu to show country profiles",
+                                                     choices = c("Select a Country", sort(unique(country_overview_large$Country))),
+                                                     selected = c("United Kingdom"),
+                                                     multiple = FALSE),
+                                         tags$p(
+                                             "Rendering of profiles takes a couple of seconds. The data presented here is based on the Fossil Fuel Database ",
+                                             "which automatically searches the internet to identify ",
+                                             "existing climate change supply-side policies. Click here ",
+                                             tags$a(
+                                                 href = "https://fossilfueltreaty.org", target="_blank",
+                                                 "for more information"
+                                             ),
+                                             "."
+                                         ),
+                                         radioButtons('format', 'Document format', c('PDF', 'HTML', 'Word'),
+                                                      inline = TRUE),
+                                         downloadButton('downloadReport')
+                                         
                             ),
-                        tags$main(
-                            tags$form(
-                                tags$legend("Select country from drop-down menu and press button to show country profiles"),
-                                tags$label(`for` = "country", ""),
-                                tags$select(id = "country", HTML(
-                                    c("Select a Country",
-                                      sapply(
-                                          sort(unique(country_overview_large$Country)),
-                                          function(x) {
-                                              paste0(
-                                                  "<option value='", x, "'>",
-                                                  x,
-                                                  "</option>"
-                                              )
-                                          }
-                                      )
-                                    )
-                                )
-                                ),
-                                tags$button(
-                                    id = "render",
-                                    class = "action-button shiny-bound-input",
-                                    "Show"
-                                )
-                            ),
-                            tags$article(
-                                `aria-label` = "report",
-                                htmlOutput("report")
-                            )
+                            mainPanel(
+                                tabsetPanel(
+                                    tabPanel("Overview", tags$article(
+                                        htmlOutput("report")
+                                    )),
+                                    tabPanel("Moratorial, Limits, & Bans", tags$article(
+                                        htmlOutput("report1")
+                                    )),
+                                    tabPanel("Subsidy Removals", tags$article(
+                                        htmlOutput("report2")
+                                    )),
+                                    tabPanel("Divestments", tags$article(
+                                        htmlOutput("report3")
+                                    ))
                         )
-                    ),
+                        )
+                        )
+               ),
                
                tabPanel("About this site",
-                        tags$head(
-                            tags$link(
-                                type = "text/css",
-                                rel = "stylesheet",
-                                href = "css/styles.css"
-                            )
-                        ),
                         tags$div(
                             tags$img(src = "FFNPT_Logo.png", width = "80px", height = "80px"),
                             tags$h3("About this app"), 
                             "This site will be updated on a regular basis (weekly). There are several other excellent Climate Change mapping tools available, including those run by", 
-                            tags$a(href="https://www.climate-laws.org/#map-section", "the Grantham Research Institute on Climate Change and the Environment"), "and",
-                            tags$a(href="http://cait.wri.org/historical/Country%20GHG%20Emissions#", "CAIT Climate Data Explorer."),
+                            tags$a(href="https://www.climate-laws.org/#map-section", target="_blank", "the Grantham Research Institute on Climate Change and the Environment"), "and",
+                            tags$a(href="http://cait.wri.org/historical/Country%20GHG%20Emissions#", target="_blank", "CAIT Climate Data Explorer."),
                             "Our aim is to complement these resources with a particular focus on supply-side policies, including a Fossil Fuel City Impact Map to help organizations to 
                         identify best practices in the field and facilitate target city choices by provinding a propensity action score.",
                             
@@ -429,13 +429,13 @@ ui <- bootstrapPage(
                             tags$b("Diplomatic engagement strategy: "), "to support movements around the world in holding governments and corporations to account and joining in call for a treaty; ",tags$br(),
                             tags$b("Research strategy: "), "to build an evidence base for this work.",tags$br(),
                             tags$br(),
-                            "More information on our work is avaialble  ",tags$a(href="https://fossilfueltreaty.org", "Fossil Fuely Treaty. "),
-                            "An article discussing our campaign was published in ",tags$a(href="https://mondediplo.com/outsidein/fossil-fuel-disarmament", "Le Monde Diplomatique. "), tags$br(), 
+                            "More information on our work is avaialble  ",tags$a(href="https://fossilfueltreaty.org", target="_blank", "Fossil Fuely Treaty. "),
+                            "An article discussing our campaign was published in ",tags$a(href="https://mondediplo.com/outsidein/fossil-fuel-disarmament", target="_blank", "Le Monde Diplomatique. "), tags$br(), 
                             tags$br(),tags$h3("Code"), 
-                            "Code and input data used to generate this Shiny mapping tool are available on ",tags$a(href="https://github.com/FUenal/FFNPT_Tracker", "Github."),tags$br(),  
+                            "Code and input data used to generate this Shiny mapping tool are available on ",tags$a(href="https://github.com/FUenal/FFNPT_Tracker", target="_blank", "Github."),tags$br(),  
                             tags$br(),tags$h3("Sources"),
                             tags$p("The data presented here is based on the Fossil Fuel Database which automatically searches the internet to identify existing climate change supply-side policies. Click here ",
-                            tags$a(href = "https://fossilfueltreaty.org","for more information"),"."), tags$p("We also rely on data from the", tags$a(href="http://cait.wri.org/historical/Country%20GHG%20Emissions#", "CAIT Climate Data Explorer.")),  
+                            tags$a(href = "https://fossilfueltreaty.org", target="_blank","for more information"),"."), tags$p("We also rely on data from the", tags$a(href="http://cait.wri.org/historical/Country%20GHG%20Emissions#", target="_blank", "CAIT Climate Data Explorer.")),  
                             tags$br(),tags$h3("Author"),
                             "Dr Fatih Uenal, Fellow @ Faculty AI & University of Cambridge",tags$br(),  
                             tags$br(),tags$h3("Contact"),
@@ -448,7 +448,7 @@ ui <- bootstrapPage(
 
 ### SHINY SERVER ###
 
-server = function(input, output, session) {
+server = function(input, output) {
     
     # Policy tab 
     output$mymap <- renderLeaflet({ 
@@ -463,7 +463,7 @@ server = function(input, output, session) {
         cumulative_div_plot(divestment)
     })
     output$cumulative_sr_plot <- renderPlot({
-        cumulative_sr_plot(subsidiy_removal)
+        cumulative_sr_plot(subsidy_removal)
     })
     
     output$policy_count <- renderText({
@@ -490,28 +490,12 @@ server = function(input, output, session) {
         paste0(prettyNum(sum(country_overview_large$Divestment_total), big.mark=","), "  Divestments")
     })
     
-    ## country-specific profiles
-    # set initial ui for htmlOutput
-    output$report <- renderUI({
-        tagList(
-            tags$p(
-                "Rendering of profiles takes a couple of seconds. The data presented here is based on the Fossil Fuel Database ",
-                "which automatically searches the internet to identify ",
-                "existing climate change supply-side policies. Click here ",
-                tags$a(
-                    href = "https://fossilfueltreaty.org",
-                    "for more information"
-                ),
-                "."
-            )
-        )
-    })
-    
+
     # render report when button clicked
-    observeEvent(input$render, {
+    observeEvent(input$country, {
         country_overview_largeDF <- country_overview_large[country_overview_large$Country == input$country, ]
         moratoria_bans_limitsDF <- moratoria_bans_limits[moratoria_bans_limits$Country == input$country, ]
-        subsidiy_removalDF <- subsidiy_removal[subsidiy_removal$Country == input$country, ]
+        subsidy_removalDF <- subsidy_removal[subsidy_removal$Country == input$country, ]
         divestmentDF <- divestment[divestment$Country == input$country, ]
         output$report <- renderUI({
             includeHTML(
@@ -520,9 +504,59 @@ server = function(input, output, session) {
                     params = list(
                         selection = input$country,
                         data = country_overview_largeDF,
+                        data = country_overview_largeDF,
                         data_mbl = moratoria_bans_limitsDF,
-                        data_sr = subsidiy_removalDF,
+                        data_sr = subsidy_removalDF,
                         data_div = divestmentDF
+                    )
+                )
+            )
+        })
+    })
+    
+    
+    # render report when button clicked
+    observeEvent(input$country, {
+        moratoria_bans_limitsDF <- moratoria_bans_limits[moratoria_bans_limits$Country == input$country, ]
+        output$report1 <- renderUI({
+            includeHTML(
+                rmarkdown::render(
+                    "report_template1.Rmd",
+                    params = list(
+                        selection = input$country,
+                        data_mbl = moratoria_bans_limitsDF
+                    )
+                )
+            )
+        })
+    })
+ 
+    # render report when button clicked
+    observeEvent(input$country, {
+        subsidy_removalDF <- subsidy_removal[subsidy_removal$Country == input$country, ]
+        output$report2 <- renderUI({
+            includeHTML(
+                rmarkdown::render(
+                    "report_template2.Rmd",
+                    params = list(
+                        selection = input$country,
+                        data_sr = subsidy_removalDF
+                    )
+                )
+            )
+        })
+    })
+   
+    # render report when button clicked
+    observeEvent(input$country, {
+        divestmentDFN <- divestment_scraped[divestment$Country == input$country, ]
+        output$report3 <- renderUI({
+            includeHTML(
+                rmarkdown::render(
+                    "report_template3.Rmd",
+                    params = list(
+                        selection = input$country,
+                        data_divN = divestmentDFN
                     )
                 )
             )

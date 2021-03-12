@@ -1,0 +1,28 @@
+---
+title: "Moratoria, Bans & Limits"
+output: html_document
+params: 
+    selection: input$country
+    data_mbl: "moratoria_bans_limitsDF"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, eval=TRUE, message=FALSE, warning=FALSE)
+```
+
+
+```{r echo=FALSE, eval=TRUE}
+# create dataframe for selected output
+mbl = params$data_mbl %>% 
+    group_by(City_state_or_province) %>%
+    select(c("City_state_or_province", "Category", "Fuel_type", "Fuel_subtype", "Start", "End", "Sources_and_more_info")) %>% 
+    replace(is.na(.), "--")
+    names(mbl) = c("City state or province", "Category", "Fuel type", "Fuel subtype", "Start", "End", "Sources")
+```
+
+```{r,fig.fig.align='left'}
+kableExtra::kable(mbl) %>% kable_styling()
+```
+
+<p>&nbsp;</p>
+

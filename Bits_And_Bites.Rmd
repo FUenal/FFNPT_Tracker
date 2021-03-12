@@ -9,7 +9,33 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+```{r echo=FALSE, eval=FALSE}
+includeMarkdown(
+    rmarkdown::render("report_template.Rmd", params = list(selection = input$country, data = country_overview_largeDF()))
+)
+```
+
+```{r echo=FALSE, eval=FALSE}
+includeMarkdown(
+    rmarkdown::render("report_template.Rmd", params = list(selection = input$country, data_mbl = moratoria_bans_limitsDF()))
+)
+```
+
+```{r echo=FALSE, eval=FALSE}
+includeMarkdown(
+    rmarkdown::render("report_template.Rmd", params = list(selection = input$country, data_div = divestmentDF()))
+)
+```
+
+```{r echo=FALSE, eval=FALSE}
+includeMarkdown(
+    rmarkdown::render("report_template.Rmd", params = list(selection = input$country, data_sr = subsidiy_removalDF()))
+)
+```
+
+
 ## R Markdown
+
 
 ```{r echo=FALSE, eval=TRUE}
 ### MAP FUNCTIONS ###

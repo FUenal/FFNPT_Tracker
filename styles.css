@@ -4,7 +4,7 @@ input[type="number"] {
 
 div.outer {
   position: fixed;
-  top: 56px;
+  top: 52px;
   left: 0;
   right: 0;
   bottom: 0;
@@ -12,17 +12,24 @@ div.outer {
   padding: 0;
 }
 
+
 /* Customize fonts */
-body, label, input, button, select { 
-  font-family: 'Roboto', Roboto;
-  font-weight: 300;
+div, report, htmlOutput, article, body, legend, label, form, label,input, form, button, select, map { 
+  font-family: 'Poppins', Poppins;
+  font-weight: 400;
 }
-h1, h2, h3, h4 { font-weight: 400; }
+
+h1, h2, h3, h4 { 
+  font-family: 'Poppins', Poppins; 
+  font-weight: 500; 
+}
+
 
 #controls {
   /* Appearance */
   background-color: white;
-  font-family: 'Roboto', Roboto;
+  font-family: 'Poppins', Poppins;
+  font-size: 12pt;
   padding: 0 10px 10px 10px;
   cursor: move;
   /* Fade out while not hovering */
@@ -51,16 +58,4 @@ h1, h2, h3, h4 { font-weight: 400; }
   /* Fade in while hovering */
   opacity: 0.95;
   transition-delay: 0;
-}
-
-html, body, #map {
-    font-family: 'Roboto', Roboto;
-    height: 100%;
-    width: 100vw;
-}
-
-body {
-    font-family: 'Roboto', Roboto;
-    padding: 0;
-    margin: 0;
 }

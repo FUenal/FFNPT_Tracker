@@ -1,0 +1,29 @@
+---
+title: "Divestments"
+output: html_document
+params: 
+    selection: input$country
+    data_divN: "divestmentDFN"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, eval=TRUE, message=FALSE, warning=FALSE)
+```
+
+
+```{r echo=FALSE, eval=TRUE}
+# create dataframe for selected output
+div = params$data_divN %>% 
+    group_by(Country) %>%
+    select(c("Country", "City", "Type", "Organisation", "Organisation_type", "Source")) %>% 
+    replace(is.na(.), "--") 
+    names(div) = c("Country", "City", "Type", "Organisation", "Organisation type", "Source")
+```
+
+
+```{r,fig.fig.align='left'}
+kableExtra::kable(div) %>% kable_styling()
+```
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>

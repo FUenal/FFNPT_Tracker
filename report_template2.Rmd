@@ -1,0 +1,28 @@
+---
+title: "Subsidy Removals"
+output: html_document
+params: 
+    selection: input$country
+    data_sr: "subsidiy_removalDF"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, eval=TRUE, message=FALSE, warning=FALSE)
+```
+
+
+```{r echo=FALSE, eval=TRUE}
+# create dataframe for selected output
+sr = params$data_sr %>% 
+    group_by(Category) %>%
+    select(c("Category", "Fuel_type", "Fuel_subtype", "Description", "Start", "Sources_and_more_info")) %>% 
+    replace(is.na(.), "--") 
+    names(sr) = c("Category", "Fuel type", "Fuel subtype", "Description", "Start", "Sources")
+```
+
+
+```{r,fig.fig.align='left'}
+kableExtra::kable(sr) %>% kable_styling()
+```
+
+<p>&nbsp;</p>

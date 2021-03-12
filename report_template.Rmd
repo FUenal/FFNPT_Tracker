@@ -1,40 +1,18 @@
 ---
 title: "Fossil Fuel Supply-Side Policies"
-output: html_document
+output: 
+    html_document: default
+    pdf_document: default
 params: 
     selection: input$country
     data: "country_overview_largeDF"
     data_mbl: "moratoria_bans_limitsDF"
-    data_sr: "subsidiy_removalDF"
+    data_sr: "subsidy_removalDF"
     data_div: "divestmentDF"
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE, eval=TRUE, message=FALSE, warning=FALSE)
-```
-
-```{r echo=FALSE, eval=FALSE}
-includeMarkdown(
-    rmarkdown::render("report_template.Rmd", params = list(selection = input$country, data = country_overview_largeDF()))
-)
-```
-
-```{r echo=FALSE, eval=FALSE}
-includeMarkdown(
-    rmarkdown::render("report_template.Rmd", params = list(selection = input$country, data_mbl = moratoria_bans_limitsDF()))
-)
-```
-
-```{r echo=FALSE, eval=FALSE}
-includeMarkdown(
-    rmarkdown::render("report_template.Rmd", params = list(selection = input$country, data_div = divestmentDF()))
-)
-```
-
-```{r echo=FALSE, eval=FALSE}
-includeMarkdown(
-    rmarkdown::render("report_template.Rmd", params = list(selection = input$country, data_sr = subsidiy_removalDF()))
-)
 ```
 
 
@@ -77,10 +55,10 @@ g2 <- params$data_div %>% ggplot(aes(x = date, y = Policy)) +
 
  g3 <- params$data_sr %>% ggplot(aes(x = date, y = Policy)) + 
         geom_bar(position="stack", stat="identity", fill = Subsidy_removal) + 
-        ylab("") +  xlab("Year") + theme_bw() + ylim(0,8) +
+        ylab("") +  xlab("Year") + theme_bw() + ylim(0,10) +
         scale_fill_manual(values=c(Subsidy_removal)) +
-        xlim(c(subsidiy_removal_min_date,subsidiy_removal_max_date)) + 
-        scale_x_date(date_labels = "%Y", limits=c(subsidiy_removal_min_date,subsidiy_removal_max_date)) +
+        xlim(c(subsidy_removal_min_date,subsidy_removal_max_date)) + 
+        scale_x_date(date_labels = "%Y", limits=c(subsidy_removal_min_date,subsidy_removal_max_date)) +
          ggtitle("Subsidy Removals") + 
         theme(legend.title = element_blank(), legend.position = "", plot.title = element_text(size=12, hjust = 0.5), 
               plot.margin = margin(5, 10, 5, 5))
@@ -120,7 +98,7 @@ mbl = params$data_mbl %>%
 ```
 
 ```{r,fig.fig.align='left'}
-kableExtra::kable(mbl) %>% kable_styling()
+kableExtra::kable(head(mbl)) %>% kable_styling()
 ```
 
 <p>&nbsp;</p>
@@ -157,7 +135,7 @@ div = params$data_div %>%
 
 
 ```{r,fig.fig.align='left'}
-kableExtra::kable(div) %>% kable_styling()
+kableExtra::kable(head(div)) %>% kable_styling()
 ```
 
 <p>&nbsp;</p>
