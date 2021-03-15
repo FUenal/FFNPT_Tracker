@@ -75,6 +75,7 @@ divestment_scraped = read.csv("input_data/divestment_scraped.csv")
 countries = read.csv("input_data/countries_codes_and_coordinates.csv")
 worldcountry = geojson_read("input_data/50m.geojson", what = "sp")
 country_geoms = read.csv("input_data/country_geoms.csv")
+annual_share_of_co2_emissions = read.csv("input_data/annual-share-of-co2-emissions.csv")
 
 # Add geo data to sheets
 country_overview['latitude'] <- countries$latitude[match(country_overview$ISO3, countries$ISO3)]
@@ -98,7 +99,12 @@ moratoria_bans_limits <- moratoria_bans_limits %>% group_by(ISO3) %>% mutate(a =
 moratoria_bans_limits <- moratoria_bans_limits %>% group_by(ISO3) %>% mutate(b = sum(mbl_city_region))
 divestment_new <- divestment_new %>% group_by(ISO3) %>% mutate(a = sum(divestment_city_region))
 divestment_new <- divestment_new %>% group_by(ISO3) %>% mutate(b = sum(divestment_non_government))
+divestment <- divestment %>% group_by(ISO3) %>% mutate(a = sum(divestment_city_region))
+divestment <- divestment %>% group_by(ISO3) %>% mutate(b = sum(divestment_non_government))
 subsidy_removal <- subsidy_removal %>% group_by(ISO3) %>% mutate(a = sum(Policy))
+
+# Replace NAs
+#country_overview_large <- country_overview_large %>% replace(is.na(.), 0)
 
 ## Transfer total number and breakdowns of policies to country_overview_large file
 country_overview_large['mbl_country'] <- moratoria_bans_limits$a[match(country_overview_large$ISO3, moratoria_bans_limits$ISO3)]
@@ -127,6 +133,7 @@ country_overview_large <- country_overview_large %>% group_by(ISO3) %>%
 
 country_overview_large <- country_overview_large %>% group_by(ISO3) %>% 
     mutate(Non_Government_policies_total = divestment_non_government)
+
 
 ## Total number of state, city, region policies
 state_city_breakdown_map <- state_city_breakdown %>% 
@@ -163,8 +170,16 @@ country_overview_large$MTCO2e_cat <- cut(country_overview_large$MTCO2e, breaks =
 
 country_overview_large$MTCO2e_cat = factor(country_overview_large$MTCO2e_cat,levels(country_overview_large$MTCO2e_cat)[c(2,1,3:8)])
 
+### Pull % Global Emissions to country_overview file via ISO3
+annual_share_of_co2_emissions_2019 <- annual_share_of_co2_emissions %>% 
+    filter(Year == 2019)
+
+country_overview_large["global_emissions_percent"] <- annual_share_of_co2_emissions_2019$Share.of.global.CO2.emissions[match(country_overview_large$ISO3,
+                                                                                                                             annual_share_of_co2_emissions_2019$Code)]
+#country_overview_large <- country_overview_large %>% replace(is.na(.), 0)
+
 # write country_overview_large file
-#write.csv(country_overview_large, file = "input_data/country_overview_large.csv")
+write.csv(country_overview_large, file = "input_data/country_overview_large.csv")
 
 ### DATA PROCESSING: Policies converting Year from numeric to date format###
 moratoria_bans_limits$Date <-lubridate::ymd(moratoria_bans_limits$Start, truncated = 2L)
@@ -174,23 +189,21 @@ divestment$Date <-lubridate::ymd(divestment$Start, truncated = 2L)
 # extract dates from moratoria_bans_limits data
 moratoria_bans_limits$date = as.Date(moratoria_bans_limits$Date, format="%d/%m/%Y")
 moratoria_bans_limits_min_date = min(moratoria_bans_limits$date)
-moratoria_bans_limits_max_date = max(moratoria_bans_limits$Date)
+moratoria_bans_limits_max_date = max(moratoria_bans_limits$date)
 moratoria_bans_limits_max_date_clean = format(as.POSIXct(moratoria_bans_limits_max_date),"%d/%m/%Y")
 
 # extract dates from moratoria_bans_limits data
 subsidy_removal$date = as.Date(subsidy_removal$Date, format="%d/%m/%Y")
 subsidy_removal_min_date = min(subsidy_removal$date)
-subsidy_removal_max_date = max(subsidy_removal$Date)
+subsidy_removal_max_date = max(subsidy_removal$date)
 subsidy_removal_max_date_clean = format(as.POSIXct(subsidy_removal_max_date),"%d/%m/%Y")
 
 # extract dates from moratoria_bans_limits data
 divestment$date = as.Date(divestment$Date, format="%d/%m/%Y")
 divestment_min_date = min(divestment$date)
-divestment_max_date = max(divestment$Date)
+divestment_max_date = max(divestment$date)
 divestment_max_date_clean = format(as.POSIXct(divestment_max_date),"%d/%m/%Y")
 
-# Set current date general
-current_date = as.Date(max(moratoria_bans_limits$date),"%Y-%m-%d") 
 
 #Set Main Plot output
 policy_count = function(country_overview_large){
@@ -263,7 +276,6 @@ cumulative_sr_plot = function(subsidy_removal) {
     g1
 }
 
-
 ## create plotting parameters for map
 #cv_pal <- colorFactor(palette = c("#FF0D0D","#FF4E11", "#FF8E15", "#FAB733", "#ACB334", "#69B34C", "#B1B6B9"), country_overview_large$CAT_rating)
 cv_pal <- colorFactor(palette = c("#EFEFEF", "#FCDE9C", "#BEC5A9", "#8DA8AD", "#668BA8", "#466A9F", "#2C4B93", "#062A89"), country_overview_large$MTCO2e_cat)
@@ -285,20 +297,20 @@ basemap = leaflet(plot_map) %>%
     hideGroup(c("Cities, States, Regions", "Governmental Policies", "Non-Governmental Policies")) %>% 
     htmlwidgets::onRender("
         function() {
-            $('.leaflet-control-layers-overlays').prepend('<label style=\"text-align:center\"><strong>Policy type and level</strong><br/></label>');
+            $('.leaflet-control-layers-overlays').prepend('<label style=\"text-align:center\"><strong>Policy Level/Type</strong><br/></label>');
         }
     ") %>%
     addProviderTiles(providers$CartoDB.Positron) %>%
     fitBounds(~-100,-60,~60,70) %>%
     addLegend("bottomright", colors = c("#EFEFEF", "#FCDE9C", "#BEC5A9", "#8DA8AD", "#668BA8", "#466A9F", "#2C4B93", "#062A89"), 
-              labels =  c("<small>No data</small>", "<small>< 0</small>", "<small>1-169</small>","<small>169-500</small>","<small>500-1000</small>","<small>1000-5000</small>",  
-                          "<small>5000-10000</small>","<small>> 10000</small>"),values = ~country_overview_large$MTCO2e_cat,
-              title = "<small><small>Country Greenhouse<br/>Gas Emissions<br/>(CAIT 2016)(MtCO2e)</small></small>") %>% 
+              labels =  c("No data", "< 0", "1-169","169-500","500-1000","1000-5000",  
+                          "5000-10000","> 10000"),values = ~country_overview_large$MTCO2e_cat,
+              title = "Country Greenhouse<br/>Gas Emissions (MtCO2e)<br/>(CAIT 2016)") %>% 
     
     addPolygons(stroke = FALSE, smoothFactor = 0.4, fillOpacity = 0.75, fillColor = ~cv_pal(country_overview_large$MTCO2e_cat),
-                label = sprintf("<strong>%s</strong><br/><small>Greenhouse Gas Emissions: %s MtCO2e</small><br/><small>Moratoria, Bans, & Limits: %g</small><br/><small>Subsidy Removals: %d</small><br/><small>Divestments: %g</small>", 
-                                country_overview_large$Country, country_overview_large$MTCO2e, country_overview_large$Moratoria_bans_limits, 
-                                country_overview_large$Subsidy_removal, country_overview_large$Divestment) %>% lapply(htmltools::HTML),
+                label = sprintf("<strong>%s</strong><br/><small>Greenhouse Gas Emissions: %s MtCO2e</small><br/><small>Climate Risk Index: %s</small><br/><small>Total number of policies: %g</small>", 
+                                country_overview_large$Country, country_overview_large$MTCO2e, country_overview_large$cri, country_overview_large$Policy_total) %>% 
+                    lapply(htmltools::HTML),
                 labelOptions = labelOptions(
                     style = list("font-weight" = "normal", "font-family" = "Poppins", padding = "3px 8px", "color" = cv_pal),
                     textsize = "15px", direction = "auto")) %>%
@@ -382,10 +394,7 @@ ui <- bootstrapPage(
                                                  "for more information"
                                              ),
                                              "."
-                                         ),
-                                         radioButtons('format', 'Document format', c('PDF', 'HTML', 'Word'),
-                                                      inline = TRUE),
-                                         downloadButton('downloadReport')
+                                         )
                                          
                             ),
                             mainPanel(
@@ -549,7 +558,7 @@ server = function(input, output) {
    
     # render report when button clicked
     observeEvent(input$country, {
-        divestmentDFN <- divestment_scraped[divestment$Country == input$country, ]
+        divestmentDFN <- divestment_scraped[divestment_scraped$Country == input$country, ]
         output$report3 <- renderUI({
             includeHTML(
                 rmarkdown::render(

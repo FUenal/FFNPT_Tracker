@@ -35,7 +35,48 @@ includeMarkdown(
 
 
 ## R Markdown
+```{r echo=FALSE, eval=TRUE, fig.width=10, fig.height=3}
+### MAP FUNCTIONS ###
+# pkgs
+suppressPackageStartupMessages(library(tidyverse))
+suppressPackageStartupMessages(library(kableExtra))
+suppressPackageStartupMessages(library(ggplot2))
 
+# plot mbl over time
+g1 <- params$data_mbl %>% ggplot(aes(x = Date, y = Policy)) + 
+        geom_bar(position="stack", stat="identity", fill = Moratoria_bans_limits) + 
+        ylab("Number of Policies") +  xlab("Year") + theme_bw() + ylim(0,30) +
+        scale_fill_manual(values=c(Moratoria_bans_limits)) +
+        xlim(c(moratoria_bans_limits_min_date,moratoria_bans_limits_max_date)) + 
+        scale_x_date(date_labels = "%Y", limits=c(moratoria_bans_limits_min_date,moratoria_bans_limits_max_date)) +
+        ggtitle("Moratoria, Bans, & Limits") + 
+        theme(legend.title = element_blank(), legend.position = "", plot.title = element_text(size=12, hjust = 0.5), 
+              plot.margin = margin(5, 10, 5, 5))
+
+g2 <- params$data_div %>% ggplot(aes(x = Date, y = Policy)) + 
+        geom_bar(position="stack", stat="identity", fill = Divestment) + 
+        ylab("") +  xlab("Year") + theme_bw() + ylim(0,50) +
+        scale_fill_manual(values=c(Divestment)) +
+        xlim(c(divestment_min_date,divestment_max_date)) + 
+        scale_x_date(date_labels = "%Y", limits=c(divestment_min_date,divestment_max_date)) +
+        ggtitle("Divestments") + 
+        theme(legend.title = element_blank(), legend.position = "", plot.title = element_text(size=12, hjust = 0.5), 
+              plot.margin = margin(5, 10, 5, 5))
+
+ g3 <- params$data_sr %>% ggplot(aes(x = Date, y = Policy)) + 
+        geom_bar(position="stack", stat="identity", fill = Subsidy_removal) + 
+        ylab("") +  xlab("Year") + theme_bw() + ylim(0,5) +
+        scale_fill_manual(values=c(Subsidy_removal)) +
+        xlim(c(subsidy_removal_min_date,subsidy_removal_max_date)) + 
+        scale_x_date(date_labels = "%Y", limits=c(subsidy_removal_min_date,subsidy_removal_max_date)) +
+        ggtitle("Subsidy Removals") + 
+        theme(legend.title = element_blank(), legend.position = "", plot.title = element_text(size=10, hjust = 0.5), 
+              plot.margin = margin(5, 10, 5, 5))
+
+ grid.arrange(g1, g2, g3, ncol=3)
+```
+
+<p>&nbsp;</p>
 
 ```{r echo=FALSE, eval=TRUE}
 ### MAP FUNCTIONS ###
@@ -161,3 +202,62 @@ grid.arrange(g1, g2, g3, ncol=3)
 #### Income group (World Bank): *XYZ*
 
 #### Main political groups: *XYZ*
+
+
+### Policy details for `r params$selection`  
+
+
+
+### Moratoria, Bans & Limits
+```{r echo=FALSE, eval=TRUE}
+# create dataframe for selected output
+mbl = params$data_mbl %>% 
+    group_by(City_state_or_province) %>%
+    select(c("City_state_or_province", "Category", "Fuel_type", "Fuel_subtype", "Start", "End", "Sources_and_more_info")) %>% 
+    replace(is.na(.), "--")
+    names(mbl) = c("City state or province", "Category", "Fuel type", "Fuel subtype", "Start", "End", "Sources")
+```
+
+```{r,fig.fig.align='left'}
+kableExtra::kable(head(mbl)) %>% kable_styling()
+```
+
+<p>&nbsp;</p>
+
+
+### Subsidy Removals
+```{r echo=FALSE, eval=TRUE}
+# create dataframe for selected output
+sr = params$data_sr %>% 
+    group_by(Category) %>%
+    select(c("Category", "Fuel_type", "Fuel_subtype", "Description", "Start", "Sources_and_more_info")) %>% 
+    replace(is.na(.), "--") 
+    names(sr) = c("Category", "Fuel type", "Fuel subtype", "Description", "Start", "Sources")
+```
+
+
+```{r,fig.fig.align='left'}
+kableExtra::kable(sr) %>% kable_styling()
+```
+
+<p>&nbsp;</p>
+
+
+### Divestments
+
+```{r echo=FALSE, eval=TRUE}
+# create dataframe for selected output
+div = params$data_div %>% 
+    group_by(Category) %>%
+    select(c("Category", "Type", "Organisation", "Organisation_type", "Start", "Sources_and_more_info"))%>% 
+    replace(is.na(.), "--")
+    names(div) = c("Category", "Type", "Organisation", "Organisation Type", "Start", "Sources")
+```
+
+
+```{r,fig.fig.align='left'}
+kableExtra::kable(head(div)) %>% kable_styling()
+```
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>

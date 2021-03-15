@@ -14,16 +14,26 @@ div.outer {
 
 
 /* Customize fonts */
-div, report, htmlOutput, article, body, legend, label, form, label,input, form, button, select, map { 
+div, report, htmlOutput, article, body, button, select, map { 
   font-family: 'Poppins', Poppins;
   font-weight: 400;
 }
 
-h1, h2, h3, h4 { 
+h1, h2 { 
+  font-family: 'Poppins', Poppins; 
+  font-weight: 500; 
+  text-align: center;
+}
+
+h3, h4 { 
   font-family: 'Poppins', Poppins; 
   font-weight: 500; 
 }
 
+legend, label, form, label,input, form {
+  font-family: 'Poppins', Poppins;
+  font-size: 12pt;
+}
 
 #controls {
   /* Appearance */
