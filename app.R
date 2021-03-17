@@ -9,16 +9,17 @@
 #'//////////////////////////////////////////////////////////////////////////////
 
 ## includes code adapted from the following sources:
-# https://davidruvolo51.github.io/shinytutorials/tutorials/rmarkdown-shiny/
 # https://github.com/eparker12/nCoV_tracker
+# https://davidruvolo51.github.io/shinytutorials/tutorials/rmarkdown-shiny/
 # https://github.com/rstudio/shiny-examples/blob/master/087-crandash/
 # https://rviews.rstudio.com/2019/10/09/building-interactive-world-maps-in-shiny/
 # https://github.com/rstudio/shiny-examples/tree/master/063-superzip-example
 
 
 # update data with automated script
-# source("divestment_scrap_weekly.R") # option to update weekly new divestment policies 
-# source("manual_scrap_weekly.R") # option to update weekly new manual entry policies
+# source("divestment_data_daily.R") # option to update weekly new divestment policies 
+# source("crowdsourced_data_daily.R") # option to update weekly new manual entry policies
+# source("newsAPI_data_weekly.R") # option to update weekly NewsAPI entries 
 
 # load required packages
 if(!require(magrittr)) install.packages("magrittr", repos = "http://cran.us.r-project.org")
@@ -31,7 +32,6 @@ if(!require(reshape2)) install.packages("reshape2", repos = "http://cran.us.r-pr
 if(!require(ggiraph)) install.packages("ggiraph", repos = "http://cran.us.r-project.org")
 if(!require(RColorBrewer)) install.packages("RColorBrewer", repos = "http://cran.us.r-project.org")
 if(!require(leaflet)) install.packages("leaflet", repos = "http://cran.us.r-project.org")
-#if(!require(plotly)) install.packages("plotly", repos = "http://cran.us.r-project.org")
 if(!require(geojsonio)) install.packages("geojsonio", repos = "http://cran.us.r-project.org")
 if(!require(shiny)) install.packages("shiny", repos = "http://cran.us.r-project.org")
 if(!require(shinyWidgets)) install.packages("shinyWidgets", repos = "http://cran.us.r-project.org")
@@ -42,7 +42,7 @@ if(!require(lubridate)) install.packages("lubridate", repos = "http://cran.us.r-
 if(!require(kableExtra)) install.packages("kableExtra", repos = "http://cran.us.r-project.org")
 if(!require(gridExtra)) install.packages("gridExtra", repos = "http://cran.us.r-project.org")
 if(!require(xlsx)) install.packages("xlsx", repos = "http://cran.us.r-project.org")
-#if(!require(shinyjs)) install.packages("shinyjs", repos = "http://cran.us.r-project.org")
+if(!require(shinyjs)) install.packages("shinyjs", repos = "http://cran.us.r-project.org")
 
 # pkgs
 suppressPackageStartupMessages(library(shiny))
@@ -54,7 +54,8 @@ Subsidy_removal = "#0C101E" #"#662506"
 Divestment = "#045a8d"
 Government_policies = "#4d004b"
 Non_Government_policies = "#016c59"
-Cities_regions_states = "#FF9100"  #"#ACB334"
+Cities_regions_states = "#FAB733"  #"#ACB334"
+FFNPT_total = "#FF9100" #ACB334
 
 ## Colour choices CAT Tracker
 # #FF0D0D","#FF4E11", "#FF8E15", "#FAB733", "#ACB334", "#69B34C", "#B1B6B9"
@@ -282,19 +283,21 @@ cv_pal <- colorFactor(palette = c("#EFEFEF", "#FCDE9C", "#BEC5A9", "#8DA8AD", "#
 plot_map <- worldcountry[worldcountry$ADM0_A3 %in% country_overview_large$ISO3, ]
 
 
-## Filter data for mapping by selecting only rows with policies > 0
+## Filter data for mapping by selecting only rows with policies > 0 for polygons and some circles
 country_overview_large_map = country_overview_large %>% filter(Government_policies_total > 0 & Non_Government_policies_total > 0)
 
-#state_city_breakdown
+# Filter data for mapping by selecting only rows with policies > 0 for state_city_breakdown
+state_city_breakdown_map_ffnpt = state_city_breakdown_map %>% filter(ffnpt_total > 0)
+
 
 # create base map 
 basemap = leaflet(plot_map) %>% 
     addTiles() %>% 
     addLayersControl(
         position = "topright",
-        overlayGroups = c("Cities, States, Regions", "Governmental Policies", "Non-Governmental Policies"),
+        overlayGroups = c("Cities, States, Regions", "Governmental Policies", "Non-Governmental Policies", "Fossil Fuel Non-Proliferation"),
         options = layersControlOptions(collapsed = FALSE)) %>% 
-    hideGroup(c("Cities, States, Regions", "Governmental Policies", "Non-Governmental Policies")) %>% 
+    hideGroup(c("Cities, States, Regions", "Governmental Policies", "Non-Governmental Policies", "Fossil Fuel Non-Proliferation")) %>% 
     htmlwidgets::onRender("
         function() {
             $('.leaflet-control-layers-overlays').prepend('<label style=\"text-align:center\"><strong>Policy Level/Type</strong><br/></label>');
@@ -307,7 +310,7 @@ basemap = leaflet(plot_map) %>%
                           "5000-10000","> 10000"),values = ~country_overview_large$MTCO2e_cat,
               title = "Country Greenhouse<br/>Gas Emissions (MtCO2e)<br/>(CAIT 2016)") %>% 
     
-    addPolygons(stroke = FALSE, smoothFactor = 0.4, fillOpacity = 0.75, fillColor = ~cv_pal(country_overview_large$MTCO2e_cat),
+    addPolygons(stroke = FALSE, smoothFactor = 0.4, fillOpacity = 0.65, fillColor = ~cv_pal(country_overview_large$MTCO2e_cat),
                 label = sprintf("<strong>%s</strong><br/><small>Greenhouse Gas Emissions: %s MtCO2e</small><br/><small>Climate Risk Index: %s</small><br/><small>Total number of policies: %g</small>", 
                                 country_overview_large$Country, country_overview_large$MTCO2e, country_overview_large$cri, country_overview_large$Policy_total) %>% 
                     lapply(htmltools::HTML),
@@ -333,7 +336,7 @@ basemap = leaflet(plot_map) %>%
                          style = list("font-weight" = "normal", "font-family" = "Poppins", padding = "3px 8px", "color" = Non_Government_policies),
                          textsize = "15px", direction = "auto")) %>%
     
-    addCircleMarkers(data = state_city_breakdown_map, lat = ~ latitude, lng = ~ longitude, weight = 4, 
+    addCircleMarkers(data = state_city_breakdown_map, lat = ~ latitude, lng = ~ longitude, weight = 2, 
                      radius = ~(City_region_state_total)^(0.89),
                      fillOpacity = 0.2, color = Cities_regions_states, group = "Cities, States, Regions",
                      label = sprintf("<strong>%s</strong><br/><small>Moratoria, Bans, Limits: %g</small><br/><small>Subsidy Removals: %d</small><br/><small>Divestments: %g</small><br/><small>FF NPT: %g</small>", 
@@ -341,7 +344,17 @@ basemap = leaflet(plot_map) %>%
                                      state_city_breakdown_map$Divestment_total, state_city_breakdown_map$ffnpt_total) %>% lapply(htmltools::HTML),
                      labelOptions = labelOptions(
                          style = list("font-weight" = "normal", "font-family" = "Poppins", padding = "3px 8px", "color" = Cities_regions_states),
+                         textsize = "15px", direction = "auto")) %>% 
+    
+    addCircleMarkers(data = state_city_breakdown_map_ffnpt, lat = ~ latitude, lng = ~ longitude, weight = 4, 
+                     fillOpacity = 0.9, color = FFNPT_total, group = "Fossil Fuel Non-Proliferation",
+                     label = sprintf("<strong>%s</strong><br/><small>Fossil Fuel Non-Proliferation: %g</small>", 
+                                     state_city_breakdown_map_ffnpt$State_city_region, state_city_breakdown_map_ffnpt$ffnpt_total) %>% lapply(htmltools::HTML),
+                     labelOptions = labelOptions(
+                         style = list("font-weight" = "normal", "font-family" = "Poppins", padding = "3px 8px", "color" = FFNPT_total),
                          textsize = "15px", direction = "auto"))
+
+
 
 ### SHINY UI ###
 ui <- bootstrapPage(
