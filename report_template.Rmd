@@ -34,7 +34,11 @@ knitr::opts_chunk$set(echo = FALSE, eval=TRUE, message=FALSE, warning=FALSE)
 #### % Global Emissions:
 
     `r params$data['global_emissions_percent']` %
+    
+#### % Share of primary energy coming from fossil-fuels (Coal, Gas, & Oil): 
 
+    `r params$data['fossil_fuel_share_energy_2019']` %
+ 
 <p>&nbsp;</p>
 
 ## Fossil Fuel Production
