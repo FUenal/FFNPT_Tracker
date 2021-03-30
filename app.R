@@ -24,6 +24,8 @@
 # load required packages
 if(!require(magrittr)) install.packages("magrittr", repos = "http://cran.us.r-project.org")
 if(!require(rvest)) install.packages("rvest", repos = "http://cran.us.r-project.org")
+if(!require(stringr)) install.packages("stringr", repos = "http://cran.us.r-project.org")
+if(!require(stringi)) install.packages("stringi", repos = "http://cran.us.r-project.org")
 if(!require(readxl)) install.packages("readxl", repos = "http://cran.us.r-project.org")
 if(!require(dplyr)) install.packages("dplyr", repos = "http://cran.us.r-project.org")
 if(!require(maps)) install.packages("maps", repos = "http://cran.us.r-project.org")
@@ -49,16 +51,15 @@ suppressPackageStartupMessages(library(shiny))
 
 # set mapping color for each category of policy
 #All_policies  = "016c59"
-Moratoria_bans_limits = "#253550" #"#cc4c02"
-Subsidy_removal = "#0C101E" #"#662506"
+Moratoria_bans_limits = "#253550" 
+Subsidy_removal = "#0C101E" 
 Divestment = "#045a8d"
 Government_policies = "#4d004b"
 Non_Government_policies = "#016c59"
-Cities_regions_states = "#FAB733"  #"#ACB334"
-FFNPT_total = "#FF9100" #ACB334
+Cities_regions_states = "#FAB733" 
+FFNPT_total = "#FF9100"
+Coal = "#FF8E15"
 
-## Colour choices CAT Tracker
-# #FF0D0D","#FF4E11", "#FF8E15", "#FAB733", "#ACB334", "#69B34C", "#B1B6B9"
 
 # Added ISO-normed country codes manually into the main xlsx data sheet (sheet 8) and manually updated country 
 # names in all sheets to standard format. Cleaning & Wrangling Process is documented in the BitsBites.R file
@@ -71,12 +72,16 @@ moratoria_bans_limits = read_xlsx("input_data/FF NPT Tracker DRAFT WIP.xlsx", sh
 subsidy_removal = read_xlsx("input_data/FF NPT Tracker DRAFT WIP.xlsx", sheet = 6)
 divestment = read_xlsx("input_data/FF NPT Tracker DRAFT WIP.xlsx", sheet = 7)
 divestment_new = read_xlsx("input_data/FF NPT Tracker DRAFT WIP.xlsx", sheet = 8)
-#world_cities = read_xlsx("input_data/FF NPT Tracker DRAFT WIP.xlsx", sheet = 10)
 divestment_scraped = read.csv("input_data/divestment_scraped.csv")
 countries = read.csv("input_data/countries_codes_and_coordinates.csv")
 worldcountry = geojson_read("input_data/50m.geojson", what = "sp")
 country_geoms = read.csv("input_data/country_geoms.csv")
+fossil_fuel_primary_energy = read.csv("input_data/fossil-fuel-primary-energy.csv")
+fossil_fuels_share_energy = read.csv("input_data/fossil-fuels-share-energy.csv")
 annual_share_of_co2_emissions = read.csv("input_data/annual-share-of-co2-emissions.csv")
+oil_production = read.csv("input_data/oil-production-by-country.csv")
+gas_production = read.csv("input_data/gas-production-by-country.csv")
+coal_production = read.csv("input_data/coal-production-by-country.csv")
 
 # Add geo data to sheets
 country_overview['latitude'] <- countries$latitude[match(country_overview$ISO3, countries$ISO3)]
@@ -160,9 +165,9 @@ state_city_breakdown_map <- state_city_breakdown_map %>% group_by(State_city_reg
 # divestment_new$Start <- divestment$Start[match(divestment_new$Organisation, divestment$Organisation)]
 
 # Factor and label CAT_rating
-country_overview_large$CAT_rating <- factor(country_overview_large$CAT_rating, levels = c(0,1,2,3,4,5,6,7), 
-                                            labels = c("Critically Insufficient","Highly Insufficient","Insufficient", 
-                                                       "2°C Compatible","1.5°C Paris Agreement Compatible", "Role Model","No Rating","No Data"))
+#country_overview_large$CAT_rating <- factor(country_overview_large$CAT_rating, levels = c(0,1,2,3,4,5,6,7), 
+                                            #labels = c("Critically Insufficient","Highly Insufficient","Insufficient", 
+                                                       #"2°C Compatible","1.5°C Paris Agreement Compatible", "Role Model","No Rating","No Data"))
 
 # Factor, label, and reorder MTCO2e
 country_overview_large$MTCO2e_cat <- cut(country_overview_large$MTCO2e, breaks = c(-100, -1, 1, 169, 500, 1000, 5000, 10000, 20000), 
@@ -177,7 +182,143 @@ annual_share_of_co2_emissions_2019 <- annual_share_of_co2_emissions %>%
 
 country_overview_large["global_emissions_percent"] <- annual_share_of_co2_emissions_2019$Share.of.global.CO2.emissions[match(country_overview_large$ISO3,
                                                                                                                              annual_share_of_co2_emissions_2019$Code)]
-#country_overview_large <- country_overview_large %>% replace(is.na(.), 0)
+
+### Pull Fossil-Fuel share of primary energy to country_overview file via ISO3 and filter by Year 2019
+fossil_fuels_share_energy_2019 <- fossil_fuels_share_energy %>% 
+    filter(Year == 2019)
+
+country_overview_large["fossil_fuel_share_energy_2019"] <- fossil_fuels_share_energy_2019$Fossil.fuels....sub.energy.[match(country_overview_large$ISO3,
+                                                                                                                            fossil_fuels_share_energy_2019$Code)]
+country_overview_large <- country_overview_large %>% replace(is.na(.), 0)
+
+# Factor and label Fossil Fuel share across countries in 2019
+country_overview_large$ff_share_2019_cat <- cut(country_overview_large$fossil_fuel_share_energy_2019, breaks = c(-1, 1, 20, 40, 60, 80, 90, 95, 100), 
+                                                labels = c("No data", "1-20%", "20-40%","40-60%", "60-80%","80-90%", "90-95", "95-100%"), right = TRUE)
+
+
+# Clean oil, gas, coal country names
+# Oil
+oil_production <- oil_production %>% mutate_at(1, function(t) {
+    str_replace(t, pattern = 'United States', replacement = "United States of America")
+})
+
+oil_production <- oil_production %>% mutate_at(1, function(t) {
+    str_replace(t, pattern = 'Russia', replacement = "Russian Federation")
+})
+
+oil_production <- oil_production %>% mutate_at(1, function(t) {
+    str_replace(t, pattern = 'Iran', replacement = "Iran, Islamic Republic of")
+})
+
+oil_production <- oil_production %>% mutate_at(1, function(t) {
+    str_replace(t, pattern = 'Democratic Republic of Congo', replacement = "Congo, (Kinshasa)")
+})
+
+oil_production <- oil_production %>% mutate_at(1, function(t) {
+    str_replace(t, pattern = 'South Korea', replacement = "Korea, (South)")
+})
+
+oil_production <- oil_production %>% mutate_at(1, function(t) {
+    str_replace(t, pattern = 'North Korea', replacement = "Korea, (North)")
+})
+
+oil_production <- oil_production %>% mutate_at(1, function(t) {
+    str_replace(t, pattern = 'Tanzania', replacement = "Tanzania, United Republic of")
+})
+
+oil_production <- oil_production %>% mutate_at(1, function(t) {
+    str_replace(t, pattern = 'Taiwan', replacement = "Taiwan, Republic of China")
+})
+
+oil_production <- oil_production %>% mutate_at(1, function(t) {
+    str_replace(t, pattern = 'Macau', replacement = "Macao, SAR China")
+})
+
+oil_production <- oil_production %>% mutate_at(1, function(t) {
+    str_replace(t, pattern = 'Laos', replacement = "Lao PDR")
+})
+
+# Gas
+gas_production <- gas_production %>% mutate_at(1, function(t) {
+    str_replace(t, pattern = 'United States', replacement = "United States of America")
+})
+
+gas_production <- gas_production %>% mutate_at(1, function(t) {
+    str_replace(t, pattern = 'Russia', replacement = "Russian Federation")
+})
+
+gas_production <- gas_production %>% mutate_at(1, function(t) {
+    str_replace(t, pattern = 'Iran', replacement = "Iran, Islamic Republic of")
+})
+
+gas_production <- gas_production %>% mutate_at(1, function(t) {
+    str_replace(t, pattern = 'Democratic Republic of Congo', replacement = "Congo, (Kinshasa)")
+})
+
+gas_production <- gas_production %>% mutate_at(1, function(t) {
+    str_replace(t, pattern = 'South Korea', replacement = "Korea, (South)")
+})
+
+gas_production <- gas_production %>% mutate_at(1, function(t) {
+    str_replace(t, pattern = 'North Korea', replacement = "Korea, (North)")
+})
+
+gas_production <- gas_production %>% mutate_at(1, function(t) {
+    str_replace(t, pattern = 'Tanzania', replacement = "Tanzania, United Republic of")
+})
+
+gas_production <- gas_production %>% mutate_at(1, function(t) {
+    str_replace(t, pattern = 'Taiwan', replacement = "Taiwan, Republic of China")
+})
+
+gas_production <- gas_production %>% mutate_at(1, function(t) {
+    str_replace(t, pattern = 'Macau', replacement = "Macao, SAR China")
+})
+
+gas_production <- gas_production %>% mutate_at(1, function(t) {
+    str_replace(t, pattern = 'Laos', replacement = "Lao PDR")
+})
+
+# Coal
+coal_production <- coal_production %>% mutate_at(1, function(t) {
+    str_replace(t, pattern = 'United States', replacement = "United States of America")
+})
+
+coal_production <- coal_production %>% mutate_at(1, function(t) {
+    str_replace(t, pattern = 'Russia', replacement = "Russian Federation")
+})
+
+coal_production <- coal_production %>% mutate_at(1, function(t) {
+    str_replace(t, pattern = 'Iran', replacement = "Iran, Islamic Republic of")
+})
+
+coal_production <- coal_production %>% mutate_at(1, function(t) {
+    str_replace(t, pattern = 'Democratic Republic of Congo', replacement = "Congo, (Kinshasa)")
+})
+
+coal_production <- coal_production %>% mutate_at(1, function(t) {
+    str_replace(t, pattern = 'South Korea', replacement = "Korea, (South)")
+})
+
+coal_production <- coal_production %>% mutate_at(1, function(t) {
+    str_replace(t, pattern = 'North Korea', replacement = "Korea, (North)")
+})
+
+coal_production <- coal_production %>% mutate_at(1, function(t) {
+    str_replace(t, pattern = 'Tanzania', replacement = "Tanzania, United Republic of")
+})
+
+coal_production <- coal_production %>% mutate_at(1, function(t) {
+    str_replace(t, pattern = 'Taiwan', replacement = "Taiwan, Republic of China")
+})
+
+coal_production <- coal_production %>% mutate_at(1, function(t) {
+    str_replace(t, pattern = 'Macau', replacement = "Macao, SAR China")
+})
+
+coal_production <- coal_production %>% mutate_at(1, function(t) {
+    str_replace(t, pattern = 'Laos', replacement = "Lao PDR")
+})
 
 # write country_overview_large file
 write.csv(country_overview_large, file = "input_data/country_overview_large.csv")
@@ -193,18 +334,40 @@ moratoria_bans_limits_min_date = min(moratoria_bans_limits$date)
 moratoria_bans_limits_max_date = max(moratoria_bans_limits$date)
 moratoria_bans_limits_max_date_clean = format(as.POSIXct(moratoria_bans_limits_max_date),"%d/%m/%Y")
 
-# extract dates from moratoria_bans_limits data
+# extract dates from subsidy removaldata
 subsidy_removal$date = as.Date(subsidy_removal$Date, format="%d/%m/%Y")
 subsidy_removal_min_date = min(subsidy_removal$date)
 subsidy_removal_max_date = max(subsidy_removal$date)
 subsidy_removal_max_date_clean = format(as.POSIXct(subsidy_removal_max_date),"%d/%m/%Y")
 
-# extract dates from moratoria_bans_limits data
+# extract dates from divestment data
 divestment$date = as.Date(divestment$Date, format="%d/%m/%Y")
 divestment_min_date = min(divestment$date)
 divestment_max_date = max(divestment$date)
 divestment_max_date_clean = format(as.POSIXct(divestment_max_date),"%d/%m/%Y")
 
+### DATA PROCESSING: Fossil Fuel Production (gas, coal, and oil) converting Year from numeric to date format###
+oil_production$Date <-lubridate::ymd(oil_production$Year, truncated = 2L)
+gas_production$Date <-lubridate::ymd(gas_production$Year, truncated = 2L)
+coal_production$Date <-lubridate::ymd(coal_production$Year, truncated = 2L)
+
+# extract dates from oil production data
+oil_production$date = as.Date(oil_production$Date, format="%d/%m/%Y")
+oil_production_min_date = min(oil_production$date)
+oil_production_max_date = max(oil_production$date)
+oil_production_max_date_clean = format(as.POSIXct(oil_production_max_date),"%d/%m/%Y")
+
+# extract dates from gas production data
+gas_production$date = as.Date(gas_production$Date, format="%d/%m/%Y")
+gas_production_min_date = min(gas_production$date)
+gas_production_max_date = max(gas_production$date)
+gas_production_max_date_clean = format(as.POSIXct(gas_production_max_date),"%d/%m/%Y")
+
+# extract dates from mcoal production data
+coal_production$date = as.Date(coal_production$Date, format="%d/%m/%Y")
+coal_production_min_date = min(coal_production$date)
+coal_production_max_date = max(coal_production$date)
+coal_production_max_date_clean = format(as.POSIXct(coal_production_max_date),"%d/%m/%Y")
 
 #Set Main Plot output
 policy_count = function(country_overview_large){
@@ -253,7 +416,7 @@ cumulative_mbl_plot = function(moratoria_bans_limits) {
 
 # function to plot cumulative Divestments by date
 cumulative_div_plot = function(divestment_new) {
-    g1 <- ggplot(divestment_new, aes(x = date, y = Policy)) + 
+    g2 <- ggplot(divestment_new, aes(x = date, y = Policy)) + 
         geom_bar(position="stack", stat="identity", fill = Divestment) + 
         ylab("Divestments") +  xlab("Year") + theme_bw() + ylim(0,300) +
         scale_fill_manual(values=c(Divestment)) +
@@ -261,12 +424,12 @@ cumulative_div_plot = function(divestment_new) {
         scale_x_date(date_labels = "%Y", limits=c(divestment_min_date,divestment_max_date)) +
         theme(legend.title = element_blank(), legend.position = "", plot.title = element_text(size=10), 
               plot.margin = margin(5, 10, 5, 5))
-    g1
+    g2
 }
 
 # function to plot cumulative subsidy_removal by date
 cumulative_sr_plot = function(subsidy_removal) {
-    g1 <- ggplot(subsidy_removal, aes(x = date, y = Policy)) + 
+    g3 <- ggplot(subsidy_removal, aes(x = date, y = Policy)) + 
         geom_bar(position="stack", stat="identity", fill = Subsidy_removal) + 
         ylab("Subsidy Removals") +  xlab("Year") + theme_bw() + ylim(0,8) +
         scale_fill_manual(values=c(Subsidy_removal)) +
@@ -274,12 +437,13 @@ cumulative_sr_plot = function(subsidy_removal) {
         scale_x_date(date_labels = "%Y", limits=c(subsidy_removal_min_date,subsidy_removal_max_date)) +
         theme(legend.title = element_blank(), legend.position = "", plot.title = element_text(size=10), 
               plot.margin = margin(5, 10, 5, 5))
-    g1
+    g3
 }
 
+
 ## create plotting parameters for map
-#cv_pal <- colorFactor(palette = c("#FF0D0D","#FF4E11", "#FF8E15", "#FAB733", "#ACB334", "#69B34C", "#B1B6B9"), country_overview_large$CAT_rating)
-cv_pal <- colorFactor(palette = c("#EFEFEF", "#FCDE9C", "#BEC5A9", "#8DA8AD", "#668BA8", "#466A9F", "#2C4B93", "#062A89"), country_overview_large$MTCO2e_cat)
+#cv_pal <- colorFactor(palette = c("#FF0D0D","#FF4E11", "#FF8E15", "#FAB733", "#ACB334", "#69B34C", "#B1B6B9"), country_overview_large$CAT_rating)  ### Alternative baseline
+cv_pal <- colorFactor(palette = c("#EFEFEF", "#FCDE9C", "#BEC5A9", "#8DA8AD", "#668BA8", "#466A9F", "#2C4B93", "#062A89"), country_overview_large$ff_share_2019_cat)
 plot_map <- worldcountry[worldcountry$ADM0_A3 %in% country_overview_large$ISO3, ]
 
 
@@ -306,13 +470,12 @@ basemap = leaflet(plot_map) %>%
     addProviderTiles(providers$CartoDB.Positron) %>%
     fitBounds(~-100,-60,~60,70) %>%
     addLegend("bottomright", colors = c("#EFEFEF", "#FCDE9C", "#BEC5A9", "#8DA8AD", "#668BA8", "#466A9F", "#2C4B93", "#062A89"), 
-              labels =  c("No data", "< 0", "1-169","169-500","500-1000","1000-5000",  
-                          "5000-10000","> 10000"),values = ~country_overview_large$MTCO2e_cat,
-              title = "Country Greenhouse<br/>Gas Emissions (MtCO2e)<br/>(CAIT 2016)") %>% 
+              labels =  c("No data", "1-20%", "20-40%","40-60%", "60-80%","80-90%","90-95%","95-100%"), values = ~country_overview_large$ff_share_2019_cat,
+              title = "Fossil fuels<br/>(% sub energy)<br/>(BP 2019)") %>%  
     
-    addPolygons(stroke = FALSE, smoothFactor = 0.4, fillOpacity = 0.65, fillColor = ~cv_pal(country_overview_large$MTCO2e_cat),
-                label = sprintf("<strong>%s</strong><br/><small>Greenhouse Gas Emissions: %s MtCO2e</small><br/><small>Climate Risk Index: %s</small><br/><small>Total number of policies: %g</small>", 
-                                country_overview_large$Country, country_overview_large$MTCO2e, country_overview_large$cri, country_overview_large$Policy_total) %>% 
+    addPolygons(stroke = FALSE, smoothFactor = 0.4, fillOpacity = 0.65, fillColor = ~cv_pal(country_overview_large$ff_share_2019_cat),
+                label = sprintf("<strong>%s</strong><br/><small>Percent of Fossil-Fuels (sub energy): %s </small><br/><small>Climate Risk Index: %s</small><br/><small>Total number of policies: %g</small>", 
+                                country_overview_large$Country, country_overview_large$ff_share_2019_cat, country_overview_large$cri, country_overview_large$Policy_total) %>% 
                     lapply(htmltools::HTML),
                 labelOptions = labelOptions(
                     style = list("font-weight" = "normal", "font-family" = "Poppins", padding = "3px 8px", "color" = cv_pal),
@@ -389,6 +552,7 @@ ui <- bootstrapPage(
                             
                         )
                ),
+               
 
                tabPanel("Country Profiles",
                         sidebarLayout(
@@ -519,6 +683,9 @@ server = function(input, output) {
         moratoria_bans_limitsDF <- moratoria_bans_limits[moratoria_bans_limits$Country == input$country, ]
         subsidy_removalDF <- subsidy_removal[subsidy_removal$Country == input$country, ]
         divestmentDF <- divestment[divestment$Country == input$country, ]
+        oilDF <- oil_production[oil_production$Entity == input$country, ]
+        gasDF <- gas_production[gas_production$Entity == input$country, ]
+        coalDF <- coal_production[coal_production$Entity == input$country, ]
         output$report <- renderUI({
             includeHTML(
                 rmarkdown::render(
@@ -529,7 +696,10 @@ server = function(input, output) {
                         data = country_overview_largeDF,
                         data_mbl = moratoria_bans_limitsDF,
                         data_sr = subsidy_removalDF,
-                        data_div = divestmentDF
+                        data_div = divestmentDF,
+                        data_oil = oilDF,
+                        data_gas = gasDF,
+                        data_coal = coalDF
                     )
                 )
             )

@@ -7,6 +7,9 @@ params:
     data_mbl: "moratoria_bans_limitsDF"
     data_sr: "subsidy_removalDF"
     data_div: "divestmentDF"
+    data_oil: "oilDF"
+    data_gas: "gasDF"
+    data_coal: "coalDF"
 ---
 
 ```{r setup, include=FALSE}
@@ -32,6 +35,50 @@ knitr::opts_chunk$set(echo = FALSE, eval=TRUE, message=FALSE, warning=FALSE)
 
     `r params$data['global_emissions_percent']` %
 
+<p>&nbsp;</p>
+
+## Fossil Fuel Production
+
+```{r echo=FALSE, eval=TRUE, fig.width=10, fig.height=3}
+### MAP FUNCTIONS ###
+# pkgs
+suppressPackageStartupMessages(library(tidyverse))
+suppressPackageStartupMessages(library(kableExtra))
+suppressPackageStartupMessages(library(ggplot2))
+
+# plot mbl over time
+g1 <- params$data_oil %>% ggplot(aes(x = Date, y = Oil.production..TWh., color = Entity)) + 
+        geom_line() + geom_point(size = 1, alpha = 0.8) + 
+        ylab("TWh") +  xlab("Year") + theme_bw() +
+        xlim(c(oil_production_min_date,oil_production_max_date)) + 
+        scale_colour_manual(values=c(Coal)) +
+        scale_x_date(date_labels = "%Y", limits=c(oil_production_min_date,oil_production_max_date)) +
+        ggtitle("Oil Production") + 
+        theme(legend.title = element_blank(), legend.position = "", plot.title = element_text(size=12, hjust = 0.5), 
+          plot.margin = margin(5, 10, 5, 5))
+g1
+g2 <- params$data_gas %>% ggplot(aes(x = Date, y = Gas.production..TWh., color = Entity)) + 
+        geom_line() + geom_point(size = 1, alpha = 0.8) + 
+        ylab("TWh") +  xlab("Year") + theme_bw() +
+        xlim(c(gas_production_min_date,gas_production_max_date)) + 
+        scale_colour_manual(values=c(Coal)) +
+        scale_x_date(date_labels = "%Y", limits=c(gas_production_min_date,gas_production_max_date)) +
+        ggtitle("Gas Production") + 
+        theme(legend.title = element_blank(), legend.position = "", plot.title = element_text(size=12, hjust = 0.5), 
+          plot.margin = margin(5, 10, 5, 5))
+g2
+ g3 <- params$data_coal %>% ggplot(aes(x = Date, y = Coal.production..TWh., color = Entity)) + 
+        geom_line() + geom_point(size = 1, alpha = 0.8) + 
+        ylab("TWh") +  xlab("Year") + theme_bw() +
+        xlim(c(coal_production_min_date,coal_production_max_date)) + 
+        scale_colour_manual(values=c(Coal)) +
+        scale_x_date(date_labels = "%Y", limits=c(coal_production_min_date,coal_production_max_date)) +
+        ggtitle("Coal Production") + 
+        theme(legend.title = element_blank(), legend.position = "", plot.title = element_text(size=12, hjust = 0.5), 
+          plot.margin = margin(5, 10, 5, 5))
+g3
+```
+Source: https://ourworldindata.org/fossil-fuels
 <p>&nbsp;</p>
 
 ## Policies  
